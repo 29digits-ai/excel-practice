@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FormulaDrill — 1000 Excel Formula Practice Sets</title>
+<style>
+  :root{
+    --paper:#F7F8F6;
+    --paper-line:#E1E5E0;
+    --ink:#16261F;
+    --ink-soft:#4E5D56;
+    --green-900:#0B3B26;
+    --green-700:#0F5C39;
+    --green-600:#127849;
+    --green-100:#DCEEE2;
+    --amber:#C97A2B;
+    --amber-100:#F6E4CD;
+    --blue:#2A5FA8;
+    --blue-100:#DCE7F6;
+    --red:#B5402D;
+    --red-100:#F6DFDA;
+    --cell-border:#C7D0CA;
+    --header-bg:#E9EEE9;
+    --mono: ui-monospace, 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --radius: 6px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 34px,
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+  }
+  .app{ max-width:1180px; margin:0 auto; padding:20px 18px 60px; }
+
+  /* ---------- Header / toolbar ---------- */
+  .titlebar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:34px;height:34px;border-radius:7px;
+    background:linear-gradient(135deg,var(--green-700),var(--green-900));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
+  }
+  .brand-text h1{ font-size:18px; margin:0; letter-spacing:-0.01em; }
+  .brand-text p{ margin:0; font-size:11.5px; color:var(--ink-soft); }
+  .stats-strip{ display:flex; gap:8px; flex-wrap:wrap; }
+  .stat-pill{
+    background:#fff; border:1px solid var(--cell-border); border-radius:999px;
+    padding:6px 12px; font-size:12px; color:var(--ink-soft); display:flex; gap:6px; align-items:baseline;
+  }
+  .stat-pill b{ color:var(--green-900); font-size:14px; font-family:var(--mono); }
+
+  /* ---------- Ribbon: name box + formula bar look ---------- */
+  .ribbon{
+    background:var(--header-bg); border:1px solid var(--cell-border); border-radius:var(--radius);
+    padding:8px 10px; display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .name-box{
+    font-family:var(--mono); font-size:12.5px; background:#fff; border:1px solid var(--cell-border);
+    border-radius:4px; padding:5px 10px; color:var(--green-900); font-weight:700; min-width:64px; text-align:center;
+  }
+  .fx{ font-family:var(--mono); font-style:italic; color:var(--green-700); font-weight:700; font-size:13px; padding:0 2px;}
+  .ribbon-divider{ width:1px; align-self:stretch; background:var(--cell-border); }
+  .ribbon-fill{ flex:1; font-size:12px; color:var(--ink-soft); }
+
+  /* ---------- Layout ---------- */
+  .layout{ display:grid; grid-template-columns:230px 1fr; gap:16px; align-items:start; }
+  @media (max-width:820px){ .layout{ grid-template-columns:1fr; } }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    background:#fff; border:1px solid var(--cell-border); border-radius:var(--radius);
+    padding:12px; position:sticky; top:16px;
+  }
+  .sidebar h3{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin:4px 0 8px; }
+  .filter-row{ display:flex; gap:6px; margin-bottom:12px; }
+  .chip{
+    flex:1; text-align:center; font-size:12px; padding:6px 4px; border-radius:5px; border:1px solid var(--cell-border);
+    background:#fff; cursor:pointer; color:var(--ink-soft); font-weight:600;
+  }
+  .chip.active{ background:var(--green-700); border-color:var(--green-700); color:#fff; }
+  .cat-list{ list-style:none; margin:0; padding:0; max-height:520px; overflow-y:auto; }
+  .cat-item{
+    display:flex; justify-content:space-between; align-items:center; gap:6px;
+    padding:7px 8px; border-radius:5px; cursor:pointer; font-size:12.5px; color:var(--ink);
+    margin-bottom:2px;
+  }
+  .cat-item:hover{ background:var(--paper); }
+  .cat-item.active{ background:var(--green-100); color:var(--green-900); font-weight:700; }
+  .cat-count{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+  .cat-item.active .cat-count{ color:var(--green-700); }
+  .progress-wrap{ margin-top:14px; }
+  .progress-track{ height:8px; border-radius:4px; background:var(--paper-line); overflow:hidden; }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--green-600),var(--green-900)); border-radius:4px; transition:width .3s ease; }
+  .progress-label{ font-size:11px; color:var(--ink-soft); margin-top:5px; display:flex; justify-content:space-between; }
+  .reset-btn{
+    margin-top:12px; width:100%; padding:7px; font-size:11.5px; border-radius:5px; border:1px solid var(--cell-border);
+    background:#fff; color:var(--ink-soft); cursor:pointer;
+  }
+  .reset-btn:hover{ border-color:var(--red); color:var(--red); }
+
+  /* ---------- Main panel ---------- */
+  .panel{ background:#fff; border:1px solid var(--cell-border); border-radius:var(--radius); overflow:hidden; }
+  .panel-head{
+    padding:16px 20px 14px; border-bottom:1px solid var(--cell-border);
+    display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;
+  }
+  .panel-head-left{ display:flex; flex-direction:column; gap:6px; }
+  .badges{ display:flex; gap:6px; align-items:center; }
+  .badge{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:3px 8px; border-radius:4px; }
+  .badge.medium{ background:var(--blue-100); color:var(--blue); }
+  .badge.hard{ background:var(--amber-100); color:var(--amber); }
+  .badge.cat{ background:var(--paper); color:var(--ink-soft); border:1px solid var(--cell-border); }
+  .panel-head h2{ margin:0; font-size:19px; }
+  .problem-id{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+  .nav-btns{ display:flex; gap:6px; }
+  .nav-btn{
+    padding:7px 12px; border-radius:5px; border:1px solid var(--cell-border); background:#fff;
+    cursor:pointer; font-size:12.5px; font-weight:600; color:var(--ink);
+  }
+  .nav-btn:hover:not(:disabled){ background:var(--paper); }
+  .nav-btn:disabled{ opacity:.4; cursor:not-allowed; }
+  .nav-btn.primary{ background:var(--green-700); border-color:var(--green-700); color:#fff; }
+  .nav-btn.primary:hover{ background:var(--green-900); }
+
+  .panel-body{ padding:18px 20px 22px; }
+  .scenario{ font-size:13.5px; color:var(--ink-soft); margin:0 0 12px; line-height:1.5; }
+  .question{
+    font-size:14.5px; line-height:1.55; margin:0 0 16px; padding:11px 14px;
+    background:var(--green-100); border-left:3px solid var(--green-700); border-radius:0 5px 5px 0; color:var(--green-900);
+  }
+
+  /* spreadsheet grid rendering */
+  .sheet-wrap{ overflow-x:auto; border:1px solid var(--cell-border); border-radius:5px; margin-bottom:18px; }
+  table.sheet{ border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; }
+  table.sheet th, table.sheet td{ border:1px solid var(--cell-border); padding:6px 10px; white-space:nowrap; text-align:left; }
+  table.sheet thead tr.colhead th{ background:var(--header-bg); color:var(--ink-soft); font-weight:700; text-align:center; font-size:11px; position:sticky; top:0; }
+  table.sheet tbody th{ background:var(--header-bg); color:var(--ink-soft); font-weight:700; text-align:center; font-size:11px; }
+  table.sheet tbody tr:nth-child(odd) td{ background:#fff; }
+  table.sheet tbody tr:nth-child(even) td{ background:#FBFBFA; }
+  table.sheet td.numeric{ text-align:right; }
+  table.sheet td.header-row{ background:var(--paper); font-weight:700; }
+
+  /* formula bar input */
+  .answer-row{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .cellref-box{
+    font-family:var(--mono); font-size:12.5px; font-weight:700; background:var(--header-bg);
+    border:1px solid var(--cell-border); border-radius:4px; padding:9px 12px; color:var(--green-900); min-width:56px; text-align:center;
+  }
+  .formula-input{
+    flex:1; font-family:var(--mono); font-size:13.5px; padding:9px 12px; border:1.5px solid var(--cell-border);
+    border-radius:4px; outline:none; color:var(--ink); background:#fff;
+  }
+  .formula-input:focus{ border-color:var(--green-700); box-shadow:0 0 0 3px var(--green-100); }
+  .formula-input.correct{ border-color:var(--green-700); background:var(--green-100); }
+  .formula-input.incorrect{ border-color:var(--red); background:var(--red-100); }
+  .submit-btn{
+    padding:9px 18px; background:var(--green-700); color:#fff; border:none; border-radius:5px;
+    font-weight:700; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .submit-btn:hover{ background:var(--green-900); }
+
+  .feedback{ font-size:13px; padding:10px 13px; border-radius:5px; margin-bottom:10px; display:none; line-height:1.5; }
+  .feedback.show{ display:block; }
+  .feedback.correct{ background:var(--green-100); color:var(--green-900); border:1px solid var(--green-600); }
+  .feedback.incorrect{ background:var(--red-100); color:var(--red); border:1px solid var(--red); }
+
+  .protip{
+    display:flex; gap:10px; align-items:flex-start; font-size:12.5px; color:var(--ink-soft);
+    background:var(--amber-100); border:1px solid #E4C08F; border-radius:5px; padding:10px 13px; margin-bottom:10px; line-height:1.5;
+  }
+  .protip-icon{ font-size:15px; line-height:1.4; }
+  .protip-label{ font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:.06em; color:var(--amber); display:block; margin-bottom:2px; }
+
+  .helpers{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .helper-btn{
+    font-size:12px; padding:6px 11px; border-radius:5px; border:1px dashed var(--cell-border);
+    background:#fff; color:var(--ink-soft); cursor:pointer;
+  }
+  .helper-btn:hover{ border-color:var(--green-700); color:var(--green-700); }
+  .reveal-box{
+    margin-top:10px; padding:10px 13px; background:var(--paper); border:1px solid var(--cell-border);
+    border-radius:5px; font-size:12.5px; color:var(--ink-soft); display:none;
+  }
+  .reveal-box.show{ display:block; }
+  .reveal-box code{ font-family:var(--mono); background:#fff; padding:2px 6px; border-radius:3px; border:1px solid var(--cell-border); color:var(--green-900); }
+
+  .fn-tags{ display:flex; gap:5px; margin-top:12px; flex-wrap:wrap; }
+  .fn-tag{ font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:3px; background:var(--paper); color:var(--ink-soft); border:1px solid var(--cell-border); }
+
+  /* footer */
+  .footnote{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:22px; }
+
+  @media (max-width:520px){
+    .panel-body{ padding:14px; }
+    .panel-head{ padding:14px; }
+    .answer-row{ flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="titlebar">
+    <div class="brand">
+      <div class="brand-mark">fx</div>
+      <div class="brand-text">
+        <h1>FormulaDrill</h1>
+        <p>1000 medium & hard Excel formula problems across every core Data & Business Analysis skill, graded live in your browser</p>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-pill">Solved <b id="statSolved">0</b>/1000</div>
+      <div class="stat-pill">Streak <b id="statStreak">0</b></div>
+      <div class="stat-pill">Accuracy <b id="statAccuracy">—</b></div>
+    </div>
+  </div>
+
+  <div class="ribbon">
+    <div class="name-box" id="ribbonId">#001</div>
+    <span class="fx">fx</span>
+    <div class="ribbon-fill" id="ribbonTitle">Loading problem set…</div>
+    <div class="ribbon-divider"></div>
+    <div class="ribbon-fill" style="text-align:right; flex:0 0 auto;">Type the formula, press Enter to check</div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>Difficulty</h3>
+      <div class="filter-row" id="diffFilter">
+        <div class="chip active" data-diff="all">All</div>
+        <div class="chip" data-diff="Medium">Medium</div>
+        <div class="chip" data-diff="Hard">Hard</div>
+      </div>
+      <h3>Categories</h3>
+      <ul class="cat-list" id="catList"></ul>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="progress-label"><span id="progressText">0 of 1000 solved</span><span id="progressPct">0%</span></div>
+      </div>
+      <button class="reset-btn" id="resetBtn">Reset all progress</button>
+    </aside>
+
+    <main class="panel">
+      <div class="panel-head">
+        <div class="panel-head-left">
+          <div class="badges">
+            <span class="badge" id="badgeDiff">Medium</span>
+            <span class="badge cat" id="badgeCat">Category</span>
+            <span class="problem-id" id="badgeId">Problem #1 of 1000</span>
+          </div>
+          <h2 id="probTitle">Title</h2>
+        </div>
+        <div class="nav-btns">
+          <button class="nav-btn" id="prevBtn">← Prev</button>
+          <button class="nav-btn" id="shuffleBtn">🔀 Random</button>
+          <button class="nav-btn primary" id="nextBtn">Next →</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <p class="scenario" id="probScenario">Scenario</p>
+        <div class="sheet-wrap"><table class="sheet" id="sheetTable"></table></div>
+        <p class="question" id="probQuestion">Question</p>
+
+        <div class="answer-row">
+          <div class="cellref-box" id="cellRefBox">=</div>
+          <input type="text" class="formula-input" id="formulaInput" placeholder="Type your Excel formula here, e.g. =SUM(A2:A10)" autocomplete="off" spellcheck="false">
+          <button class="submit-btn" id="submitBtn">Check</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="protip" id="proTipBox">
+          <span class="protip-icon">⌨️</span>
+          <div><span class="protip-label">Pro tip</span><div id="proTipText"></div></div>
+        </div>
+
+        <div class="helpers">
+          <button class="helper-btn" id="hintBtn">💡 Show hint</button>
+          <button class="helper-btn" id="solutionBtn">✅ Show solution</button>
+          <button class="helper-btn" id="skipBtn">⏭ Skip problem</button>
+        </div>
+        <div class="reveal-box" id="hintBox"></div>
+        <div class="reveal-box" id="solutionBox"></div>
+
+        <div class="fn-tags" id="fnTags"></div>
+      </div>
+    </main>
+  </div>
+
+  <p class="footnote">Covers SUMIFS/COUNTIFS/AVERAGEIFS, VLOOKUP/INDEX-MATCH/XLOOKUP, nested IF/IFS logic, text cleaning, date &amp; business-date math, RANK/LARGE/SMALL/PERCENTILE statistics, SUMPRODUCT, PMT/NPV/FV/PV finance, growth-rate &amp; margin analysis, and more — all evaluated by an in-browser Excel-formula engine. Your progress is saved automatically in this browser (it won't follow you to another device or browser).</p>
+</div>
+
+<script>
+// ---- Mini Excel formula engine ----
+
+function colToIndex(col) {
+  let idx = 0;
+  for (let i = 0; i < col.length; i++) idx = idx * 26 + (col.charCodeAt(i) - 64);
+  return idx; // 1-based
+}
+function indexToCol(idx) {
+  let s = '';
+  while (idx > 0) {
+    const r = (idx - 1) % 26;
+    s = String.fromCharCode(65 + r) + s;
+    idx = Math.floor((idx - 1) / 26);
+  }
+  return s;
+}
+function parseRef(ref) {
+  const m = ref.match(/^([A-Z]+)(\d+)$/);
+  if (!m) return null;
+  return { col: colToIndex(m[1]), row: parseInt(m[2], 10) };
+}
+
+class Grid {
+  constructor(data) {
+    // data: 2D array of values, data[0] is header row, rows 1.. are data. row r, col c (1-based) -> data[r-1][c-1]
+    this.data = data;
+  }
+  get(row, col) {
+    const r = this.data[row - 1];
+    if (!r) return null;
+    const v = r[col - 1];
+    return v === undefined ? null : v;
+  }
+  getCell(ref) {
+    const p = parseRef(ref);
+    if (!p) throw new Error('#REF!');
+    return this.get(p.row, p.col);
+  }
+  getRange(ref) {
+    const [a, b] = ref.split(':');
+    const pa = parseRef(a), pb = parseRef(b);
+    const r1 = Math.min(pa.row, pb.row), r2 = Math.max(pa.row, pb.row);
+    const c1 = Math.min(pa.col, pb.col), c2 = Math.max(pa.col, pb.col);
+    const out = [];
+    for (let r = r1; r <= r2; r++) {
+      for (let c = c1; c <= c2; c++) out.push(this.get(r, c));
+    }
+    return out;
+  }
+}
+
+// ---- Tokenizer ----
+function tokenize(formula) {
+  let s = formula.trim();
+  if (s.startsWith('=')) s = s.slice(1);
+  s = s.replace(/\$/g, '');
+  const tokens = [];
+  let i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (/\s/.test(c)) { i++; continue; }
+    if (c === '"') {
+      let j = i + 1, str = '';
+      while (j < s.length && s[j] !== '"') { str += s[j]; j++; }
+      tokens.push({ type: 'string', value: str });
+      i = j + 1;
+      continue;
+    }
+    if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(s[i+1] || ''))) {
+      let j = i, num = '';
+      while (j < s.length && /[0-9.]/.test(s[j])) { num += s[j]; j++; }
+      tokens.push({ type: 'number', value: parseFloat(num) });
+      i = j;
+      continue;
+    }
+    if (/[A-Za-z_]/.test(c)) {
+      let j = i, word = '';
+      while (j < s.length && /[A-Za-z0-9_]/.test(s[j])) { word += s[j]; j++; }
+      // check for range/cell ref like A1:B10 or A1
+      let full = word;
+      if (s[j] === ':') {
+        // could be range
+        let k = j + 1, word2 = '';
+        while (k < s.length && /[A-Za-z0-9]/.test(s[k])) { word2 += s[k]; k++; }
+        if (/^[A-Z]+[0-9]+$/i.test(word) && /^[A-Z]+[0-9]+$/i.test(word2)) {
+          full = word + ':' + word2;
+          j = k;
+        }
+      }
+      if (/^[A-Z]+[0-9]+$/i.test(full) && !full.includes(':')) {
+        tokens.push({ type: 'ref', value: full.toUpperCase() });
+      } else if (full.includes(':')) {
+        tokens.push({ type: 'range', value: full.toUpperCase() });
+      } else if (s[j] === '(') {
+        tokens.push({ type: 'func', value: word.toUpperCase() });
+      } else if (word.toUpperCase() === 'TRUE') {
+        tokens.push({ type: 'bool', value: true });
+      } else if (word.toUpperCase() === 'FALSE') {
+        tokens.push({ type: 'bool', value: false });
+      } else {
+        tokens.push({ type: 'name', value: word.toUpperCase() });
+      }
+      i = j;
+      continue;
+    }
+    if (c === '<' || c === '>') {
+      if (s[i+1] === '=') { tokens.push({ type: 'op', value: c + '=' }); i += 2; }
+      else if (c === '<' && s[i+1] === '>') { tokens.push({ type: 'op', value: '<>' }); i += 2; }
+      else { tokens.push({ type: 'op', value: c }); i++; }
+      continue;
+    }
+    if ('+-*/^&=,()%'.includes(c)) {
+      tokens.push({ type: (c === '(' || c === ')' || c === ',') ? c : 'op', value: c });
+      i++;
+      continue;
+    }
+    throw new Error('Unexpected character: ' + c);
+  }
+  return tokens;
+}
+
+// ---- Parser (Pratt) ----
+function parse(tokens) {
+  let pos = 0;
+  function peek() { return tokens[pos]; }
+  function next() { return tokens[pos++]; }
+
+  function parseExpr(minPrec = 0) {
+    let left = parseUnary();
+    while (true) {
+      const t = peek();
+      if (!t || t.type !== 'op') break;
+      const prec = { '&':1, '=':2, '<>':2, '<':2, '>':2, '<=':2, '>=':2, '+':3, '-':3, '*':4, '/':4, '^':6 }[t.value];
+      if (prec === undefined || prec < minPrec) break;
+      next();
+      const right = parseExpr(prec + 1);
+      left = { type: 'binop', op: t.value, left, right };
+    }
+    return left;
+  }
+
+  function parseUnary() {
+    const t = peek();
+    if (t && t.type === 'op' && t.value === '-') {
+      next();
+      return { type: 'neg', value: parseUnary() };
+    }
+    if (t && t.type === 'op' && t.value === '+') {
+      next();
+      return parseUnary();
+    }
+    return parsePostfix();
+  }
+
+  function parsePostfix() {
+    let node = parsePrimary();
+    while (peek() && peek().type === 'op' && peek().value === '%') {
+      next();
+      node = { type: 'percent', value: node };
+    }
+    return node;
+  }
+
+  function parsePrimary() {
+    const t = next();
+    if (!t) throw new Error('Unexpected end of formula');
+    if (t.type === 'number') return { type: 'number', value: t.value };
+    if (t.type === 'string') return { type: 'string', value: t.value };
+    if (t.type === 'bool') return { type: 'bool', value: t.value };
+    if (t.type === 'ref') return { type: 'ref', value: t.value };
+    if (t.type === 'range') return { type: 'range', value: t.value };
+    if (t.type === '(') {
+      const e = parseExpr(0);
+      if (peek() && peek().type === ')') next();
+      return e;
+    }
+    if (t.type === 'func') {
+      if (peek() && peek().type === '(') next();
+      const args = [];
+      if (peek() && peek().type === ')') { next(); return { type: 'call', name: t.value, args }; }
+      args.push(parseExpr(0));
+      while (peek() && peek().type === ',') {
+        next();
+        args.push(parseExpr(0));
+      }
+      if (peek() && peek().type === ')') next();
+      return { type: 'call', name: t.value, args };
+    }
+    if (t.type === 'name') return { type: 'name', value: t.value };
+    throw new Error('Unexpected token: ' + JSON.stringify(t));
+  }
+
+  const result = parseExpr(0);
+  return result;
+}
+
+// ---- Evaluator ----
+function toNumber(v) {
+  if (v === null || v === undefined || v === '') return 0;
+  if (typeof v === 'number') return v;
+  if (typeof v === 'boolean') return v ? 1 : 0;
+  const n = parseFloat(v);
+  return isNaN(n) ? 0 : n;
+}
+function toStr(v) {
+  if (v === null || v === undefined) return '';
+  return String(v);
+}
+
+function matchCriteria(value, criteria) {
+  if (typeof criteria === 'string' && /^[<>]=?/.test(criteria)) {
+    const m = criteria.match(/^(<=|>=|<>|<|>|=)(.*)$/);
+    const op = m[1];
+    let cVal = m[2];
+    const cNum = parseFloat(cVal);
+    const num = !isNaN(cNum) && cVal.trim() !== '';
+    const a = num ? toNumber(value) : toStr(value).toLowerCase();
+    const b = num ? cNum : cVal.toLowerCase();
+    switch (op) {
+      case '=': return a == b;
+      case '<>': return a != b;
+      case '<': return a < b;
+      case '>': return a > b;
+      case '<=': return a <= b;
+      case '>=': return a >= b;
+    }
+  }
+  if (typeof criteria === 'number') return toNumber(value) === criteria;
+  // string equality (case-insensitive), supports * wildcard
+  const cs = toStr(criteria);
+  if (cs.includes('*')) {
+    const re = new RegExp('^' + cs.split('*').map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.*') + '$', 'i');
+    return re.test(toStr(value));
+  }
+  return toStr(value).toLowerCase() === cs.toLowerCase();
+}
+
+function applyBinopScalar(op, l, r) {
+  if (op === '&') return toStr(l) + toStr(r);
+  if (['=','<>','<','>','<=','>='].includes(op)) {
+    let lv = l, rv = r;
+    if (typeof lv === 'number' || typeof rv === 'number') { lv = toNumber(lv); rv = toNumber(rv); }
+    else { lv = toStr(lv).toLowerCase(); rv = toStr(rv).toLowerCase(); }
+    switch (op) {
+      case '=': return lv == rv;
+      case '<>': return lv != rv;
+      case '<': return lv < rv;
+      case '>': return lv > rv;
+      case '<=': return lv <= rv;
+      case '>=': return lv >= rv;
+    }
+  }
+  const lv = toNumber(l), rv = toNumber(r);
+  switch (op) {
+    case '+': return lv + rv;
+    case '-': return lv - rv;
+    case '*': return lv * rv;
+    case '/': if (rv === 0) throw new Error('#DIV/0!'); return lv / rv;
+    case '^': return Math.pow(lv, rv);
+  }
+  throw new Error('Unknown op ' + op);
+}
+
+function evalNode(node, grid) {
+  switch (node.type) {
+    case 'number': return node.value;
+    case 'string': return node.value;
+    case 'bool': return node.value;
+    case 'neg': return -toNumber(evalNode(node.value, grid));
+    case 'percent': return toNumber(evalNode(node.value, grid)) / 100;
+    case 'ref': return grid.getCell(node.value);
+    case 'range': return grid.getRange(node.value);
+    case 'name': throw new Error('#NAME?');
+    case 'binop': {
+      const op = node.op;
+      let l = evalNode(node.left, grid), r = evalNode(node.right, grid);
+      if (Array.isArray(l) || Array.isArray(r)) {
+        const la = Array.isArray(l) ? l : null, ra = Array.isArray(r) ? r : null;
+        const len = Math.max(la ? la.length : 1, ra ? ra.length : 1);
+        const out = [];
+        for (let i = 0; i < len; i++) {
+          const lv = la ? la[i % la.length] : l;
+          const rv = ra ? ra[i % ra.length] : r;
+          out.push(applyBinopScalar(op, lv, rv));
+        }
+        return out;
+      }
+      return applyBinopScalar(op, l, r);
+    }
+    case 'call': return evalCall(node, grid);
+    default: throw new Error('Unknown node ' + node.type);
+  }
+}
+
+function flattenArgs(args, grid) {
+  // used for SUM/AVERAGE etc: expand ranges
+  const out = [];
+  for (const a of args) {
+    if (a.type === 'range') out.push(...grid.getRange(a.value));
+    else out.push(evalNode(a, grid));
+  }
+  return out;
+}
+
+function evalCall(node, grid) {
+  const name = node.name;
+  const A = node.args;
+  const ev = (n) => evalNode(n, grid);
+  switch (name) {
+    case 'SUM': return flattenArgs(A, grid).reduce((s, v) => s + toNumber(v), 0);
+    case 'AVERAGE': { const vs = flattenArgs(A, grid).filter(v => v !== null && v !== ''); return vs.reduce((s,v)=>s+toNumber(v),0) / (vs.length||1); }
+    case 'COUNT': return flattenArgs(A, grid).filter(v => typeof v === 'number' || (!isNaN(parseFloat(v)) && v !== null && v !== '')).length;
+    case 'COUNTA': return flattenArgs(A, grid).filter(v => v !== null && v !== '').length;
+    case 'MAX': return Math.max(...flattenArgs(A, grid).map(toNumber));
+    case 'MIN': return Math.min(...flattenArgs(A, grid).map(toNumber));
+    case 'ABS': return Math.abs(toNumber(ev(A[0])));
+    case 'ROUND': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return Math.round(v*f)/f; }
+    case 'ROUNDUP': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return (v>=0?Math.ceil(v*f):Math.floor(v*f))/f; }
+    case 'ROUNDDOWN': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return (v>=0?Math.floor(v*f):Math.ceil(v*f))/f; }
+    case 'IF': { const c = ev(A[0]); return c ? (A[1]?ev(A[1]):true) : (A[2]!==undefined?ev(A[2]):false); }
+    case 'IFS': { for (let i=0;i<A.length;i+=2) { if (ev(A[i])) return ev(A[i+1]); } throw new Error('#N/A'); }
+    case 'AND': return A.every(a => !!ev(a));
+    case 'OR': return A.some(a => !!ev(a));
+    case 'NOT': return !ev(A[0]);
+    case 'IFERROR': { try { const v = ev(A[0]); if (typeof v === 'string' && v.startsWith('#')) return ev(A[1]); return v; } catch(e) { return ev(A[1]); } }
+    case 'CONCATENATE': case 'CONCAT': case 'TEXTJOIN': {
+      if (name === 'TEXTJOIN') {
+        const delim = toStr(ev(A[0]));
+        const skip = !!ev(A[1]);
+        const rest = A.slice(2).flatMap(a => a.type==='range'?grid.getRange(a.value):[ev(a)]);
+        return rest.filter(v => !skip || (v!==null && v!=='')).map(toStr).join(delim);
+      }
+      return A.flatMap(a => a.type==='range'?grid.getRange(a.value):[ev(a)]).map(toStr).join('');
+    }
+    case 'LEFT': return toStr(ev(A[0])).slice(0, A[1]?toNumber(ev(A[1])):1);
+    case 'RIGHT': { const s = toStr(ev(A[0])); const n = A[1]?toNumber(ev(A[1])):1; return s.slice(Math.max(0,s.length-n)); }
+    case 'MID': return toStr(ev(A[0])).substr(toNumber(ev(A[1]))-1, toNumber(ev(A[2])));
+    case 'LEN': return toStr(ev(A[0])).length;
+    case 'UPPER': return toStr(ev(A[0])).toUpperCase();
+    case 'LOWER': return toStr(ev(A[0])).toLowerCase();
+    case 'PROPER': return toStr(ev(A[0])).replace(/\w\S*/g, t => t[0].toUpperCase()+t.slice(1).toLowerCase());
+    case 'TRIM': return toStr(ev(A[0])).trim().replace(/\s+/g,' ');
+    case 'TEXT': { const v = ev(A[0]); const fmt = toStr(ev(A[1])); return formatText(v, fmt); }
+    case 'VALUE': return toNumber(ev(A[0]));
+    case 'SUMIF': { const rng = grid.getRange(A[0].value); const crit = ev(A[1]); const sumRng = A[2]?grid.getRange(A[2].value):rng; let s=0; for(let i=0;i<rng.length;i++) if (matchCriteria(rng[i], crit)) s+=toNumber(sumRng[i]); return s; }
+    case 'COUNTIF': { const rng = grid.getRange(A[0].value); const crit = ev(A[1]); return rng.filter(v=>matchCriteria(v,crit)).length; }
+    case 'AVERAGEIF': { const rng = grid.getRange(A[0].value); const crit = ev(A[1]); const avgRng = A[2]?grid.getRange(A[2].value):rng; let s=0,c=0; for(let i=0;i<rng.length;i++) if (matchCriteria(rng[i], crit)) { s+=toNumber(avgRng[i]); c++; } return c? s/c : 0; }
+    case 'SUMIFS': { const sumRng = grid.getRange(A[0].value); let idxs = null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let s=0; idxs.forEach(ix=>s+=toNumber(sumRng[ix])); return s; }
+    case 'COUNTIFS': { let idxs=null; for (let i=0;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } return idxs.size; }
+    case 'AVERAGEIFS': { const avgRng = grid.getRange(A[0].value); let idxs=null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let s=0; idxs.forEach(ix=>s+=toNumber(avgRng[ix])); return idxs.size? s/idxs.size:0; }
+    case 'VLOOKUP': { const lookup = ev(A[0]); const table = A[1].type==='range'?rangeToTable(grid, A[1].value):null; const colIdx = toNumber(ev(A[2])); const exact = A[3]? !ev(A[3]) : true; for (const row of table) { if (exact ? matchLoose(row[0], lookup) : toStr(row[0]).toLowerCase()===toStr(lookup).toLowerCase()) return row[colIdx-1]; } if(!exact){} throw new Error('#N/A'); }
+    case 'HLOOKUP': { const lookup = ev(A[0]); const table = rangeToTable(grid, A[1].value); const rowIdx = toNumber(ev(A[2])); const cols = table[0].length; for (let c=0;c<cols;c++) { if (matchLoose(table[0][c], lookup)) return table[rowIdx-1][c]; } throw new Error('#N/A'); }
+    case 'XLOOKUP': { const lookup = ev(A[0]); const lookupRng = grid.getRange(A[1].value); const retRng = grid.getRange(A[2].value); for (let i=0;i<lookupRng.length;i++) if (matchLoose(lookupRng[i], lookup)) return retRng[i]; return A[3]!==undefined? ev(A[3]) : (()=>{throw new Error('#N/A')})(); }
+    case 'INDEX': { const table = A[0].type==='range'? rangeToTable(grid, A[0].value) : [[ev(A[0])]]; const r = toNumber(ev(A[1])); const c = A[2]!==undefined?toNumber(ev(A[2])):1; if (table.length===1 && !isRange2D(grid,A[0].value)) { return table[0][r-1]; } return table[r-1][c-1]; }
+    case 'MATCH': { const lookup = ev(A[0]); const rng = grid.getRange(A[1].value); const type = A[2]!==undefined?toNumber(ev(A[2])):1; if (type===0) { for (let i=0;i<rng.length;i++) if (matchLoose(rng[i], lookup)) return i+1; throw new Error('#N/A'); } else { let best=-1; for (let i=0;i<rng.length;i++){ if (toNumber(rng[i])<=toNumber(lookup)) best=i+1; } if(best===-1) throw new Error('#N/A'); return best; } }
+    case 'RANK': { const v = toNumber(ev(A[0])); const rng = grid.getRange(A[1].value).map(toNumber); const desc = A[2]!==undefined? !ev(A[2]) : true; const sorted = [...rng].sort((a,b)=>desc?b-a:a-b); return sorted.indexOf(v)+1; }
+    case 'LARGE': { const rng = grid.getRange(A[0].value).map(toNumber).sort((a,b)=>b-a); return rng[toNumber(ev(A[1]))-1]; }
+    case 'SMALL': { const rng = grid.getRange(A[0].value).map(toNumber).sort((a,b)=>a-b); return rng[toNumber(ev(A[1]))-1]; }
+    case 'ISBLANK': { try { const v = ev(A[0]); return v===null||v===''; } catch(e){return true;} }
+    case 'ISNUMBER': { try { const v = ev(A[0]); return typeof v==='number'; } catch(e){return false;} }
+    case 'ISTEXT': { try { const v = ev(A[0]); return typeof v==='string'; } catch(e){return false;} }
+    case 'SUMPRODUCT': { const arrs = A.map(a => { const v = a.type==='range'? grid.getRange(a.value) : ev(a); return Array.isArray(v) ? v : [v]; }); const len = Math.max(...arrs.map(a=>a.length)); let s=0; for (let i=0;i<len;i++){ let p=1; for (const arr of arrs) p*=toNumber(arr[i % arr.length]); s+=p; } return s; }
+    case 'ROW': return A[0] && A[0].type==='ref' ? parseRef(A[0].value).row : 1;
+    case 'COLUMN': return A[0] && A[0].type==='ref' ? parseRef(A[0].value).col : 1;
+    case 'ABS': return Math.abs(toNumber(ev(A[0])));
+    case 'DATEDIF': { const d1 = parseDate(ev(A[0])), d2 = parseDate(ev(A[1])); const unit = toStr(ev(A[2])).toUpperCase(); return dateDiff(d1,d2,unit); }
+    case 'TODAY': return grid.today || '2026-07-23';
+    case 'YEAR': return parseDate(ev(A[0])).getFullYear();
+    case 'MONTH': return parseDate(ev(A[0])).getMonth()+1;
+    case 'DAY': return parseDate(ev(A[0])).getDate();
+    case 'WEEKDAY': { const d = parseDate(ev(A[0])); const type = A[1]!==undefined?toNumber(ev(A[1])):1; const dow = d.getDay(); if (type===2) return dow===0?7:dow; if (type===3) return dow===0?6:dow-1; return dow+1; }
+    case 'EDATE': { const d = parseDate(ev(A[0])); const m = toNumber(ev(A[1])); const nd = new Date(d); nd.setMonth(nd.getMonth()+m); return isoDate(nd); }
+    case 'EOMONTH': { const d = parseDate(ev(A[0])); const m = toNumber(ev(A[1])); const nd = new Date(d.getFullYear(), d.getMonth()+m+1, 0); return isoDate(nd); }
+    case 'MEDIAN': { const vs = flattenArgs(A, grid).map(toNumber).sort((a,b)=>a-b); const n=vs.length; if(n===0) return 0; return n%2? vs[(n-1)/2] : (vs[n/2-1]+vs[n/2])/2; }
+    case 'MODE': { const vs = flattenArgs(A, grid).map(toNumber); const counts = {}; let best=null,bestC=0; for(const v of vs){ counts[v]=(counts[v]||0)+1; if(counts[v]>bestC){bestC=counts[v]; best=v;} } return best; }
+    case 'STDEV': { const vs = flattenArgs(A, grid).map(toNumber); const n=vs.length; if(n<2) return 0; const m=vs.reduce((s,v)=>s+v,0)/n; const ss=vs.reduce((s,v)=>s+(v-m)*(v-m),0); return Math.sqrt(ss/(n-1)); }
+    case 'VAR': { const vs = flattenArgs(A, grid).map(toNumber); const n=vs.length; if(n<2) return 0; const m=vs.reduce((s,v)=>s+v,0)/n; const ss=vs.reduce((s,v)=>s+(v-m)*(v-m),0); return ss/(n-1); }
+    case 'COUNTBLANK': return flattenArgs(A, grid).filter(v => v===null || v==='').length;
+    case 'ISERROR': { try { const v = ev(A[0]); return typeof v==='string' && v.startsWith('#'); } catch(e){ return true; } }
+    case 'SUBSTITUTE': { const text = toStr(ev(A[0])); const oldT = toStr(ev(A[1])); const newT = toStr(ev(A[2])); return text.split(oldT).join(newT); }
+    case 'FIND': { const find = toStr(ev(A[0])); const within = toStr(ev(A[1])); const start = A[2]!==undefined?toNumber(ev(A[2])):1; const idx = within.indexOf(find, start-1); if (idx===-1) throw new Error('#VALUE!'); return idx+1; }
+    case 'SEARCH': { const find = toStr(ev(A[0])).toLowerCase(); const within = toStr(ev(A[1])).toLowerCase(); const start = A[2]!==undefined?toNumber(ev(A[2])):1; const idx = within.indexOf(find, start-1); if (idx===-1) throw new Error('#VALUE!'); return idx+1; }
+    case 'PMT': { const rate = toNumber(ev(A[0])), nper = toNumber(ev(A[1])), pv = toNumber(ev(A[2])); if (rate===0) return -(pv)/nper; return -(pv*rate)/(1-Math.pow(1+rate,-nper)); }
+    case 'FV': { const rate = toNumber(ev(A[0])), nper = toNumber(ev(A[1])), pmt = toNumber(ev(A[2])), pv = A[3]!==undefined?toNumber(ev(A[3])):0; if (rate===0) return -(pv+pmt*nper); return -(pv*Math.pow(1+rate,nper) + pmt*(Math.pow(1+rate,nper)-1)/rate); }
+    case 'PV': { const rate = toNumber(ev(A[0])), nper = toNumber(ev(A[1])), pmt = toNumber(ev(A[2])), fv = A[3]!==undefined?toNumber(ev(A[3])):0; if (rate===0) return -(pmt*nper+fv); return -(pmt*(1-Math.pow(1+rate,-nper))/rate + fv*Math.pow(1+rate,-nper)); }
+    case 'NPV': { const rate = toNumber(ev(A[0])); const flows = A.slice(1).flatMap(a => a.type==='range'?grid.getRange(a.value):[ev(a)]).map(toNumber); let s=0; flows.forEach((cf,i)=>{ s += cf/Math.pow(1+rate,i+1); }); return s; }
+    case 'PERCENTILE': { const vs = grid.getRange(A[0].value).map(toNumber).sort((a,b)=>a-b); const p = toNumber(ev(A[1])); const idx = p*(vs.length-1); const lo=Math.floor(idx), hi=Math.ceil(idx); if(lo===hi) return vs[lo]; return vs[lo] + (vs[hi]-vs[lo])*(idx-lo); }
+    case 'QUARTILE': { const vs = grid.getRange(A[0].value).map(toNumber).sort((a,b)=>a-b); const q = toNumber(ev(A[1])); const p = q/4; const idx = p*(vs.length-1); const lo=Math.floor(idx), hi=Math.ceil(idx); if(lo===hi) return vs[lo]; return vs[lo] + (vs[hi]-vs[lo])*(idx-lo); }
+    case 'TRUNC': { const v = toNumber(ev(A[0])); const d = A[1]!==undefined?toNumber(ev(A[1])):0; const f = Math.pow(10,d); return Math.trunc(v*f)/f; }
+    case 'MOD': { const a = toNumber(ev(A[0])), b = toNumber(ev(A[1])); return a - Math.floor(a/b)*b; }
+    case 'POWER': return Math.pow(toNumber(ev(A[0])), toNumber(ev(A[1])));
+    case 'SQRT': return Math.sqrt(toNumber(ev(A[0])));
+    case 'CEILING': { const v = toNumber(ev(A[0])), sig = toNumber(ev(A[1])); return Math.ceil(v/sig)*sig; }
+    case 'FLOOR': { const v = toNumber(ev(A[0])), sig = toNumber(ev(A[1])); return Math.floor(v/sig)*sig; }
+    case 'CHOOSE': { const idx = toNumber(ev(A[0])); return ev(A[idx]); }
+    default: throw new Error('#NAME? Unknown function ' + name);
+  }
+}
+function isoDate(d) { return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+
+function matchLoose(a, b) {
+  if (typeof a === 'number' || typeof b === 'number') return toNumber(a) === toNumber(b);
+  return toStr(a).toLowerCase() === toStr(b).toLowerCase();
+}
+function isRange2D(grid, rangeStr) {
+  const [a,b] = rangeStr.split(':'); const pa = parseRef(a), pb = parseRef(b);
+  return pa.col !== pb.col;
+}
+function rangeToTable(grid, rangeStr) {
+  const [a, b] = rangeStr.split(':');
+  const pa = parseRef(a), pb = parseRef(b);
+  const r1 = Math.min(pa.row,pb.row), r2 = Math.max(pa.row,pb.row);
+  const c1 = Math.min(pa.col,pb.col), c2 = Math.max(pa.col,pb.col);
+  const table = [];
+  for (let r=r1;r<=r2;r++) { const row=[]; for (let c=c1;c<=c2;c++) row.push(grid.get(r,c)); table.push(row); }
+  return table;
+}
+function parseDate(v) {
+  if (v instanceof Date) return v;
+  if (typeof v === 'string') { const d = new Date(v); if(!isNaN(d)) return d; }
+  return new Date(v);
+}
+function dateDiff(d1,d2,unit) {
+  const ms = d2 - d1;
+  if (unit==='D') return Math.round(ms/86400000);
+  if (unit==='M') return (d2.getFullYear()-d1.getFullYear())*12 + (d2.getMonth()-d1.getMonth()) - (d2.getDate()<d1.getDate()?1:0);
+  if (unit==='Y') return d2.getFullYear()-d1.getFullYear() - ((d2.getMonth()<d1.getMonth() || (d2.getMonth()===d1.getMonth() && d2.getDate()<d1.getDate()))?1:0);
+  return Math.round(ms/86400000);
+}
+function formatText(v, fmt) {
+  if (fmt.includes('%')) return (toNumber(v)*100).toFixed((fmt.match(/0/g)||[]).length - 1 >=0 ? (fmt.split('.')[1]||'').replace('%','').length : 0) + '%';
+  if (fmt.includes('.')) { const dec = (fmt.split('.')[1]||'').length; return toNumber(v).toFixed(dec); }
+  if (/0+/.test(fmt) && !fmt.includes('.')) return String(Math.round(toNumber(v)));
+  return toStr(v);
+}
+
+function evaluateFormula(formula, grid) {
+  const tokens = tokenize(formula);
+  const ast = parse(tokens);
+  return evalNode(ast, grid);
+}
+
+
+</script>
+<script>
+
+function mulberry32(seed) {
+  let a = seed;
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+function pickN(rng, arr, n) {
+  const copy = [...arr]; const out = [];
+  for (let i = 0; i < n && copy.length; i++) { const idx = Math.floor(rng()*copy.length); out.push(copy.splice(idx,1)[0]); }
+  return out;
+}
+function randInt(rng, min, max) { return Math.floor(rng() * (max - min + 1)) + min; }
+function colLetter(n) { let s=''; while(n>0){ const r=(n-1)%26; s=String.fromCharCode(65+r)+s; n=Math.floor((n-1)/26);} return s; }
+
+const NAMES = ['Alicia','Brandon','Carmen','Devon','Elena','Farhan','Grace','Hiro','Ines','Jamal','Kavya','Liam','Maya','Noah','Olga','Priya','Quentin','Riya','Sam','Tara','Umar','Vera','Wyatt','Xena','Yusuf','Zara','Aditi','Bruno','Chidi','Diana'];
+const REGIONS = ['North','South','East','West','Central'];
+const PRODUCTS = ['Laptop','Monitor','Keyboard','Mouse','Headset','Webcam','Tablet','Printer','Router','Charger'];
+const DEPTS = ['Sales','Marketing','Engineering','Support','Finance','HR','Operations'];
+const CITIES = ['Mumbai','Delhi','Bengaluru','Chennai','Kolkata','Pune','Hyderabad','Jaipur'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const CHANNELS = ['Online','In-store','Phone','Partner'];
+const GRADES = ['A','B','C','D'];
+
+function buildGrid(rows) { return new Grid(rows); }
+
+function refEval(rows, formula) {
+  const g = buildGrid(rows);
+  const val = evaluateFormula(formula, g);
+  return val;
+}
+
+function tableHtml(headers) { return headers; }
+
+// ---------- helper to render a numbered spreadsheet range description ----------
+function rangeRef(colIdx, rStart, rEnd) { return `${colLetter(colIdx)}${rStart}:${colLetter(colIdx)}${rEnd}`; }
+
+// =========================================================
+// 20 CATEGORY GENERATORS. Each: (rng, variant, hard) -> problem
+// variant 0-6 => medium, 7-14 => hard (per category, but each category defines its own medium/hard forms)
+// =========================================================
+
+function cat_sumif(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Salesperson','Region','Department','Revenue']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,REGIONS), pick(rng,DEPTS), randInt(rng,200,3000)]);
+  const sample = pick(rng, rows.slice(1));
+  const region = sample[1];
+  const dept = sample[2];
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Regional Revenue Total',
+      scenario: `You have a list of salespeople with their region and revenue.`,
+      question: `Write a formula that adds up total Revenue for everyone in the "${region}" region.`,
+      rows, refFormula: `=SUMIF(B2:B${last},"${region}",D2:D${last})`,
+      hint: `Use SUMIF(range, criteria, sum_range).`,
+      functions: ['SUMIF']
+    };
+  }
+  return {
+    title: 'Regional & Departmental Revenue',
+    scenario: `You have a list of salespeople with their region, department, and revenue.`,
+    question: `Write a formula that adds up Revenue only for rows where Region is "${region}" AND Department is "${dept}".`,
+    rows, refFormula: `=SUMIFS(D2:D${last},B2:B${last},"${region}",C2:C${last},"${dept}")`,
+    hint: `Use SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2, criteria2).`,
+    functions: ['SUMIFS']
+  };
+}
+
+function cat_countif(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['Employee','Department','Status','Score']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,DEPTS), pick(rng,['Active','Inactive']), randInt(rng,40,100)]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Count Active Employees',
+      scenario: `A list tracks employees, their department and current status.`,
+      question: `Write a formula that counts how many employees have Status = "Active".`,
+      rows, refFormula: `=COUNTIF(C2:C${last},"Active")`,
+      hint: `Use COUNTIF(range, criteria).`,
+      functions: ['COUNTIF']
+    };
+  }
+  const activeRows = rows.slice(1).filter(r => r[2] === 'Active');
+  const sample = activeRows.length ? pick(rng, activeRows) : pick(rng, rows.slice(1));
+  const dept = sample[1];
+  const minScore = Math.min(sample[3], 70);
+  return {
+    title: 'Count High Performers by Department',
+    scenario: `A list tracks employees, department, status, and performance score.`,
+    question: `Write a formula that counts employees in the "${dept}" department with Status = "Active" AND Score >= ${minScore}.`,
+    rows, refFormula: `=COUNTIFS(B2:B${last},"${dept}",C2:C${last},"Active",D2:D${last},">=${minScore}")`,
+    hint: `Use COUNTIFS with three criteria pairs.`,
+    functions: ['COUNTIFS']
+  };
+}
+
+function cat_averageif(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Product','Category','Units','Rating']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), pick(rng,['Electronics','Accessories']), randInt(rng,5,80), (randInt(rng,30,50)/10)]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Average Rating by Category',
+      scenario: `A product list shows category, units sold, and customer rating.`,
+      question: `Write a formula for the AVERAGE Rating of products in the "Electronics" category.`,
+      rows, refFormula: `=AVERAGEIF(B2:B${last},"Electronics",D2:D${last})`,
+      hint: `Use AVERAGEIF(range, criteria, average_range).`,
+      functions: ['AVERAGEIF']
+    };
+  }
+  const elecRows = rows.slice(1).filter(r => r[1] === 'Electronics');
+  const minUnits = elecRows.length ? Math.min(...elecRows.map(r => r[2])) : 20;
+  return {
+    title: 'Average Rating for Strong Sellers',
+    scenario: `A product list shows category, units sold, and rating.`,
+    question: `Write a formula for the AVERAGE Rating of "Electronics" products that sold ${minUnits} units or more.`,
+    rows, refFormula: `=AVERAGEIFS(D2:D${last},B2:B${last},"Electronics",C2:C${last},">=${minUnits}")`,
+    hint: `Use AVERAGEIFS(average_range, criteria_range1, criteria1, criteria_range2, criteria2).`,
+    functions: ['AVERAGEIFS']
+  };
+}
+
+function cat_vlookup(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['ProductID','Product','Price','Stock']];
+  const ids = [];
+  for (let i=0;i<n;i++) { const id = 'P' + (100+i); ids.push(id); rows.push([id, pick(rng,PRODUCTS), randInt(rng,10,500), randInt(rng,0,200)]); }
+  const last = n+1;
+  const targetId = pick(rng, ids);
+  if (!hard) {
+    return {
+      title: 'Look Up Product Price',
+      scenario: `A product catalog lists ProductID, Product name, Price, and Stock.`,
+      question: `Write a formula that looks up the Price for ProductID "${targetId}".`,
+      rows, refFormula: `=VLOOKUP("${targetId}",A2:D${last},3,FALSE)`,
+      hint: `Use VLOOKUP(lookup_value, table_array, col_index, FALSE).`,
+      functions: ['VLOOKUP']
+    };
+  }
+  const missingId = 'P999';
+  return {
+    title: 'Safe Product Lookup',
+    scenario: `A product catalog lists ProductID, Product name, Price, and Stock.`,
+    question: `Write a formula that looks up the Price for ProductID "${missingId}", and shows "Not Found" instead of an error if it doesn't exist.`,
+    rows, refFormula: `=IFERROR(VLOOKUP("${missingId}",A2:D${last},3,FALSE),"Not Found")`,
+    hint: `Wrap VLOOKUP in IFERROR(formula, value_if_error).`,
+    functions: ['VLOOKUP','IFERROR']
+  };
+}
+
+function cat_indexmatch(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['EmployeeID','Name','Department','Salary']];
+  const names = pickN(rng, NAMES, n);
+  for (let i=0;i<n;i++) rows.push(['E'+(300+i), names[i], pick(rng,DEPTS), randInt(rng,30000,90000)]);
+  const last = n+1;
+  const target = pick(rng, names);
+  if (!hard) {
+    return {
+      title: 'Find Salary with INDEX/MATCH',
+      scenario: `An employee table lists ID, Name, Department, and Salary.`,
+      question: `Write a formula using INDEX and MATCH to find the Salary of "${target}".`,
+      rows, refFormula: `=INDEX(D2:D${last},MATCH("${target}",B2:B${last},0))`,
+      hint: `INDEX(return_range, MATCH(lookup_value, lookup_range, 0)).`,
+      functions: ['INDEX','MATCH']
+    };
+  }
+  const targetDept = pick(rng, rows.slice(1).map(r => r[2]));
+  return {
+    title: 'Two-Column Lookup',
+    scenario: `An employee table lists ID, Name, Department, and Salary.`,
+    question: `Write a single formula using INDEX and MATCH that returns the Name of the first employee found in the "${targetDept}" department.`,
+    rows, refFormula: `=INDEX(B2:B${last},MATCH("${targetDept}",C2:C${last},0))`,
+    hint: `MATCH the Department column, then INDEX into the Name column.`,
+    functions: ['INDEX','MATCH']
+  };
+}
+
+function cat_xlookup(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['OrderID','Customer','Status','Amount']];
+  const ids = [];
+  for (let i=0;i<n;i++) { const id='ORD'+(500+i); ids.push(id); rows.push([id, pick(rng,NAMES), pick(rng,['Shipped','Pending','Cancelled']), randInt(rng,50,900)]); }
+  const last = n+1;
+  const target = pick(rng, ids);
+  if (!hard) {
+    return {
+      title: 'XLOOKUP Order Amount',
+      scenario: `An orders table lists OrderID, Customer, Status, and Amount.`,
+      question: `Write an XLOOKUP formula that returns the Amount for OrderID "${target}".`,
+      rows, refFormula: `=XLOOKUP("${target}",A2:A${last},D2:D${last})`,
+      hint: `XLOOKUP(lookup_value, lookup_array, return_array).`,
+      functions: ['XLOOKUP']
+    };
+  }
+  const missing = 'ORD999';
+  return {
+    title: 'XLOOKUP with Fallback',
+    scenario: `An orders table lists OrderID, Customer, Status, and Amount.`,
+    question: `Write an XLOOKUP formula that returns the Status for OrderID "${missing}", showing "No Order" if it isn't found (use XLOOKUP's own fallback argument).`,
+    rows, refFormula: `=XLOOKUP("${missing}",A2:A${last},C2:C${last},"No Order")`,
+    hint: `XLOOKUP's 4th argument is if_not_found.`,
+    functions: ['XLOOKUP']
+  };
+}
+
+function cat_nestedif(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Student','Score']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,35,100)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Pass or Fail',
+      scenario: `A gradebook lists each student's Score.`,
+      question: `In row ${target}, write a formula that shows "Pass" if the Score in B${target} is 40 or above, otherwise "Fail".`,
+      rows, refFormula: `=IF(B${target}>=40,"Pass","Fail")`,
+      hint: `Use IF(condition, value_if_true, value_if_false).`,
+      functions: ['IF']
+    };
+  }
+  return {
+    title: 'Letter Grade Assignment',
+    scenario: `A gradebook lists each student's Score.`,
+    question: `In row ${target}, write a nested IF formula for cell B${target} that returns "A" for 90+, "B" for 80-89, "C" for 70-79, and "D" for anything below 70.`,
+    rows, refFormula: `=IF(B${target}>=90,"A",IF(B${target}>=80,"B",IF(B${target}>=70,"C","D")))`,
+    hint: `Chain multiple IFs: IF(c1,r1,IF(c2,r2,IF(c3,r3,r4))).`,
+    functions: ['IF']
+  };
+}
+
+function cat_ifs(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Rep','Sales']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,1000,50000)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Commission Tier (Two Tiers)',
+      scenario: `A sales rep list shows total Sales.`,
+      question: `In row ${target}, write an IFS formula for cell B${target} that returns "High" if Sales >= 20000, else "Low".`,
+      rows, refFormula: `=IFS(B${target}>=20000,"High",TRUE,"Low")`,
+      hint: `IFS(cond1,result1,cond2,result2,...). Use TRUE as a catch-all final condition.`,
+      functions: ['IFS']
+    };
+  }
+  return {
+    title: 'Commission Tier (Four Tiers)',
+    scenario: `A sales rep list shows total Sales.`,
+    question: `In row ${target}, write an IFS formula for cell B${target} that returns "Platinum" for Sales >= 40000, "Gold" for >= 25000, "Silver" for >= 10000, and "Bronze" otherwise.`,
+    rows, refFormula: `=IFS(B${target}>=40000,"Platinum",B${target}>=25000,"Gold",B${target}>=10000,"Silver",TRUE,"Bronze")`,
+    hint: `List conditions from highest to lowest threshold, ending with TRUE as the catch-all.`,
+    functions: ['IFS']
+  };
+}
+
+function cat_textextract(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Code']];
+  const codes = [];
+  for (let i=0;i<n;i++) { const c = pick(rng,['NA','EU','AS']) + '-' + pick(rng,PRODUCTS).slice(0,3).toUpperCase() + '-' + randInt(rng,100,999); codes.push(c); rows.push([c]); }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Extract Region Code',
+      scenario: `Each product code follows the pattern "REGION-PRD-NUM", e.g. "NA-LAP-482".`,
+      question: `In row ${target}, write a formula for cell B${target} that extracts the 2-letter region code from the start of A${target}.`,
+      rows, refFormula: `=LEFT(A${target},2)`,
+      hint: `Use LEFT(text, num_chars).`,
+      functions: ['LEFT']
+    };
+  }
+  return {
+    title: 'Extract Middle Segment',
+    scenario: `Each product code follows the pattern "REGION-PRD-NUM" (always 2 letters, dash, 3 letters, dash, 3 digits), e.g. "NA-LAP-482".`,
+    question: `In row ${target}, write a formula for cell B${target} that extracts just the 3-letter product part (characters 4 to 6) from A${target}.`,
+    rows, refFormula: `=MID(A${target},4,3)`,
+    hint: `Use MID(text, start_num, num_chars). Count characters carefully including the dash.`,
+    functions: ['MID']
+  };
+}
+
+function cat_textconcat(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['First','Last','Dept']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,NAMES), pick(rng,DEPTS)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Build Full Name',
+      scenario: `A staff list has separate First and Last name columns.`,
+      question: `In row ${target}, write a formula for cell D${target} that joins First and Last name with a space in between (e.g. "Jane Smith").`,
+      rows, refFormula: `=A${target}&" "&B${target}`,
+      hint: `Use the & operator to join text, or CONCATENATE().`,
+      functions: ['CONCATENATE']
+    };
+  }
+  return {
+    title: 'Build a Formatted Email',
+    scenario: `A staff list has First, Last, and Department columns.`,
+    question: `In row ${target}, write a formula for cell D${target} that builds a lowercase email like "firstname.lastname@company.com" using First and Last name.`,
+    rows, refFormula: `=LOWER(A${target}&"."&B${target}&"@company.com")`,
+    hint: `Combine & concatenation with LOWER().`,
+    functions: ['LOWER','CONCATENATE']
+  };
+}
+
+function cat_dates(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Employee','JoinDate']];
+  for (let i=0;i<n;i++) {
+    const y = randInt(rng, 2015, 2024), m = randInt(rng,1,12), d = randInt(rng,1,28);
+    rows.push([pick(rng,NAMES), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
+  }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Extract Join Year',
+      scenario: `An HR sheet lists each employee's JoinDate (as a date).`,
+      question: `In row ${target}, write a formula for cell C${target} that returns just the year from B${target}.`,
+      rows, refFormula: `=YEAR(B${target})`,
+      hint: `Use YEAR(date).`,
+      functions: ['YEAR']
+    };
+  }
+  return {
+    title: 'Calculate Years of Tenure',
+    scenario: `An HR sheet lists each employee's JoinDate. Today's date is 2026-07-23.`,
+    question: `In row ${target}, write a formula for cell C${target} that calculates the employee's full years of tenure using DATEDIF, comparing B${target} to today (2026-07-23).`,
+    rows, refFormula: `=DATEDIF(B${target},"2026-07-23","Y")`,
+    hint: `DATEDIF(start_date, end_date, "Y") gives complete years between two dates.`,
+    functions: ['DATEDIF']
+  };
+}
+
+function cat_rank(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['Player','Score']];
+  const used = new Set();
+  for (let i=0;i<n;i++) { let s; do { s = randInt(rng,50,99); } while(used.has(s)); used.add(s); rows.push([pick(rng,NAMES), s]); }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Rank Player Score',
+      scenario: `A leaderboard lists each Player's Score.`,
+      question: `In row ${target}, write a formula for cell C${target} that shows the rank of B${target} among all scores in B2:B${last}, highest score = rank 1.`,
+      rows, refFormula: `=RANK(B${target},B2:B${last})`,
+      hint: `RANK(number, ref) ranks in descending order by default.`,
+      functions: ['RANK']
+    };
+  }
+  return {
+    title: 'Rank with Ascending Order',
+    scenario: `A leaderboard lists each Player's penalty Score, where LOWER is better.`,
+    question: `In row ${target}, write a formula for cell C${target} that ranks B${target} among B2:B${last} so that the smallest score gets rank 1 (ascending order).`,
+    rows, refFormula: `=RANK(B${target},B2:B${last},1)`,
+    hint: `RANK(number, ref, order) — set order to 1 (or TRUE) for ascending.`,
+    functions: ['RANK']
+  };
+}
+
+function cat_largesmall(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['City','Rainfall']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,CITIES), randInt(rng,100,3000)]);
+  const last = n+1;
+  if (!hard) {
+    const k = randInt(rng,1,3);
+    return {
+      title: 'Find the Nth Highest Value',
+      scenario: `A table shows annual Rainfall by city.`,
+      question: `Write a formula that returns the ${k===1?'highest':k+'nd/rd highest'.replace('nd/rd', k===2?'2nd':'3rd')} Rainfall value in B2:B${last}.`,
+      rows, refFormula: `=LARGE(B2:B${last},${k})`,
+      hint: `LARGE(range, k) returns the k-th largest value.`,
+      functions: ['LARGE']
+    };
+  }
+  const k = randInt(rng,1,3);
+  return {
+    title: 'Combine SMALL with INDEX/MATCH',
+    scenario: `A table shows annual Rainfall by city.`,
+    question: `Write a single formula that returns the name of the City with the ${k===1?'lowest':k+'-lowest'} Rainfall, using SMALL together with INDEX and MATCH.`,
+    rows, refFormula: `=INDEX(A2:A${last},MATCH(SMALL(B2:B${last},${k}),B2:B${last},0))`,
+    hint: `Find the k-th smallest value with SMALL, then locate it with MATCH, then pull the name with INDEX.`,
+    functions: ['SMALL','INDEX','MATCH']
+  };
+}
+
+function cat_round(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Item','Price','DiscountPct']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,500,9999)/10, randInt(rng,5,40)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Round the Price',
+      scenario: `A price list shows Item, Price, and DiscountPct.`,
+      question: `In row ${target}, write a formula for cell D${target} that rounds the Price in B${target} to the nearest whole number.`,
+      rows, refFormula: `=ROUND(B${target},0)`,
+      hint: `ROUND(number, num_digits). Use 0 digits for whole numbers.`,
+      functions: ['ROUND']
+    };
+  }
+  return {
+    title: 'Discounted Price, Rounded Up',
+    scenario: `A price list shows Item, Price, and DiscountPct (e.g. 20 means 20% off).`,
+    question: `In row ${target}, write a formula for cell D${target} that applies the discount to the Price and rounds the result UP to 2 decimal places.`,
+    rows, refFormula: `=ROUNDUP(B${target}*(1-C${target}/100),2)`,
+    hint: `First compute price*(1-discount/100), then wrap it in ROUNDUP(value,2).`,
+    functions: ['ROUNDUP']
+  };
+}
+
+function cat_iferror(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['SKU','Item','Stock']];
+  const skus = [];
+  for (let i=0;i<n;i++) { const s='SK'+(700+i); skus.push(s); rows.push([s, pick(rng,PRODUCTS), randInt(rng,0,100)]); }
+  const last = n+1;
+  const missing = 'SK999';
+  if (!hard) {
+    return {
+      title: 'Safe Stock Lookup',
+      scenario: `An inventory table lists SKU, Item, and Stock.`,
+      question: `Write a formula that looks up Stock for SKU "${missing}" and returns 0 instead of an error if the SKU is not found.`,
+      rows, refFormula: `=IFERROR(VLOOKUP("${missing}",A2:C${last},3,FALSE),0)`,
+      hint: `IFERROR(formula, value_if_error).`,
+      functions: ['IFERROR','VLOOKUP']
+    };
+  }
+  const target = pick(rng, skus);
+  return {
+    title: 'Safe Lookup with Custom Message',
+    scenario: `An inventory table lists SKU, Item, and Stock.`,
+    question: `Write a formula that looks up Stock for SKU "${target}" using INDEX/MATCH, wrapped in IFERROR to display "Check SKU" if anything goes wrong.`,
+    rows, refFormula: `=IFERROR(INDEX(C2:C${last},MATCH("${target}",A2:A${last},0)),"Check SKU")`,
+    hint: `Nest INDEX/MATCH inside IFERROR.`,
+    functions: ['IFERROR','INDEX','MATCH']
+  };
+}
+
+function cat_logical(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Applicant','Age','Income']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,18,65), randInt(rng,10000,80000)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Loan Eligibility (AND)',
+      scenario: `An applicant list shows Age and Income.`,
+      question: `In row ${target}, write a formula for cell D${target} that returns "Eligible" if Age is 21 or above AND Income is at least 25000, otherwise "Not Eligible".`,
+      rows, refFormula: `=IF(AND(B${target}>=21,C${target}>=25000),"Eligible","Not Eligible")`,
+      hint: `Combine AND() inside IF().`,
+      functions: ['IF','AND']
+    };
+  }
+  return {
+    title: 'Loan Eligibility (AND + OR)',
+    scenario: `An applicant list shows Age and Income.`,
+    question: `In row ${target}, write a formula for cell D${target} that returns "Eligible" if (Age >= 21 AND Income >= 25000) OR Income >= 60000 (high earners bypass the age rule), otherwise "Not Eligible".`,
+    rows, refFormula: `=IF(OR(AND(B${target}>=21,C${target}>=25000),C${target}>=60000),"Eligible","Not Eligible")`,
+    hint: `Nest AND() inside OR(), then wrap the whole thing in IF().`,
+    functions: ['IF','AND','OR']
+  };
+}
+
+function cat_sumproduct(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Item','Qty','UnitPrice']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,1,20), randInt(rng,50,500)]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Total Order Value',
+      scenario: `An order table shows Qty and UnitPrice for several items.`,
+      question: `Write a single formula that calculates the total order value (sum of Qty × UnitPrice for every row) without using a helper column.`,
+      rows, refFormula: `=SUMPRODUCT(B2:B${last},C2:C${last})`,
+      hint: `SUMPRODUCT(range1, range2) multiplies row by row and adds up the results.`,
+      functions: ['SUMPRODUCT']
+    };
+  }
+  const minQty = 5;
+  return {
+    title: 'Conditional Weighted Total',
+    scenario: `An order table shows Qty and UnitPrice for several items.`,
+    question: `Write a formula using SUMPRODUCT that totals Qty × UnitPrice, but only for rows where Qty is greater than ${minQty}.`,
+    rows, refFormula: `=SUMPRODUCT((B2:B${last}>${minQty})*B2:B${last}*C2:C${last})`,
+    hint: `Multiply a condition array (B2:B${last}>${minQty}) by the two value ranges inside SUMPRODUCT.`,
+    functions: ['SUMPRODUCT']
+  };
+}
+
+function cat_wildcard(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Customer','Channel','OrderValue']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,CHANNELS), randInt(rng,100,2000)]);
+  rows[1 + randInt(rng,0,n-1)][1] = 'Online';
+  rows[1 + randInt(rng,0,n-1)][1] = 'In-store';
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Count by Partial Text Match',
+      scenario: `An orders table shows Customer, Channel, and OrderValue.`,
+      question: `Write a formula that counts orders where the Channel starts with "On" (use a wildcard so it matches "Online").`,
+      rows, refFormula: `=COUNTIF(B2:B${last},"On*")`,
+      hint: `The * wildcard in COUNTIF matches any text after "On".`,
+      functions: ['COUNTIF']
+    };
+  }
+  const inRows = rows.slice(1).filter(r => r[1] === 'In-store');
+  const minVal = inRows.length ? Math.max(0, Math.min(...inRows.map(r => r[2])) - 1) : 500;
+  return {
+    title: 'Wildcard + Value Threshold',
+    scenario: `An orders table shows Customer, Channel, and OrderValue.`,
+    question: `Write a formula that sums OrderValue where Channel starts with "In" (wildcard) AND OrderValue is above ${minVal}.`,
+    rows, refFormula: `=SUMIFS(C2:C${last},B2:B${last},"In*",C2:C${last},">${minVal}")`,
+    hint: `SUMIFS supports wildcards in text criteria just like SUMIF.`,
+    functions: ['SUMIFS']
+  };
+}
+
+function cat_twoway(rng, hard) {
+  const rows = [['Product', 'Q1', 'Q2', 'Q3', 'Q4']];
+  const prods = pickN(rng, PRODUCTS, hard?6:5);
+  for (const p of prods) rows.push([p, randInt(rng,100,999), randInt(rng,100,999), randInt(rng,100,999), randInt(rng,100,999)]);
+  const last = prods.length + 1;
+  const targetProd = pick(rng, prods);
+  const targetQ = pick(rng, ['Q1','Q2','Q3','Q4']);
+  const qCol = { Q1:2, Q2:3, Q3:4, Q4:5 }[targetQ];
+  if (!hard) {
+    return {
+      title: 'Two-Way Lookup: Product × Quarter',
+      scenario: `A table shows sales for each Product across four quarters (columns B-E, header row 1).`,
+      question: `Write a formula using INDEX and MATCH that returns the sales value for "${targetProd}" in ${targetQ}.`,
+      rows, refFormula: `=INDEX(B2:E${last},MATCH("${targetProd}",A2:A${last},0),${qCol-1})`,
+      hint: `INDEX(table, MATCH(row_lookup, row_range, 0), column_number).`,
+      functions: ['INDEX','MATCH']
+    };
+  }
+  return {
+    title: 'Fully Dynamic Two-Way Lookup',
+    scenario: `A table shows sales for each Product across four quarters, with quarter names in row 1 (B1:E1) and product names in column A.`,
+    question: `Write a formula using INDEX and two MATCH functions (one for the row, one for the column) that returns the sales value for "${targetProd}" in "${targetQ}" — without hardcoding the column number.`,
+    rows, refFormula: `=INDEX(B2:E${last},MATCH("${targetProd}",A2:A${last},0),MATCH("${targetQ}",B1:E1,0))`,
+    hint: `Use one MATCH to find the row and a second MATCH to find the column, both feeding into INDEX.`,
+    functions: ['INDEX','MATCH']
+  };
+}
+
+function cat_mixed(rng) {
+  // hard-only case study
+  const n = 8;
+  const rows = [['Employee','BaseSalary','PerformanceScore']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,25000,60000), randInt(rng,1,100)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  return {
+    title: 'Bonus Calculation Case Study',
+    scenario: `A payroll sheet shows each Employee's BaseSalary and PerformanceScore (0-100).`,
+    question: `In row ${target}, write one formula for cell D${target} that calculates a bonus: 10% of BaseSalary if PerformanceScore >= 80, 5% if PerformanceScore >= 50, otherwise 0 — and rounds the result to the nearest whole number.`,
+    rows, refFormula: `=ROUND(IF(C${target}>=80,B${target}*0.1,IF(C${target}>=50,B${target}*0.05,0)),0)`,
+    hint: `Build the nested IF for the bonus percentage first, then wrap the whole thing in ROUND(...,0).`,
+    functions: ['ROUND','IF']
+  };
+}
+
+// ===================== 20 ADDITIONAL DATA/BUSINESS ANALYSIS CATEGORIES =====================
+
+function cat_medianmode(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['Rep','DealsClosed']];
+  const pool = [];
+  for (let i=0;i<n-2;i++) pool.push(randInt(rng,2,15));
+  const dup = pick(rng, pool.length?pool:[5]);
+  pool.push(dup, dup); // guarantee a real mode
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pool[i]]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Median Deals Closed',
+      scenario: `A sales team log shows how many DealsClosed each rep had this month.`,
+      question: `Write a formula that finds the MEDIAN number of deals closed across B2:B${last}.`,
+      rows, refFormula: `=MEDIAN(B2:B${last})`,
+      hint: `MEDIAN(range) returns the middle value when the numbers are sorted — useful when outliers would skew an average.`,
+      shortcut: `Alt+= is the shortcut for AutoSum; type MEDIAN( manually since it isn't on the AutoSum menu.`,
+      functions: ['MEDIAN']
+    };
+  }
+  return {
+    title: 'Most Common Deal Count',
+    scenario: `A sales team log shows how many DealsClosed each rep had this month.`,
+    question: `Write a formula that finds the MODE (most frequently occurring value) of DealsClosed in B2:B${last}.`,
+    rows, refFormula: `=MODE(B2:B${last})`,
+    hint: `MODE(range) returns the value that repeats most often in the range.`,
+    shortcut: `Ctrl+\` toggles "Show Formulas" view — handy for auditing a sheet full of statistical formulas at once.`,
+    functions: ['MODE']
+  };
+}
+
+function cat_stdevvar(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['Month','Revenue']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,MONTHS), randInt(rng,5000,50000)]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Revenue Volatility (Standard Deviation)',
+      scenario: `A table lists monthly Revenue for the past ${n} months.`,
+      question: `Write a formula that calculates the STANDARD DEVIATION of Revenue in B2:B${last} (sample standard deviation).`,
+      rows, refFormula: `=STDEV(B2:B${last})`,
+      hint: `STDEV(range) measures how spread out the values are from the average — a core metric for judging revenue stability.`,
+      shortcut: `Ctrl+Shift+% instantly formats the selected cell as a percentage — useful once you compute relative volatility (StdDev / Average).`,
+      functions: ['STDEV']
+    };
+  }
+  return {
+    title: 'Revenue Variance',
+    scenario: `A table lists monthly Revenue for the past ${n} months.`,
+    question: `Write a formula that calculates the VARIANCE of Revenue in B2:B${last} (sample variance).`,
+    rows, refFormula: `=VAR(B2:B${last})`,
+    hint: `VAR(range) is the square of the standard deviation — Excel also offers VAR.S (sample) and VAR.P (population) in modern versions.`,
+    shortcut: `F9 recalculates all open workbooks; Shift+F9 recalculates only the active sheet — useful when auditing volatile stats formulas.`,
+    functions: ['VAR']
+  };
+}
+
+function cat_dataquality(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['CustomerID','Email','Region']];
+  const ids = [];
+  for (let i=0;i<n;i++) {
+    const id = 'C'+(400+i); ids.push(id);
+    const blank = (!hard && i === Math.floor(n/2));
+    rows.push([id, blank ? '' : pick(rng,NAMES).toLowerCase()+'@mail.com', pick(rng,REGIONS)]);
+  }
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Count Missing Emails',
+      scenario: `A customer table lists CustomerID, Email, and Region. Some Email cells are blank because the data wasn't collected.`,
+      question: `Write a formula that counts how many blank cells are in the Email column, B2:B${last}.`,
+      rows, refFormula: `=COUNTBLANK(B2:B${last})`,
+      hint: `COUNTBLANK(range) counts empty cells — a first step in any data-quality audit.`,
+      shortcut: `Ctrl+Shift+L toggles AutoFilter on a table, so you can quickly filter a column down to just its blanks.`,
+      functions: ['COUNTBLANK']
+    };
+  }
+  const missing = 'C999';
+  return {
+    title: 'Flag Lookup Errors',
+    scenario: `A customer table lists CustomerID, Email, and Region.`,
+    question: `Write a formula that checks whether looking up CustomerID "${missing}" with VLOOKUP would return an error, showing TRUE or FALSE.`,
+    rows, refFormula: `=ISERROR(VLOOKUP("${missing}",A2:C${last},2,FALSE))`,
+    hint: `ISERROR(formula) returns TRUE if the formula inside it would fail — useful for building data-quality flags before wrapping in IF.`,
+    shortcut: `Ctrl+\` (Show Formulas) plus Ctrl+[ (Trace Precedents) together make debugging nested error-checks much faster.`,
+    functions: ['ISERROR','VLOOKUP']
+  };
+}
+
+function cat_substitute(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['RawPhone']];
+  for (let i=0;i<n;i++) rows.push([`(${randInt(rng,100,999)})-${randInt(rng,100,999)}-${randInt(rng,1000,9999)}`]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Clean Phone Numbers',
+      scenario: `Raw phone numbers are formatted like "(555)-123-4567" and need their dashes removed.`,
+      question: `In row ${target}, write a formula for cell B${target} that removes all "-" characters from A${target}.`,
+      rows, refFormula: `=SUBSTITUTE(A${target},"-","")`,
+      hint: `SUBSTITUTE(text, old_text, new_text) replaces every occurrence of old_text — use "" as new_text to delete it.`,
+      shortcut: `Ctrl+H opens Find & Replace directly on the worksheet — the manual equivalent of what SUBSTITUTE does inside a formula.`,
+      functions: ['SUBSTITUTE']
+    };
+  }
+  return {
+    title: 'Fully Normalize Phone Numbers',
+    scenario: `Raw phone numbers are formatted like "(555)-123-4567" and need to become plain digits like "5551234567".`,
+    question: `In row ${target}, write one formula for cell B${target} that removes "(", ")" and "-" from A${target}, using nested SUBSTITUTE calls.`,
+    rows, refFormula: `=SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(A${target},"(",""),")",""),"-","")`,
+    hint: `Nest SUBSTITUTE inside SUBSTITUTE — each layer strips one character type. Work from the inside out.`,
+    shortcut: `Ctrl+E triggers Flash Fill, which can often clean text like this without any formula at all — great for one-off cleanups.`,
+    functions: ['SUBSTITUTE']
+  };
+}
+
+function cat_findsearch(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Email']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES).toLowerCase()+'.'+pick(rng,NAMES).toLowerCase()+'@'+pick(rng,['acme','globex','initech','umbrella'])+'.com']);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Locate the @ Symbol',
+      scenario: `A list of Email addresses needs to be split apart for analysis.`,
+      question: `In row ${target}, write a formula for cell B${target} that returns the character position of "@" within A${target}.`,
+      rows, refFormula: `=FIND("@",A${target})`,
+      hint: `FIND(find_text, within_text) returns the position (1-based) of the first match — case-sensitive.`,
+      shortcut: `Ctrl+F opens worksheet Find — same idea as FIND(), but interactive rather than formula-driven.`,
+      functions: ['FIND']
+    };
+  }
+  return {
+    title: 'Extract the Domain from an Email',
+    scenario: `A list of Email addresses needs the domain name (everything after "@") extracted for a company report.`,
+    question: `In row ${target}, write one formula for cell B${target} that extracts just the domain (e.g. "acme.com") from A${target}, using FIND together with MID or RIGHT.`,
+    rows, refFormula: `=MID(A${target},FIND("@",A${target})+1,LEN(A${target})-FIND("@",A${target}))`,
+    hint: `Use FIND to locate "@", then MID from just after that position to the end of the string (LEN minus the position).`,
+    shortcut: `Ctrl+E (Flash Fill) can extract domains instantly from a pattern — great for checking your formula's output.`,
+    functions: ['FIND','MID','LEN']
+  };
+}
+
+function cat_pmt(rng, hard) {
+  const rate = randInt(rng,4,12)/100/12;
+  const nper = pick(rng,[12,24,36,48,60]);
+  const pv = randInt(rng,5000,50000);
+  if (!hard) {
+    return {
+      title: 'Monthly Loan Payment',
+      scenario: `A loan sheet shows the LoanAmount (A2), AnnualRatePct (B2), and repayment term in Months (C2).`,
+      question: `Write a formula in cell D2 that calculates the fixed MONTHLY payment for this loan using PMT.`,
+      rows: [['LoanAmount','AnnualRatePct','Months'],[pv, Math.round(rate*12*10000)/100, nper]],
+      refFormula: `=PMT(B2/100/12,C2,-A2)`,
+      hint: `PMT(rate_per_period, nper, pv) — divide the annual rate by 12 for a monthly rate, and make pv negative since it's money you received.`,
+      shortcut: `Alt+= (AutoSum) doesn't cover PMT — type "=PMT(" and Excel's function tooltip will guide you through each argument.`,
+      functions: ['PMT']
+    };
+  }
+  return {
+    title: 'Total Interest Paid on a Loan',
+    scenario: `A loan sheet shows the LoanAmount (A2), AnnualRatePct (B2), and repayment term in Months (C2).`,
+    question: `Write one formula in cell D2 that calculates the TOTAL interest paid over the life of the loan (total of all payments minus the original loan amount), rounded to 2 decimals.`,
+    rows: [['LoanAmount','AnnualRatePct','Months'],[pv, Math.round(rate*12*10000)/100, nper]],
+    refFormula: `=ROUND(PMT(B2/100/12,C2,-A2)*C2-A2,2)`,
+    hint: `Total paid = monthly PMT × number of months. Subtract the original LoanAmount to isolate the interest, then ROUND.`,
+    shortcut: `F4 toggles absolute references ($) while editing — critical once you start copying loan formulas down a table.`,
+    functions: ['PMT','ROUND']
+  };
+}
+
+function cat_npv(rng, hard) {
+  const rate = randInt(rng,5,15)/100;
+  const n = hard ? 6 : 5;
+  const rows = [['Year','CashFlow']];
+  for (let i=1;i<=n;i++) rows.push([i, randInt(rng,-2000,8000)]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Net Present Value of Future Cash Flows',
+      scenario: `A project's projected CashFlow for each future Year is listed (discount rate: ${(rate*100).toFixed(0)}%).`,
+      question: `Write a formula that calculates the NET PRESENT VALUE of the cash flows in B2:B${last}, using a discount rate of ${rate}.`,
+      rows, refFormula: `=NPV(${rate},B2:B${last})`,
+      hint: `NPV(rate, values) discounts each cash flow back to today, assuming the first value occurs one period from now.`,
+      shortcut: `Ctrl+\` (Show Formulas) is handy for double-checking that your discount rate cell reference didn't shift after copying.`,
+      functions: ['NPV']
+    };
+  }
+  const investment = randInt(rng,3000,10000);
+  return {
+    title: 'NPV Including Initial Investment',
+    scenario: `A project requires an upfront investment of ${investment} today (Year 0), plus the projected CashFlow for each future Year listed in B2:B${last} (discount rate: ${(rate*100).toFixed(0)}%).`,
+    question: `Write one formula that calculates the project's total NPV, including the Year-0 investment of ${investment} as an immediate cash outflow.`,
+    rows, refFormula: `=NPV(${rate},B2:B${last})-${investment}`,
+    hint: `NPV() only discounts future cash flows — the Year-0 investment happens today, so subtract it separately instead of including it inside NPV().`,
+    shortcut: `Name Box (top-left) + typing a range like B2:B${last} then Enter is a fast way to select and audit a range before referencing it.`,
+    functions: ['NPV']
+  };
+}
+
+function cat_fvpv(rng, hard) {
+  const rate = randInt(rng,3,10)/100;
+  const nper = pick(rng,[5,10,15,20]);
+  const pmt = randInt(rng,500,5000);
+  if (!hard) {
+    return {
+      title: 'Future Value of Regular Savings',
+      scenario: `You plan to invest a fixed amount every year at an annual rate of ${(rate*100).toFixed(0)}% for ${nper} years.`,
+      question: `Cell B2 holds the annual contribution amount. Write a formula in C2 that calculates the FUTURE VALUE of this savings plan after ${nper} years.`,
+      rows: [['AnnualContribution'],[pmt]],
+      refFormula: `=FV(${rate},${nper},-B2)`,
+      hint: `FV(rate, nper, pmt) — make pmt negative since it represents money leaving your pocket into the investment.`,
+      shortcut: `Ctrl+1 opens Format Cells — use it to apply currency formatting to FV/PV results so they read clearly.`,
+      functions: ['FV']
+    };
+  }
+  const target = randInt(rng,20000,100000);
+  return {
+    title: 'Present Value of a Target Payout',
+    scenario: `You need a lump sum of ${target} in ${nper} years, and can earn ${(rate*100).toFixed(0)}% annually until then.`,
+    question: `Write a formula that calculates the PRESENT VALUE you'd need to invest today (as a single lump sum, no further contributions) to reach exactly ${target} in ${nper} years.`,
+    rows: [['TargetAmount','Rate','Years'],[target, rate, nper]],
+    refFormula: `=PV(B2,C2,0,-A2)`,
+    hint: `PV(rate, nper, pmt, fv) — with no periodic payments, pmt is 0 and the future value goes in the fv argument (negative, since it's money you'll receive).`,
+    shortcut: `Ctrl+~ toggles formula view across the whole sheet — great for verifying which argument slot each input landed in.`,
+    functions: ['PV']
+  };
+}
+
+function cat_percentile(rng, hard) {
+  const n = hard ? 10 : 8;
+  const rows = [['Candidate','TestScore']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,40,100)]);
+  const last = n+1;
+  if (!hard) {
+    const p = pick(rng,[0.75,0.8,0.9]);
+    return {
+      title: `${Math.round(p*100)}th Percentile Score`,
+      scenario: `A table lists each Candidate's TestScore.`,
+      question: `Write a formula that returns the ${Math.round(p*100)}th PERCENTILE of TestScore in B2:B${last}.`,
+      rows, refFormula: `=PERCENTILE(B2:B${last},${p})`,
+      hint: `PERCENTILE(range, k) — k is a decimal between 0 and 1 (0.9 = 90th percentile).`,
+      shortcut: `Ctrl+Shift+% quickly reformats a cell as a percentage once you've expressed k as a fraction.`,
+      functions: ['PERCENTILE']
+    };
+  }
+  const q = pick(rng,[1,3]);
+  return {
+    title: `Quartile ${q} of Test Scores`,
+    scenario: `A table lists each Candidate's TestScore.`,
+    question: `Write a formula that returns QUARTILE ${q} (the ${q===1?'25th':'75th'} percentile) of TestScore in B2:B${last}.`,
+    rows, refFormula: `=QUARTILE(B2:B${last},${q})`,
+    hint: `QUARTILE(range, quart) — quart 1 = 25th percentile, 2 = median, 3 = 75th percentile.`,
+    shortcut: `Ctrl+Shift+% and Ctrl+1 (Format Cells) both help present quartile results cleanly in a report.`,
+    functions: ['QUARTILE']
+  };
+}
+
+function cat_truncmod(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Item','UnitsOrdered']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,15,250)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Truncate Decimal Values',
+      scenario: `A shipping sheet lists UnitsOrdered, some of which come from an average calculation and include decimals (e.g. 42.87).`,
+      question: `In row ${target}, write a formula for cell C${target} that TRUNCATES B${target} to a whole number (no rounding, just drop the decimal).`,
+      rows, refFormula: `=TRUNC(B${target})`,
+      hint: `TRUNC(number) simply cuts off the decimal portion, unlike ROUND which can round up.`,
+      shortcut: `Ctrl+Shift+1 applies the Number format (with 2 decimals) — good for spotting values that need TRUNC in the first place.`,
+      functions: ['TRUNC']
+    };
+  }
+  const boxSize = pick(rng,[6,12,24]);
+  return {
+    title: 'Leftover Units After Boxing',
+    scenario: `Units are packed into boxes of ${boxSize}. UnitsOrdered is in column B.`,
+    question: `In row ${target}, write a formula for cell C${target} that calculates how many units would be LEFT OVER after packing as many full boxes of ${boxSize} as possible from B${target}.`,
+    rows, refFormula: `=MOD(B${target},${boxSize})`,
+    hint: `MOD(number, divisor) returns the remainder of a division — exactly the leftover after full boxes are packed.`,
+    shortcut: `Ctrl+D fills a formula down from the cell above — fast way to apply this MOD formula to every row.`,
+    functions: ['MOD']
+  };
+}
+
+function cat_powersqrt(rng, hard) {
+  if (!hard) {
+    const principal = randInt(rng,1000,20000);
+    const rate = randInt(rng,3,15)/100;
+    const years = randInt(rng,2,10);
+    return {
+      title: 'Compound Growth with POWER',
+      scenario: `An investment of ${principal} grows at ${(rate*100).toFixed(0)}% annually, compounded once per year.`,
+      question: `Write a formula that calculates the value of the investment after ${years} years using POWER for the exponent.`,
+      rows: [['Principal','Rate','Years'],[principal, rate, years]],
+      refFormula: `=A2*POWER(1+B2,C2)`,
+      hint: `POWER(number, power) raises (1 + rate) to the number of years — the standard compound-growth formula.`,
+      shortcut: `You can also write exponents with the ^ operator, e.g. A2*(1+B2)^C2 — POWER() is just the explicit function form.`,
+      functions: ['POWER']
+    };
+  }
+  const start = randInt(rng,500,5000);
+  const end = start + randInt(rng,500,8000);
+  const years = randInt(rng,2,8);
+  return {
+    title: 'Find the Annual Growth Rate (CAGR)',
+    scenario: `Revenue grew from ${start} to ${end} over ${years} years.`,
+    question: `Write a formula that calculates the Compound Annual Growth Rate (CAGR) as a decimal, using POWER for the root: (End/Start) raised to (1/Years), minus 1.`,
+    rows: [['StartValue','EndValue','Years'],[start, end, years]],
+    refFormula: `=POWER(B2/A2,1/C2)-1`,
+    hint: `CAGR = (End/Start)^(1/Years) − 1. A root is just a POWER with a fractional exponent like 1/Years.`,
+    shortcut: `Format the result with Ctrl+Shift+% so a decimal like 0.083 reads clearly as an 8.3% growth rate.`,
+    functions: ['POWER']
+  };
+}
+
+function cat_ceilfloor(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Item','RawPrice']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,100,999)/10]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  const nearest = pick(rng,[0.5,1,5]);
+  if (!hard) {
+    return {
+      title: 'Round Prices Up to a Pricing Step',
+      scenario: `A pricing sheet lists RawPrice values that need to be pushed up to the nearest ${nearest} for pricing rules.`,
+      question: `In row ${target}, write a formula for cell C${target} that rounds B${target} UP to the nearest ${nearest} using CEILING.`,
+      rows, refFormula: `=CEILING(B${target},${nearest})`,
+      hint: `CEILING(number, significance) rounds up to the nearest multiple of significance.`,
+      shortcut: `Ctrl+1 → Number tab lets you preview how a value will display before deciding on CEILING vs ROUND vs ROUNDUP.`,
+      functions: ['CEILING']
+    };
+  }
+  return {
+    title: 'Round Prices Down to a Pricing Step',
+    scenario: `A pricing sheet lists RawPrice values that need to be pushed down to the nearest ${nearest} for a "charm pricing" strategy.`,
+    question: `In row ${target}, write a formula for cell C${target} that rounds B${target} DOWN to the nearest ${nearest} using FLOOR.`,
+    rows, refFormula: `=FLOOR(B${target},${nearest})`,
+    hint: `FLOOR(number, significance) rounds down to the nearest multiple of significance — the mirror image of CEILING.`,
+    shortcut: `Ctrl+D fills the formula down the column once you've built it in one cell.`,
+    functions: ['FLOOR']
+  };
+}
+
+function cat_edate(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Contract','StartDate']];
+  for (let i=0;i<n;i++) {
+    const y = randInt(rng,2023,2026), m = randInt(rng,1,12), d = randInt(rng,1,28);
+    rows.push(['CT-'+(100+i), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
+  }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    const months = pick(rng,[6,12,24]);
+    return {
+      title: 'Calculate a Renewal Date',
+      scenario: `A contracts table lists each Contract's StartDate. Contracts renew every ${months} months.`,
+      question: `In row ${target}, write a formula for cell C${target} that returns the renewal date — StartDate plus ${months} months.`,
+      rows, refFormula: `=EDATE(B${target},${months})`,
+      hint: `EDATE(start_date, months) shifts a date forward (or back, with a negative number) by whole months.`,
+      shortcut: `Ctrl+; instantly inserts today's date into a cell — handy for quick date comparisons while testing.`,
+      functions: ['EDATE']
+    };
+  }
+  return {
+    title: 'Find the Last Day of the Start Month',
+    scenario: `A contracts table lists each Contract's StartDate. Finance needs the last calendar day of the month each contract started, for billing cutoffs.`,
+    question: `In row ${target}, write a formula for cell C${target} that returns the last day of the month that B${target} falls in.`,
+    rows, refFormula: `=EOMONTH(B${target},0)`,
+    hint: `EOMONTH(start_date, months) with 0 months returns the last day of the same month; use 1 for next month's end, -1 for last month's end.`,
+    shortcut: `Ctrl+Shift+# formats a cell as a date instantly — useful right after EOMONTH returns a serial date number.`,
+    functions: ['EOMONTH']
+  };
+}
+
+function cat_weekday(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Task','DueDate']];
+  for (let i=0;i<n;i++) {
+    const y = 2026, m = randInt(rng,1,12), d = randInt(rng,1,28);
+    rows.push(['Task '+(i+1), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
+  }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Find the Day of the Week',
+      scenario: `A task list shows each Task's DueDate.`,
+      question: `In row ${target}, write a formula for cell C${target} that returns the day of the week as a number (1=Sunday...7=Saturday) for B${target}.`,
+      rows, refFormula: `=WEEKDAY(B${target})`,
+      hint: `WEEKDAY(date) defaults to numbering Sunday as 1 through Saturday as 7.`,
+      shortcut: `Ctrl+; inserts today's date — quickly test WEEKDAY() against "today" while building the formula.`,
+      functions: ['WEEKDAY']
+    };
+  }
+  return {
+    title: 'Flag Weekend Due Dates',
+    scenario: `A task list shows each Task's DueDate. Anything landing on a Saturday or Sunday needs to be flagged for rescheduling.`,
+    question: `In row ${target}, write a formula for cell C${target} that returns "Weekend" if B${target} falls on a Saturday or Sunday, otherwise "Weekday" — combine WEEKDAY with IF and OR.`,
+    rows, refFormula: `=IF(OR(WEEKDAY(B${target})=1,WEEKDAY(B${target})=7),"Weekend","Weekday")`,
+    hint: `With the default WEEKDAY numbering, 1 = Sunday and 7 = Saturday — check for either inside an OR(), then wrap in IF().`,
+    shortcut: `Ctrl+Shift+L adds filter dropdowns so you can quickly isolate all "Weekend" flagged rows once the formula is filled down.`,
+    functions: ['WEEKDAY','IF','OR']
+  };
+}
+
+function cat_choose(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Order','QuarterNum']];
+  for (let i=0;i<n;i++) rows.push(['ORD-'+(200+i), randInt(rng,1,4)]);
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Convert a Number to a Label',
+      scenario: `An orders table stores the QuarterNum (1-4) each order was placed in, and you need readable quarter labels.`,
+      question: `In row ${target}, write a formula for cell C${target} that uses CHOOSE to turn B${target} into "Q1", "Q2", "Q3", or "Q4".`,
+      rows, refFormula: `=CHOOSE(B${target},"Q1","Q2","Q3","Q4")`,
+      hint: `CHOOSE(index_num, value1, value2, ...) picks the nth value from the list — index 1 returns value1, and so on.`,
+      shortcut: `Ctrl+D fills the formula down once written in the first row of a column.`,
+      functions: ['CHOOSE']
+    };
+  }
+  return {
+    title: 'CHOOSE with a Calculated Index',
+    scenario: `An orders table stores the QuarterNum (1-4) each order was placed in. Bonus multipliers differ by quarter: Q1=1.0x, Q2=1.05x, Q3=1.1x, Q4=1.2x (Q4 is peak season).`,
+    question: `In row ${target}, write a formula for cell C${target} that uses CHOOSE with B${target} as the index to return the correct multiplier for that quarter.`,
+    rows, refFormula: `=CHOOSE(B${target},1,1.05,1.1,1.2)`,
+    hint: `The index passed to CHOOSE doesn't have to be a literal number — it can be any cell or expression that evaluates to 1, 2, 3...`,
+    shortcut: `F4 while editing toggles a reference between relative and absolute — useful once you reuse B${target} elsewhere in the same formula.`,
+    functions: ['CHOOSE']
+  };
+}
+
+function cat_growthrate(rng, hard) {
+  const oldV = randInt(rng,10000,50000);
+  const newV = oldV + randInt(rng,-8000,15000);
+  if (!hard) {
+    return {
+      title: 'Year-over-Year Growth Rate',
+      scenario: `LastYearRevenue is in B2 and ThisYearRevenue is in C2.`,
+      question: `Write a formula in D2 that calculates the year-over-year growth rate as a percentage change from B2 to C2.`,
+      rows: [['LastYearRevenue','ThisYearRevenue'],[oldV, newV]],
+      refFormula: `=(C2-B2)/B2`,
+      hint: `Growth rate = (New − Old) / Old. Format the result as a percentage to read it naturally.`,
+      shortcut: `Ctrl+Shift+% instantly applies percentage formatting to the selected cell.`,
+      functions: []
+    };
+  }
+  const years = randInt(rng,2,6);
+  const startV = randInt(rng,10000,40000);
+  const endV = startV + randInt(rng,5000,60000);
+  return {
+    title: 'Multi-Year Compound Growth Rate',
+    scenario: `Revenue was ${startV} in Year 1 and reached ${endV} by Year ${years}.`,
+    question: `Write a formula that calculates the average annual (compound) growth rate over this period, using the CAGR formula: (End/Start)^(1/(Years-1)) - 1.`,
+    rows: [['StartRevenue','EndRevenue','Years'],[startV, endV, years]],
+    refFormula: `=(B2/A2)^(1/(C2-1))-1`,
+    hint: `Use (Years − 1) as the exponent denominator since Year 1 is the starting point, not a full growth period.`,
+    shortcut: `Ctrl+Shift+% to format as a percentage; F4 to lock cell references before copying the formula elsewhere.`,
+    functions: []
+  };
+}
+
+function cat_margin(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Product','Revenue','Cost']];
+  for (let i=0;i<n;i++) { const cost = randInt(rng,50,400); rows.push([pick(rng,PRODUCTS), cost + randInt(rng,20,300), cost]); }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Calculate Gross Margin %',
+      scenario: `A product table shows Revenue and Cost for each item.`,
+      question: `In row ${target}, write a formula for cell D${target} that calculates Gross Margin % = (Revenue − Cost) / Revenue.`,
+      rows, refFormula: `=(B${target}-C${target})/B${target}`,
+      hint: `Gross Margin % is measured against Revenue, not Cost — that's what separates it from Markup %.`,
+      shortcut: `Ctrl+Shift+% applies percent formatting so the ratio reads as a clean percentage.`,
+      functions: []
+    };
+  }
+  return {
+    title: 'Blended Margin Across Products',
+    scenario: `A product table shows Revenue and Cost for each item.`,
+    question: `Write a single formula (not a helper column) that calculates the BLENDED gross margin % across all products in B2:B${last} and C2:C${last} — total profit divided by total revenue.`,
+    rows, refFormula: `=(SUM(B2:B${last})-SUM(C2:C${last}))/SUM(B2:B${last})`,
+    hint: `Blended margin is NOT the average of each row's margin — sum all Revenue and all Cost first, then compute one overall ratio.`,
+    shortcut: `Alt+= (AutoSum) quickly inserts SUM() for a range — build both sums first, then combine them into the ratio.`,
+    functions: []
+  };
+}
+
+function cat_weightedavg(rng, hard) {
+  const n = hard ? 8 : 6;
+  const rows = [['Course','Grade','Credits']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,60,100), pick(rng,[1,2,3,4])]);
+  rows[1 + randInt(rng,0,n-1)][2] = pick(rng,[3,4]);
+  const last = n+1;
+  if (!hard) {
+    return {
+      title: 'Credit-Weighted Average Grade',
+      scenario: `A transcript lists each Course's Grade and Credits (heavier courses should count more).`,
+      question: `Write a single formula (no helper column) that calculates the credit-weighted average Grade across B2:B${last} and C2:C${last}.`,
+      rows, refFormula: `=SUMPRODUCT(B2:B${last},C2:C${last})/SUM(C2:C${last})`,
+      hint: `Weighted average = SUMPRODUCT(values, weights) / SUM(weights) — SUMPRODUCT multiplies each pair and adds the results in one step.`,
+      shortcut: `Alt+= (AutoSum) can build the SUM(weights) part instantly; type SUMPRODUCT manually for the numerator.`,
+      functions: ['SUMPRODUCT']
+    };
+  }
+  const minCredits = 2;
+  return {
+    title: 'Weighted Average for High-Credit Courses Only',
+    scenario: `A transcript lists each Course's Grade and Credits.`,
+    question: `Write a single formula that calculates the credit-weighted average Grade, but only including courses with Credits greater than ${minCredits}.`,
+    rows, refFormula: `=SUMPRODUCT((C2:C${last}>${minCredits})*B2:B${last}*C2:C${last})/SUMPRODUCT((C2:C${last}>${minCredits})*C2:C${last})`,
+    hint: `Multiply a condition array (C2:C${last}>${minCredits}) into both the numerator and denominator of the weighted-average formula to filter it.`,
+    shortcut: `Ctrl+Shift+Enter used to be required for array formulas in older Excel — modern Excel spills these automatically.`,
+    functions: ['SUMPRODUCT']
+  };
+}
+
+function cat_runningtotal(rng, hard) {
+  const n = hard ? 9 : 7;
+  const rows = [['Day','UnitsSold']];
+  for (let i=1;i<=n;i++) rows.push([i, randInt(rng,10,150)]);
+  const last = n+1;
+  const target = randInt(rng,3,last);
+  if (!hard) {
+    return {
+      title: 'Running Total of Daily Sales',
+      scenario: `A table logs UnitsSold for each Day of the month.`,
+      question: `In row ${target}, write a formula for cell C${target} that shows the RUNNING TOTAL of UnitsSold from B2 through B${target}.`,
+      rows, refFormula: `=SUM(B$2:B${target})`,
+      hint: `Anchor the start of the range with a $ (like B$2) so that copying the formula down keeps expanding from row 2, while the end of the range grows with each row.`,
+      shortcut: `F4 while the cursor is inside a cell reference cycles through $A$1, A$1, $A1, A1 — the fastest way to lock a reference.`,
+      functions: ['SUM']
+    };
+  }
+  return {
+    title: "Running Total as % of Month's Total",
+    scenario: `A table logs UnitsSold for each Day of the month, B2:B${last}.`,
+    question: `In row ${target}, write a formula for cell C${target} that shows the running total through row ${target} AS A PERCENTAGE of the full month's total (B2:B${last}).`,
+    rows, refFormula: `=SUM(B$2:B${target})/SUM(B$2:B$${last})`,
+    hint: `Combine a growing running-total SUM with a fixed, fully-anchored SUM (both ends locked with $) for the denominator.`,
+    shortcut: `Ctrl+Shift+% formats the result as a percentage immediately after building the ratio.`,
+    functions: ['SUM']
+  };
+}
+
+function cat_mixed2(rng, hard) {
+  const n = 8;
+  const rows = [['SKU','ListPrice','UnitsSold','Category']];
+  const skus = [];
+  for (let i=0;i<n;i++) { const s='SKU'+(600+i); skus.push(s); rows.push([s, randInt(rng,200,2000)/10, randInt(rng,5,120), pick(rng,['Electronics','Accessories'])]); }
+  const last = n+1;
+  const target = randInt(rng,2,n+1);
+  if (!hard) {
+    return {
+      title: 'Discounted Revenue by Category (Case Study)',
+      scenario: `A product table lists SKU, ListPrice, UnitsSold, and Category. Electronics get a 10% discount, everything else gets no discount.`,
+      question: `In row ${target}, write one formula for cell E${target} that calculates the discounted revenue (ListPrice × UnitsSold, minus 10% if Category is "Electronics"), rounded to 2 decimals.`,
+      rows, refFormula: `=ROUND(B${target}*C${target}*IF(D${target}="Electronics",0.9,1),2)`,
+      hint: `Build the base revenue (Price × Units) first, then multiply by a discount factor chosen with IF, then wrap in ROUND.`,
+      shortcut: `F9 with a formula (or part of it) selected in the formula bar shows you its evaluated value — great for debugging multi-step formulas like this.`,
+      functions: ['IF','ROUND']
+    };
+  }
+  const targetSku = pick(rng, skus);
+  return {
+    title: 'Safe Category Lookup with Conditional Pricing (Case Study)',
+    scenario: `A product table lists SKU, ListPrice, UnitsSold, and Category. You need to check a SKU that may or may not exist in the sheet.`,
+    question: `Write one formula that looks up ListPrice for SKU "${targetSku}" using VLOOKUP, applies a 15% markup, rounds to 2 decimals, and shows "SKU Not Found" if the lookup fails — all in a single formula.`,
+    rows, refFormula: `=IFERROR(ROUND(VLOOKUP("${targetSku}",A2:D${last},2,FALSE)*1.15,2),"SKU Not Found")`,
+    hint: `Nest from the inside out: VLOOKUP first, then multiply by 1.15, then ROUND, then wrap the entire thing in IFERROR.`,
+    shortcut: `Ctrl+[ (Trace Precedents) visually maps which cells feed into a complex nested formula like this one.`,
+    functions: ['VLOOKUP','ROUND','IFERROR']
+  };
+}
+
+const NEW_CATEGORIES = [
+  { key: 'medianmode', label: 'MEDIAN / MODE', fn: cat_medianmode },
+  { key: 'stdevvar', label: 'STDEV / VAR', fn: cat_stdevvar },
+  { key: 'dataquality', label: 'Data Quality Checks', fn: cat_dataquality },
+  { key: 'substitute', label: 'SUBSTITUTE (Text Cleaning)', fn: cat_substitute },
+  { key: 'findsearch', label: 'FIND / SEARCH', fn: cat_findsearch },
+  { key: 'pmt', label: 'PMT (Loan Payments)', fn: cat_pmt },
+  { key: 'npv', label: 'NPV (Valuation)', fn: cat_npv },
+  { key: 'fvpv', label: 'FV / PV (Time Value of Money)', fn: cat_fvpv },
+  { key: 'percentile', label: 'PERCENTILE / QUARTILE', fn: cat_percentile },
+  { key: 'truncmod', label: 'TRUNC / MOD', fn: cat_truncmod },
+  { key: 'powersqrt', label: 'POWER / Growth Modeling', fn: cat_powersqrt },
+  { key: 'ceilfloor', label: 'CEILING / FLOOR', fn: cat_ceilfloor },
+  { key: 'edate', label: 'EDATE / EOMONTH', fn: cat_edate },
+  { key: 'weekday', label: 'WEEKDAY (Business Dates)', fn: cat_weekday },
+  { key: 'choose', label: 'CHOOSE', fn: cat_choose },
+  { key: 'growthrate', label: 'Growth Rate / CAGR', fn: cat_growthrate },
+  { key: 'margin', label: 'Margin & Markup Analysis', fn: cat_margin },
+  { key: 'weightedavg', label: 'Weighted Averages', fn: cat_weightedavg },
+  { key: 'runningtotal', label: 'Running Totals (Absolute Refs)', fn: cat_runningtotal },
+  { key: 'mixed2', label: 'Case Studies II', fn: cat_mixed2 },
+];
+
+const CATEGORIES = [
+  { key: 'sumif', label: 'SUMIF / SUMIFS', fn: cat_sumif },
+  { key: 'countif', label: 'COUNTIF / COUNTIFS', fn: cat_countif },
+  { key: 'averageif', label: 'AVERAGEIF / AVERAGEIFS', fn: cat_averageif },
+
+  { key: 'vlookup', label: 'VLOOKUP', fn: cat_vlookup },
+  { key: 'indexmatch', label: 'INDEX / MATCH', fn: cat_indexmatch },
+  { key: 'xlookup', label: 'XLOOKUP', fn: cat_xlookup },
+  { key: 'nestedif', label: 'Nested IF', fn: cat_nestedif },
+  { key: 'ifs', label: 'IFS (Multi-Tier)', fn: cat_ifs },
+  { key: 'textextract', label: 'Text Extraction', fn: cat_textextract },
+  { key: 'textconcat', label: 'Text Building', fn: cat_textconcat },
+  { key: 'dates', label: 'Date Functions', fn: cat_dates },
+  { key: 'rank', label: 'RANK', fn: cat_rank },
+  { key: 'largesmall', label: 'LARGE / SMALL', fn: cat_largesmall },
+  { key: 'round', label: 'ROUND Family', fn: cat_round },
+  { key: 'iferror', label: 'IFERROR + Lookup', fn: cat_iferror },
+  { key: 'logical', label: 'AND / OR Logic', fn: cat_logical },
+  { key: 'sumproduct', label: 'SUMPRODUCT', fn: cat_sumproduct },
+  { key: 'wildcard', label: 'Wildcard Criteria', fn: cat_wildcard },
+  { key: 'twoway', label: '2-Way Lookup', fn: cat_twoway },
+  { key: 'mixed', label: 'Case Studies', fn: cat_mixed },
+  ...NEW_CATEGORIES,
+];
+
+const GENERAL_SHORTCUTS = [
+  'Ctrl+Space selects the entire column of the active cell; Shift+Space selects the entire row.',
+  'F2 edits the active cell in place, putting your cursor right where you last clicked.',
+  'Ctrl+Arrow keys jump to the edge of a block of data — much faster than scrolling.',
+  'Alt+= is AutoSum: it guesses the SUM range for you in one keystroke.',
+  'Ctrl+D fills a formula or value down from the cell(s) above.',
+  'Ctrl+R fills a formula or value right from the cell(s) to the left.',
+  'F4 while editing a formula cycles a reference through $A$1, A$1, $A1, A1.',
+  'Ctrl+; inserts today\'s date; Ctrl+Shift+; inserts the current time.',
+  'Ctrl+1 opens Format Cells for quick number/date/percentage formatting.',
+  'Ctrl+Shift+L toggles filter dropdowns on a data range.',
+  'Ctrl+T converts a range into a proper Excel Table with structured references.',
+  'Ctrl+` (grave accent) toggles Show Formulas, revealing every formula on the sheet at once.',
+  'Alt+Enter inserts a line break inside a cell or the formula bar, useful for long nested formulas.',
+  'Ctrl+[ traces precedents — the cells feeding into the active formula.',
+  'F9 recalculates all formulas; select part of a formula in the formula bar and press F9 to preview just that piece.',
+  'Ctrl+E triggers Flash Fill, which can replace many text formulas with pattern recognition.',
+  'Ctrl+Shift+% applies percentage formatting instantly.',
+  'Ctrl+Home jumps to cell A1 from anywhere in a large sheet.',
+  'Ctrl+Shift+Arrow selects from the active cell to the edge of a data block.',
+  'F4 (outside formula editing) repeats your last action — handy after formatting a cell.',
+];
+
+function buildAllProblems() {
+  const problems = [];
+  let id = 1;
+  for (const cat of CATEGORIES) {
+    for (let v = 0; v < 25; v++) {
+      const hard = v >= 12;
+      const rng = mulberry32(id * 7919 + 13);
+      let p;
+      if (cat.key === 'mixed') p = cat.fn(rng);
+      else p = cat.fn(rng, hard);
+      p.id = id;
+      p.category = cat.label;
+      p.difficulty = cat.key === 'mixed' ? 'Hard' : (hard ? 'Hard' : 'Medium');
+      // compute expected value using the engine itself
+      const grid = buildGrid(p.rows);
+      let expected;
+      try {
+        expected = evaluateFormula(p.refFormula, grid);
+      } catch (e) {
+        expected = 'ENGINE_ERROR: ' + e.message;
+      }
+      p.expected = expected;
+      if (!p.shortcut) p.shortcut = GENERAL_SHORTCUTS[id % GENERAL_SHORTCUTS.length];
+      problems.push(p);
+      id++;
+    }
+  }
+  return problems;
+}
+
+
+</script>
+<script>
+(function () {
+  const ALL_PROBLEMS = buildAllProblems(); // from generators_browser.js
+  const TOTAL = ALL_PROBLEMS.length;
+
+  // ---------- state ----------
+  let solvedIds = new Set();
+  let attempts = 0, correctAttempts = 0, streak = 0;
+  let diffFilter = 'all';
+  let catFilter = null; // null = all categories
+  let currentIndex = 0; // index into filteredList()
+  let hintShown = false, solutionShown = false;
+
+  const STORAGE_KEY = 'formuladrill-progress';
+
+  async function loadProgress() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        solvedIds = new Set(parsed.solvedIds || []);
+        attempts = parsed.attempts || 0;
+        correctAttempts = parsed.correctAttempts || 0;
+        streak = parsed.streak || 0;
+      }
+    } catch (e) { /* no saved progress yet */ }
+    renderProgress();
+  }
+
+  async function saveProgress() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        solvedIds: [...solvedIds], attempts, correctAttempts, streak
+      }));
+    } catch (e) { console.warn('save failed', e); }
+  }
+
+  // ---------- category list ----------
+  function buildCategoryList() {
+    const cats = [];
+    const seen = new Set();
+    for (const p of ALL_PROBLEMS) {
+      if (!seen.has(p.category)) { seen.add(p.category); cats.push(p.category); }
+    }
+    return cats;
+  }
+  const CATS = buildCategoryList();
+
+  function filteredList() {
+    return ALL_PROBLEMS.filter(p => {
+      if (diffFilter !== 'all' && p.difficulty !== diffFilter) return false;
+      if (catFilter && p.category !== catFilter) return false;
+      return true;
+    });
+  }
+
+  // ---------- rendering ----------
+  const el = (id) => document.getElementById(id);
+
+  function renderCatList() {
+    const ul = el('catList');
+    ul.innerHTML = '';
+    const allLi = document.createElement('li');
+    allLi.className = 'cat-item' + (catFilter === null ? ' active' : '');
+    allLi.innerHTML = `<span>All categories</span><span class="cat-count">${ALL_PROBLEMS.length}</span>`;
+    allLi.onclick = () => { catFilter = null; currentIndex = 0; renderCatList(); showProblem(); };
+    ul.appendChild(allLi);
+    for (const c of CATS) {
+      const count = ALL_PROBLEMS.filter(p => p.category === c).length;
+      const solvedCount = ALL_PROBLEMS.filter(p => p.category === c && solvedIds.has(p.id)).length;
+      const li = document.createElement('li');
+      li.className = 'cat-item' + (catFilter === c ? ' active' : '');
+      li.innerHTML = `<span>${c}</span><span class="cat-count">${solvedCount}/${count}</span>`;
+      li.onclick = () => { catFilter = c; currentIndex = 0; renderCatList(); showProblem(); };
+      ul.appendChild(li);
+    }
+  }
+
+  function renderProgress() {
+    el('statSolved').textContent = solvedIds.size;
+    el('statStreak').textContent = streak;
+    el('statAccuracy').textContent = attempts ? Math.round((correctAttempts / attempts) * 100) + '%' : '—';
+    const pct = Math.round((solvedIds.size / TOTAL) * 100);
+    el('progressFill').style.width = pct + '%';
+    el('progressText').textContent = `${solvedIds.size} of ${TOTAL} solved`;
+    el('progressPct').textContent = pct + '%';
+    renderCatList();
+  }
+
+  function colLetterUI(n) {
+    let s = ''; while (n > 0) { const r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); } return s;
+  }
+
+  function renderSheet(rows) {
+    const table = el('sheetTable');
+    table.innerHTML = '';
+    const numCols = Math.max(...rows.map(r => r.length));
+    const numRows = rows.length; // includes header row as data row 1
+
+    const thead = document.createElement('thead');
+    const colHeadRow = document.createElement('tr');
+    colHeadRow.className = 'colhead';
+    const cornerTh = document.createElement('th');
+    colHeadRow.appendChild(cornerTh);
+    for (let c = 1; c <= numCols; c++) {
+      const th = document.createElement('th');
+      th.textContent = colLetterUI(c);
+      colHeadRow.appendChild(th);
+    }
+    thead.appendChild(colHeadRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for (let r = 0; r < numRows; r++) {
+      const tr = document.createElement('tr');
+      const rowTh = document.createElement('th');
+      rowTh.textContent = r + 1;
+      tr.appendChild(rowTh);
+      for (let c = 0; c < numCols; c++) {
+        const td = document.createElement('td');
+        const v = rows[r][c];
+        td.textContent = v === undefined ? '' : v;
+        if (r === 0) td.classList.add('header-row');
+        if (typeof v === 'number') td.classList.add('numeric');
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+  }
+
+  function currentList() { return filteredList(); }
+
+  function showProblem() {
+    const list = currentList();
+    if (list.length === 0) { catFilter = null; return showProblem(); }
+    if (currentIndex >= list.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = list.length - 1;
+    const p = list[currentIndex];
+
+    el('ribbonId').textContent = '#' + String(p.id).padStart(3, '0');
+    el('ribbonTitle').textContent = p.title + ' — ' + p.category;
+
+    el('badgeDiff').textContent = p.difficulty;
+    el('badgeDiff').className = 'badge ' + p.difficulty.toLowerCase();
+    el('badgeCat').textContent = p.category;
+    el('badgeId').textContent = `Problem #${p.id} of ${TOTAL}` + (solvedIds.has(p.id) ? '  •  ✓ solved' : '');
+    el('probTitle').textContent = p.title;
+    el('probScenario').textContent = p.scenario;
+    el('probQuestion').textContent = p.question;
+
+    renderSheet(p.rows);
+
+    const targetMatch = p.question.match(/cell\s+([A-Z]+\d+)/i);
+    el('cellRefBox').textContent = targetMatch ? targetMatch[1] : '=';
+
+    const input = el('formulaInput');
+    input.value = '';
+    input.className = 'formula-input';
+    input.focus();
+
+    el('feedback').className = 'feedback';
+    el('feedback').textContent = '';
+
+    hintShown = false; solutionShown = false;
+    el('hintBox').className = 'reveal-box';
+    el('hintBox').textContent = '';
+    el('solutionBox').className = 'reveal-box';
+    el('solutionBox').textContent = '';
+    el('hintBtn').textContent = '💡 Show hint';
+    el('solutionBtn').textContent = '✅ Show solution';
+
+    el('fnTags').innerHTML = p.functions.map(f => `<span class="fn-tag">${f}</span>`).join('');
+    el('proTipText').textContent = p.shortcut || '';
+
+    el('prevBtn').disabled = false;
+    el('nextBtn').disabled = false;
+  }
+
+  function valuesMatch(actual, expected) {
+    if (typeof expected === 'number') {
+      const a = typeof actual === 'number' ? actual : parseFloat(actual);
+      if (isNaN(a)) return false;
+      return Math.abs(a - expected) < 0.005;
+    }
+    if (typeof expected === 'boolean') {
+      return String(actual).toLowerCase() === String(expected).toLowerCase();
+    }
+    return String(actual).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  }
+
+  function checkAnswer() {
+    const list = currentList();
+    const p = list[currentIndex];
+    const formula = el('formulaInput').value.trim();
+    if (!formula) return;
+
+    const grid = new Grid(p.rows);
+    const fb = el('feedback');
+    const input = el('formulaInput');
+    attempts++;
+
+    let result;
+    try {
+      result = evaluateFormula(formula, grid);
+    } catch (e) {
+      correctAttempts_fail();
+      fb.className = 'feedback incorrect show';
+      fb.textContent = `⚠️ Formula error: ${e.message}. Check your syntax and cell references.`;
+      input.className = 'formula-input incorrect';
+      saveProgress(); renderProgress();
+      return;
+    }
+
+    if (valuesMatch(result, p.expected)) {
+      correctAttempts++;
+      streak++;
+      solvedIds.add(p.id);
+      fb.className = 'feedback correct show';
+      fb.textContent = `✅ Correct! Your formula returned ${formatDisplay(result)}.`;
+      input.className = 'formula-input correct';
+    } else {
+      correctAttempts_fail();
+      fb.className = 'feedback incorrect show';
+      fb.textContent = `❌ Not quite. Your formula returned ${formatDisplay(result)}, but the expected answer is ${formatDisplay(p.expected)}. Try again or check the hint.`;
+      input.className = 'formula-input incorrect';
+    }
+    el('badgeId').textContent = `Problem #${p.id} of ${TOTAL}` + (solvedIds.has(p.id) ? '  •  ✓ solved' : '');
+    saveProgress();
+    renderProgress();
+  }
+  function correctAttempts_fail() { streak = 0; }
+
+  function formatDisplay(v) {
+    if (typeof v === 'number') {
+      return Number.isInteger(v) ? String(v) : String(Math.round(v * 10000) / 10000);
+    }
+    if (typeof v === 'boolean') return v ? 'TRUE' : 'FALSE';
+    return `"${v}"`;
+  }
+
+  // ---------- events ----------
+  el('submitBtn').onclick = checkAnswer;
+  el('formulaInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') checkAnswer(); });
+
+  el('prevBtn').onclick = () => { currentIndex--; showProblem(); };
+  el('nextBtn').onclick = () => { currentIndex++; showProblem(); };
+  el('shuffleBtn').onclick = () => {
+    const list = currentList();
+    currentIndex = Math.floor(Math.random() * list.length);
+    showProblem();
+  };
+
+  el('hintBtn').onclick = () => {
+    const list = currentList(); const p = list[currentIndex];
+    hintShown = !hintShown;
+    const box = el('hintBox');
+    if (hintShown) { box.textContent = p.hint; box.className = 'reveal-box show'; el('hintBtn').textContent = '💡 Hide hint'; }
+    else { box.className = 'reveal-box'; el('hintBtn').textContent = '💡 Show hint'; }
+  };
+  el('solutionBtn').onclick = () => {
+    const list = currentList(); const p = list[currentIndex];
+    solutionShown = !solutionShown;
+    const box = el('solutionBox');
+    if (solutionShown) {
+      box.innerHTML = `Sample solution: <code>${p.refFormula}</code>`;
+      box.className = 'reveal-box show';
+      el('solutionBtn').textContent = '✅ Hide solution';
+    } else { box.className = 'reveal-box'; el('solutionBtn').textContent = '✅ Show solution'; }
+  };
+  el('skipBtn').onclick = () => { currentIndex++; showProblem(); };
+
+  document.querySelectorAll('#diffFilter .chip').forEach(chip => {
+    chip.onclick = () => {
+      document.querySelectorAll('#diffFilter .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      diffFilter = chip.dataset.diff;
+      currentIndex = 0;
+      showProblem();
+    };
+  });
+
+  el('resetBtn').onclick = async () => {
+    if (!confirm('Reset all saved progress? This cannot be undone.')) return;
+    solvedIds = new Set(); attempts = 0; correctAttempts = 0; streak = 0;
+    await saveProgress();
+    renderProgress();
+    showProblem();
+  };
+
+  // ---------- init ----------
+  (async function init() {
+    await loadProgress();
+    renderCatList();
+    showProblem();
+  })();
+})();
+
+</script>
+</body>
+</html>
