@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FormulaDrill — 1000 Excel Formula Practice Sets</title>
+<title>FormulaDrill — 10,000 Excel Formula Practice Sets</title>
 <style>
   :root{
     --paper:#F7F8F6;
@@ -20,6 +20,14 @@
     --blue-100:#DCE7F6;
     --red:#B5402D;
     --red-100:#F6DFDA;
+    --gold:#E2A63B;
+    --gold-100:#FBEECB;
+    --pink:#D6467D;
+    --pink-100:#FCE1EC;
+    --sky:#2E8FC7;
+    --sky-100:#DCF0F8;
+    --violet:#7B4FC9;
+    --violet-100:#EBE1FA;
     --cell-border:#C7D0CA;
     --header-bg:#E9EEE9;
     --mono: ui-monospace, 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
@@ -46,12 +54,12 @@
   .brand{ display:flex; align-items:center; gap:10px; }
   .brand-mark{
     width:34px;height:34px;border-radius:7px;
-    background:linear-gradient(135deg,var(--green-700),var(--green-900));
+    background:linear-gradient(135deg,var(--pink),var(--violet) 55%,var(--sky));
     display:flex;align-items:center;justify-content:center;
     color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;
     box-shadow: 0 2px 0 rgba(0,0,0,.15);
   }
-  .brand-text h1{ font-size:18px; margin:0; letter-spacing:-0.01em; }
+  .brand-text h1{ font-size:18px; margin:0; letter-spacing:-0.01em; background:linear-gradient(90deg,var(--green-900),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .brand-text p{ margin:0; font-size:11.5px; color:var(--ink-soft); }
   .stats-strip{ display:flex; gap:8px; flex-wrap:wrap; }
   .stat-pill{
@@ -59,17 +67,30 @@
     padding:6px 12px; font-size:12px; color:var(--ink-soft); display:flex; gap:6px; align-items:baseline;
   }
   .stat-pill b{ color:var(--green-900); font-size:14px; font-family:var(--mono); }
+  .stat-pill.streak{ border-color:var(--gold); background:var(--gold-100); }
+  .stat-pill.streak b{ color:var(--amber); }
+  .board-btn{
+    display:flex; align-items:center; gap:6px; background:linear-gradient(120deg,var(--violet),var(--pink));
+    color:#fff; border:none; border-radius:999px; padding:7px 14px; font-size:12.5px; font-weight:700; cursor:pointer;
+    box-shadow:0 2px 0 rgba(0,0,0,.15);
+  }
+  .board-btn:hover{ filter:brightness(1.06); }
+  .sound-btn{
+    background:#fff; border:1px solid var(--cell-border); border-radius:999px; width:32px; height:32px;
+    cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;
+  }
 
   /* ---------- Ribbon: name box + formula bar look ---------- */
   .ribbon{
-    background:var(--header-bg); border:1px solid var(--cell-border); border-radius:var(--radius);
+    background:linear-gradient(90deg,var(--header-bg),var(--sky-100));
+    border:1px solid var(--cell-border); border-radius:var(--radius);
     padding:8px 10px; display:flex; align-items:center; gap:10px; margin-bottom:14px;
   }
   .name-box{
     font-family:var(--mono); font-size:12.5px; background:#fff; border:1px solid var(--cell-border);
     border-radius:4px; padding:5px 10px; color:var(--green-900); font-weight:700; min-width:64px; text-align:center;
   }
-  .fx{ font-family:var(--mono); font-style:italic; color:var(--green-700); font-weight:700; font-size:13px; padding:0 2px;}
+  .fx{ font-family:var(--mono); font-style:italic; color:var(--violet); font-weight:700; font-size:13px; padding:0 2px;}
   .ribbon-divider{ width:1px; align-self:stretch; background:var(--cell-border); }
   .ribbon-fill{ flex:1; font-size:12px; color:var(--ink-soft); }
 
@@ -93,7 +114,7 @@
   .cat-item{
     display:flex; justify-content:space-between; align-items:center; gap:6px;
     padding:7px 8px; border-radius:5px; cursor:pointer; font-size:12.5px; color:var(--ink);
-    margin-bottom:2px;
+    margin-bottom:2px; border-left:3px solid transparent;
   }
   .cat-item:hover{ background:var(--paper); }
   .cat-item.active{ background:var(--green-100); color:var(--green-900); font-weight:700; }
@@ -101,7 +122,7 @@
   .cat-item.active .cat-count{ color:var(--green-700); }
   .progress-wrap{ margin-top:14px; }
   .progress-track{ height:8px; border-radius:4px; background:var(--paper-line); overflow:hidden; }
-  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--green-600),var(--green-900)); border-radius:4px; transition:width .3s ease; }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--sky),var(--violet),var(--pink)); border-radius:4px; transition:width .3s ease; }
   .progress-label{ font-size:11px; color:var(--ink-soft); margin-top:5px; display:flex; justify-content:space-between; }
   .reset-btn{
     margin-top:12px; width:100%; padding:7px; font-size:11.5px; border-radius:5px; border:1px solid var(--cell-border);
@@ -119,7 +140,7 @@
   .badges{ display:flex; gap:6px; align-items:center; }
   .badge{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:3px 8px; border-radius:4px; }
   .badge.medium{ background:var(--blue-100); color:var(--blue); }
-  .badge.hard{ background:var(--amber-100); color:var(--amber); }
+  .badge.hard{ background:var(--pink-100); color:var(--pink); }
   .badge.cat{ background:var(--paper); color:var(--ink-soft); border:1px solid var(--cell-border); }
   .panel-head h2{ margin:0; font-size:19px; }
   .problem-id{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
@@ -130,8 +151,8 @@
   }
   .nav-btn:hover:not(:disabled){ background:var(--paper); }
   .nav-btn:disabled{ opacity:.4; cursor:not-allowed; }
-  .nav-btn.primary{ background:var(--green-700); border-color:var(--green-700); color:#fff; }
-  .nav-btn.primary:hover{ background:var(--green-900); }
+  .nav-btn.primary{ background:linear-gradient(120deg,var(--green-700),var(--green-900)); border-color:var(--green-900); color:#fff; }
+  .nav-btn.primary:hover{ filter:brightness(1.08); }
 
   .panel-body{ padding:18px 20px 22px; }
   .scenario{ font-size:13.5px; color:var(--ink-soft); margin:0 0 12px; line-height:1.5; }
@@ -141,15 +162,19 @@
   }
 
   /* spreadsheet grid rendering */
-  .sheet-wrap{ overflow-x:auto; border:1px solid var(--cell-border); border-radius:5px; margin-bottom:18px; }
-  table.sheet{ border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; }
+  .sheet-wrap{ overflow-x:auto; border:1px solid var(--cell-border); border-radius:5px; margin-bottom:6px; }
+  table.sheet{ border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; user-select:none; }
   table.sheet th, table.sheet td{ border:1px solid var(--cell-border); padding:6px 10px; white-space:nowrap; text-align:left; }
   table.sheet thead tr.colhead th{ background:var(--header-bg); color:var(--ink-soft); font-weight:700; text-align:center; font-size:11px; position:sticky; top:0; }
   table.sheet tbody th{ background:var(--header-bg); color:var(--ink-soft); font-weight:700; text-align:center; font-size:11px; }
-  table.sheet tbody tr:nth-child(odd) td{ background:#fff; }
-  table.sheet tbody tr:nth-child(even) td{ background:#FBFBFA; }
+  table.sheet tbody tr:nth-child(odd) td.data-cell{ background:#fff; }
+  table.sheet tbody tr:nth-child(even) td.data-cell{ background:#FBFBFA; }
   table.sheet td.numeric{ text-align:right; }
   table.sheet td.header-row{ background:var(--paper); font-weight:700; }
+  table.sheet td.data-cell{ cursor:cell; }
+  table.sheet td.data-cell:hover{ outline:2px solid var(--sky); outline-offset:-2px; background:var(--sky-100) !important; }
+  table.sheet td.range-select{ background:var(--gold-100) !important; outline:2px solid var(--gold); outline-offset:-2px; }
+  .sheet-hint{ font-size:11px; color:var(--ink-soft); margin:0 0 14px; display:flex; align-items:center; gap:5px; }
 
   /* formula bar input */
   .answer-row{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
@@ -161,14 +186,14 @@
     flex:1; font-family:var(--mono); font-size:13.5px; padding:9px 12px; border:1.5px solid var(--cell-border);
     border-radius:4px; outline:none; color:var(--ink); background:#fff;
   }
-  .formula-input:focus{ border-color:var(--green-700); box-shadow:0 0 0 3px var(--green-100); }
+  .formula-input:focus{ border-color:var(--violet); box-shadow:0 0 0 3px var(--violet-100); }
   .formula-input.correct{ border-color:var(--green-700); background:var(--green-100); }
   .formula-input.incorrect{ border-color:var(--red); background:var(--red-100); }
   .submit-btn{
-    padding:9px 18px; background:var(--green-700); color:#fff; border:none; border-radius:5px;
+    padding:9px 18px; background:linear-gradient(120deg,var(--green-700),var(--green-900)); color:#fff; border:none; border-radius:5px;
     font-weight:700; font-size:13px; cursor:pointer; white-space:nowrap;
   }
-  .submit-btn:hover{ background:var(--green-900); }
+  .submit-btn:hover{ filter:brightness(1.08); }
 
   .feedback{ font-size:13px; padding:10px 13px; border-radius:5px; margin-bottom:10px; display:none; line-height:1.5; }
   .feedback.show{ display:block; }
@@ -187,7 +212,7 @@
     font-size:12px; padding:6px 11px; border-radius:5px; border:1px dashed var(--cell-border);
     background:#fff; color:var(--ink-soft); cursor:pointer;
   }
-  .helper-btn:hover{ border-color:var(--green-700); color:var(--green-700); }
+  .helper-btn:hover{ border-color:var(--violet); color:var(--violet); }
   .reveal-box{
     margin-top:10px; padding:10px 13px; background:var(--paper); border:1px solid var(--cell-border);
     border-radius:5px; font-size:12.5px; color:var(--ink-soft); display:none;
@@ -196,10 +221,69 @@
   .reveal-box code{ font-family:var(--mono); background:#fff; padding:2px 6px; border-radius:3px; border:1px solid var(--cell-border); color:var(--green-900); }
 
   .fn-tags{ display:flex; gap:5px; margin-top:12px; flex-wrap:wrap; }
-  .fn-tag{ font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:3px; background:var(--paper); color:var(--ink-soft); border:1px solid var(--cell-border); }
+  .fn-tag{ font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:3px; color:#fff; }
 
   /* footer */
   .footnote{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:22px; }
+
+  /* ---------- Floating widgets ---------- */
+  .rating-widget{
+    position:fixed; top:14px; left:14px; z-index:60; background:#fff; border:1px solid var(--cell-border);
+    border-radius:10px; padding:8px 12px; box-shadow:0 4px 14px rgba(0,0,0,.08); font-size:11.5px; color:var(--ink-soft);
+    max-width:190px;
+  }
+  .rating-widget .rw-label{ font-weight:700; color:var(--ink); font-size:11px; margin-bottom:4px; }
+  .stars{ display:flex; gap:2px; cursor:pointer; }
+  .stars span{ font-size:16px; color:#D8DCD5; transition:color .1s; }
+  .stars span.filled{ color:var(--gold); }
+  .rw-thanks{ margin-top:4px; color:var(--green-700); font-size:11px; display:none; }
+  .rw-thanks.show{ display:block; }
+
+  .visitor-widget{
+    position:fixed; bottom:14px; left:14px; z-index:60; background:#fff; border:1px solid var(--cell-border);
+    border-radius:999px; padding:7px 14px; box-shadow:0 4px 14px rgba(0,0,0,.08); font-size:12px; color:var(--ink-soft);
+    display:flex; align-items:center; gap:6px;
+  }
+  .visitor-widget b{ color:var(--sky); font-family:var(--mono); }
+
+  @media (max-width:640px){
+    .rating-widget, .visitor-widget{ font-size:10.5px; padding:6px 9px; max-width:140px; }
+  }
+
+  /* ---------- Leaderboard modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(11,59,38,.35); z-index:100; display:none;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-box{
+    background:#fff; border-radius:12px; max-width:460px; width:100%; padding:22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25); max-height:82vh; overflow-y:auto;
+  }
+  .modal-box h3{ margin:0 0 4px; font-size:17px; display:flex; align-items:center; gap:8px; }
+  .modal-box .modal-sub{ font-size:12px; color:var(--ink-soft); margin:0 0 14px; }
+  .lb-row{ display:flex; align-items:center; gap:10px; padding:8px 6px; border-bottom:1px solid var(--paper-line); font-size:13px; }
+  .lb-rank{ width:26px; height:26px; border-radius:50%; background:var(--paper); color:var(--ink-soft); font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .lb-rank.r1{ background:var(--gold); color:#fff; }
+  .lb-rank.r2{ background:#C9CFCA; color:#fff; }
+  .lb-rank.r3{ background:#CD8C5C; color:#fff; }
+  .lb-name{ flex:1; font-weight:600; }
+  .lb-meta{ font-family:var(--mono); font-size:11.5px; color:var(--ink-soft); text-align:right; }
+  .lb-empty{ font-size:12.5px; color:var(--ink-soft); padding:14px 0; text-align:center; }
+  .lb-save-row{ display:flex; gap:8px; margin-top:14px; }
+  .lb-save-row input{ flex:1; padding:8px 10px; border:1px solid var(--cell-border); border-radius:5px; font-size:13px; }
+  .lb-save-row button{ padding:8px 14px; border-radius:5px; border:none; background:var(--violet); color:#fff; font-weight:700; cursor:pointer; font-size:12.5px; }
+  .modal-close{ float:right; background:none; border:none; font-size:18px; cursor:pointer; color:var(--ink-soft); }
+
+  /* ---------- Celebration ---------- */
+  #confettiCanvas{ position:fixed; inset:0; z-index:200; pointer-events:none; }
+  .celebrate-toast{
+    position:fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-10px); z-index:201;
+    background:linear-gradient(120deg,var(--gold),var(--pink)); color:#fff; padding:10px 22px; border-radius:999px;
+    font-weight:700; font-size:14px; box-shadow:0 8px 24px rgba(0,0,0,.2); opacity:0; transition:opacity .25s, transform .25s;
+    pointer-events:none; white-space:nowrap;
+  }
+  .celebrate-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
   @media (max-width:520px){
     .panel-body{ padding:14px; }
@@ -211,27 +295,55 @@
 <body>
 <div class="app">
 
+  <div class="rating-widget" id="ratingWidget">
+    <div class="rw-label">⭐ Rate FormulaDrill</div>
+    <div class="stars" id="starRow">
+      <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+    </div>
+    <div class="rw-thanks" id="rwThanks">Thanks for the rating!</div>
+  </div>
+
+  <div class="visitor-widget" id="visitorWidget">👀 Visit #<b id="visitCount">1</b> on this device</div>
+
+  <canvas id="confettiCanvas"></canvas>
+  <div class="celebrate-toast" id="celebrateToast"></div>
+
+  <div class="modal-overlay" id="lbOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="lbClose">✕</button>
+      <h3>🏆 Leaderboard</h3>
+      <p class="modal-sub">Saved on this device only — every browser keeps its own board. Save your current run to add it below.</p>
+      <div id="lbList"></div>
+      <div class="lb-save-row">
+        <input type="text" id="lbName" placeholder="Your name" maxlength="18">
+        <button id="lbSaveBtn">Save my score</button>
+      </div>
+    </div>
+  </div>
+
   <div class="titlebar">
     <div class="brand">
       <div class="brand-mark">fx</div>
       <div class="brand-text">
         <h1>FormulaDrill</h1>
-        <p>1000 medium & hard Excel formula problems across every core Data & Business Analysis skill, graded live in your browser</p>
+        <p>10,000 medium & hard Excel formula problems across every core Data & Business Analysis skill, graded live in your browser</p>
       </div>
     </div>
     <div class="stats-strip">
-      <div class="stat-pill">Solved <b id="statSolved">0</b>/1000</div>
-      <div class="stat-pill">Streak <b id="statStreak">0</b></div>
+      <div class="stat-pill">Solved <b id="statSolved">0</b>/10000</div>
+      <div class="stat-pill streak">🔥 Streak <b id="statStreak">0</b></div>
       <div class="stat-pill">Accuracy <b id="statAccuracy">—</b></div>
+      <button class="board-btn" id="openLbBtn">🏆 Leaderboard</button>
+      <button class="sound-btn" id="soundBtn" title="Toggle celebration sound">🔊</button>
     </div>
   </div>
 
   <div class="ribbon">
-    <div class="name-box" id="ribbonId">#001</div>
+    <div class="name-box" id="ribbonId">#0001</div>
     <span class="fx">fx</span>
     <div class="ribbon-fill" id="ribbonTitle">Loading problem set…</div>
     <div class="ribbon-divider"></div>
-    <div class="ribbon-fill" style="text-align:right; flex:0 0 auto;">Type the formula, press Enter to check</div>
+    <div class="ribbon-fill" style="text-align:right; flex:0 0 auto;">Type the formula, or click cells below to insert references</div>
   </div>
 
   <div class="layout">
@@ -246,7 +358,7 @@
       <ul class="cat-list" id="catList"></ul>
       <div class="progress-wrap">
         <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-        <div class="progress-label"><span id="progressText">0 of 1000 solved</span><span id="progressPct">0%</span></div>
+        <div class="progress-label"><span id="progressText">0 of 10000 solved</span><span id="progressPct">0%</span></div>
       </div>
       <button class="reset-btn" id="resetBtn">Reset all progress</button>
     </aside>
@@ -257,7 +369,7 @@
           <div class="badges">
             <span class="badge" id="badgeDiff">Medium</span>
             <span class="badge cat" id="badgeCat">Category</span>
-            <span class="problem-id" id="badgeId">Problem #1 of 1000</span>
+            <span class="problem-id" id="badgeId">Problem #1 of 10000</span>
           </div>
           <h2 id="probTitle">Title</h2>
         </div>
@@ -270,11 +382,12 @@
       <div class="panel-body">
         <p class="scenario" id="probScenario">Scenario</p>
         <div class="sheet-wrap"><table class="sheet" id="sheetTable"></table></div>
+        <p class="sheet-hint">🖱️ Click a cell (or drag across a range) to insert its reference into the formula box — just like Excel.</p>
         <p class="question" id="probQuestion">Question</p>
 
         <div class="answer-row">
           <div class="cellref-box" id="cellRefBox">=</div>
-          <input type="text" class="formula-input" id="formulaInput" placeholder="Type your Excel formula here, e.g. =SUM(A2:A10)" autocomplete="off" spellcheck="false">
+          <input type="text" class="formula-input" id="formulaInput" placeholder="Type your Excel formula here, or click cells in the sheet above" autocomplete="off" spellcheck="false">
           <button class="submit-btn" id="submitBtn">Check</button>
         </div>
 
@@ -298,7 +411,7 @@
     </main>
   </div>
 
-  <p class="footnote">Covers SUMIFS/COUNTIFS/AVERAGEIFS, VLOOKUP/INDEX-MATCH/XLOOKUP, nested IF/IFS logic, text cleaning, date &amp; business-date math, RANK/LARGE/SMALL/PERCENTILE statistics, SUMPRODUCT, PMT/NPV/FV/PV finance, growth-rate &amp; margin analysis, and more — all evaluated by an in-browser Excel-formula engine. Your progress is saved automatically in this browser (it won't follow you to another device or browser).</p>
+  <p class="footnote">Covers SUMIFS/COUNTIFS/AVERAGEIFS, VLOOKUP/INDEX-MATCH/XLOOKUP, nested IF/IFS logic, text cleaning, date &amp; business-date math, RANK/LARGE/SMALL/PERCENTILE statistics, SUMPRODUCT, PMT/NPV/FV/PV finance, growth-rate &amp; margin analysis, and more — all evaluated by an in-browser Excel-formula engine. Progress, ratings, visits, and the leaderboard are all saved locally in this browser (they won't follow you to another device or browser).</p>
 </div>
 
 <script>
@@ -766,14 +879,28 @@ function pickN(rng, arr, n) {
 function randInt(rng, min, max) { return Math.floor(rng() * (max - min + 1)) + min; }
 function colLetter(n) { let s=''; while(n>0){ const r=(n-1)%26; s=String.fromCharCode(65+r)+s; n=Math.floor((n-1)/26);} return s; }
 
-const NAMES = ['Alicia','Brandon','Carmen','Devon','Elena','Farhan','Grace','Hiro','Ines','Jamal','Kavya','Liam','Maya','Noah','Olga','Priya','Quentin','Riya','Sam','Tara','Umar','Vera','Wyatt','Xena','Yusuf','Zara','Aditi','Bruno','Chidi','Diana'];
+const NAMES = ['Alicia','Brandon','Carmen','Devon','Elena','Farhan','Grace','Hiro','Ines','Jamal','Kavya','Liam','Maya','Noah','Olga','Priya','Quentin','Riya','Sam','Tara','Umar','Vera','Wyatt','Xena','Yusuf','Zara','Aditi','Bruno','Chidi','Diana','Aarav','Bianca','Caleb','Dara','Emeka','Fatima','Giorgio','Hana','Ivan','Jia','Kofi','Lena','Mateo','Nadia','Oscar','Paloma','Quinn','Rosa','Suki','Tobias'];
 const REGIONS = ['North','South','East','West','Central'];
-const PRODUCTS = ['Laptop','Monitor','Keyboard','Mouse','Headset','Webcam','Tablet','Printer','Router','Charger'];
-const DEPTS = ['Sales','Marketing','Engineering','Support','Finance','HR','Operations'];
-const CITIES = ['Mumbai','Delhi','Bengaluru','Chennai','Kolkata','Pune','Hyderabad','Jaipur'];
+const PRODUCTS = ['Laptop','Monitor','Keyboard','Mouse','Headset','Webcam','Tablet','Printer','Router','Charger','Speaker','Drone','SmartWatch','Projector','HardDrive','Backpack','DeskLamp','Chair'];
+const DEPTS = ['Sales','Marketing','Engineering','Support','Finance','HR','Operations','Legal','IT','Procurement'];
+const CITIES = ['Mumbai','Delhi','Bengaluru','Chennai','Kolkata','Pune','Hyderabad','Jaipur','Ahmedabad','Lucknow','Surat','Kochi','Chandigarh','Nagpur'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CHANNELS = ['Online','In-store','Phone','Partner'];
 const GRADES = ['A','B','C','D'];
+
+// ---------- Themes: give the same formula category a completely different dataset each time ----------
+const THEMES = [
+  { entity:'Salesperson', plural:'salespeople', pool:NAMES, g1:'Region', g1Pool:REGIONS, g2:'Department', g2Pool:DEPTS, metric:'Revenue', min:200, max:3000, statusPool:['Active','Inactive'], person:true },
+  { entity:'Student', plural:'students', pool:NAMES, g1:'Class', g1Pool:['Class A','Class B','Class C','Class D','Class E'], g2:'Subject', g2Pool:['Math','Science','History','Art','English','Music'], metric:'Score', min:40, max:100, statusPool:['Enrolled','Withdrawn'], person:true },
+  { entity:'Patient', plural:'patients', pool:NAMES, g1:'Ward', g1Pool:['ICU','General','Pediatrics','Surgery','Maternity'], g2:'Doctor', g2Pool:['Dr. Rao','Dr. Kim','Dr. Silva','Dr. Osei','Dr. Novak','Dr. Haddad'], metric:'BillAmount', min:500, max:9000, statusPool:['Admitted','Discharged'], person:true },
+  { entity:'Diner', plural:'diners', pool:NAMES, g1:'Branch', g1Pool:CITIES, g2:'Server', g2Pool:['Alex','Priya','Sam','Noor','Theo','Mei'], metric:'BillTotal', min:150, max:4000, statusPool:['Paid','Unpaid'], person:true },
+  { entity:'Member', plural:'members', pool:NAMES, g1:'Plan', g1Pool:['Basic','Premium','Elite','Student'], g2:'Trainer', g2Pool:['Coach Ana','Coach Ben','Coach Cy','Coach Deja','Coach Ravi'], metric:'MonthlySpend', min:20, max:250, statusPool:['Active','Frozen'], person:true },
+  { entity:'Item', plural:'items', pool:PRODUCTS, g1:'Warehouse', g1Pool:CITIES, g2:'Carrier', g2Pool:['FastFreight','QuickShip','CargoLink','ParcelPro','SwiftPost'], metric:'ShippingCost', min:50, max:800, statusPool:['Delivered','InTransit'], person:false },
+  { entity:'Donor', plural:'donors', pool:NAMES, g1:'Region', g1Pool:REGIONS, g2:'Campaign', g2Pool:['SpringDrive','WinterAppeal','GalaNight','OnlineFund','LegacyGiving'], metric:'DonationAmount', min:20, max:5000, statusPool:['Recurring','OneTime'], person:true },
+  { entity:'Property', plural:'properties', pool:['Maple House','Oak Villa','Cedar Flat','Birch Loft','Pine Cottage','Elm Residence','Willow Court','Ash Manor'], g1:'City', g1Pool:CITIES, g2:'Agent', g2Pool:['Meera','Josh','Ana','Ravi','Lucia'], metric:'ListingPrice', min:50000, max:900000, statusPool:['Listed','Sold'], person:false },
+];
+function pickTheme(rng) { return THEMES[Math.floor(rng() * THEMES.length)]; }
+function pickPersonTheme(rng) { const p = THEMES.filter(t => t.person); return p[Math.floor(rng() * p.length)]; }
 
 function buildGrid(rows) { return new Grid(rows); }
 
@@ -789,96 +916,103 @@ function tableHtml(headers) { return headers; }
 function rangeRef(colIdx, rStart, rEnd) { return `${colLetter(colIdx)}${rStart}:${colLetter(colIdx)}${rEnd}`; }
 
 // =========================================================
-// 20 CATEGORY GENERATORS. Each: (rng, variant, hard) -> problem
-// variant 0-6 => medium, 7-14 => hard (per category, but each category defines its own medium/hard forms)
+// 40 CATEGORY GENERATORS. Each: (rng, hard) -> problem
+// Row counts are randomized per-problem (within a band) so every table is a different size,
+// and several categories draw from THEMES so the same formula skill shows up against a
+// genuinely different dataset (sales / school / hospital / restaurant / gym / logistics / charity / real estate) each time.
 // =========================================================
 
 function cat_sumif(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Salesperson','Region','Department','Revenue']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,REGIONS), pick(rng,DEPTS), randInt(rng,200,3000)]);
+  const th = pickTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [[th.entity, th.g1, th.g2, th.metric]];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), pick(rng,th.g1Pool), pick(rng,th.g2Pool), randInt(rng,th.min,th.max)]);
   const sample = pick(rng, rows.slice(1));
-  const region = sample[1];
-  const dept = sample[2];
+  const g1val = sample[1];
+  const g2val = sample[2];
   const last = n+1;
   if (!hard) {
     return {
-      title: 'Regional Revenue Total',
-      scenario: `You have a list of salespeople with their region and revenue.`,
-      question: `Write a formula that adds up total Revenue for everyone in the "${region}" region.`,
-      rows, refFormula: `=SUMIF(B2:B${last},"${region}",D2:D${last})`,
+      title: `${th.g1} ${th.metric} Total`,
+      scenario: `You have a list of ${th.plural} with their ${th.g1} and ${th.metric}.`,
+      question: `Write a formula that adds up total ${th.metric} for everyone with ${th.g1} = "${g1val}".`,
+      rows, refFormula: `=SUMIF(B2:B${last},"${g1val}",D2:D${last})`,
       hint: `Use SUMIF(range, criteria, sum_range).`,
       functions: ['SUMIF']
     };
   }
   return {
-    title: 'Regional & Departmental Revenue',
-    scenario: `You have a list of salespeople with their region, department, and revenue.`,
-    question: `Write a formula that adds up Revenue only for rows where Region is "${region}" AND Department is "${dept}".`,
-    rows, refFormula: `=SUMIFS(D2:D${last},B2:B${last},"${region}",C2:C${last},"${dept}")`,
+    title: `${th.g1} & ${th.g2} ${th.metric}`,
+    scenario: `You have a list of ${th.plural} with their ${th.g1}, ${th.g2}, and ${th.metric}.`,
+    question: `Write a formula that adds up ${th.metric} only for rows where ${th.g1} is "${g1val}" AND ${th.g2} is "${g2val}".`,
+    rows, refFormula: `=SUMIFS(D2:D${last},B2:B${last},"${g1val}",C2:C${last},"${g2val}")`,
     hint: `Use SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2, criteria2).`,
     functions: ['SUMIFS']
   };
 }
 
 function cat_countif(rng, hard) {
-  const n = hard ? 10 : 8;
-  const rows = [['Employee','Department','Status','Score']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,DEPTS), pick(rng,['Active','Inactive']), randInt(rng,40,100)]);
+  const th = pickTheme(rng);
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
+  const rows = [[th.entity, th.g1, 'Status', th.metric]];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), pick(rng,th.g1Pool), pick(rng,th.statusPool), randInt(rng,th.min,th.max)]);
   const last = n+1;
+  const activeStatus = th.statusPool[0];
   if (!hard) {
     return {
-      title: 'Count Active Employees',
-      scenario: `A list tracks employees, their department and current status.`,
-      question: `Write a formula that counts how many employees have Status = "Active".`,
-      rows, refFormula: `=COUNTIF(C2:C${last},"Active")`,
+      title: 'Count by Status',
+      scenario: `A list tracks each ${th.entity}, their ${th.g1}, and current Status.`,
+      question: `Write a formula that counts how many ${th.plural} have Status = "${activeStatus}".`,
+      rows, refFormula: `=COUNTIF(C2:C${last},"${activeStatus}")`,
       hint: `Use COUNTIF(range, criteria).`,
       functions: ['COUNTIF']
     };
   }
-  const activeRows = rows.slice(1).filter(r => r[2] === 'Active');
+  const activeRows = rows.slice(1).filter(r => r[2] === activeStatus);
   const sample = activeRows.length ? pick(rng, activeRows) : pick(rng, rows.slice(1));
-  const dept = sample[1];
-  const minScore = Math.min(sample[3], 70);
+  const g1val = sample[1];
+  const minVal = Math.max(1, Math.round(sample[3]*0.85));
   return {
-    title: 'Count High Performers by Department',
-    scenario: `A list tracks employees, department, status, and performance score.`,
-    question: `Write a formula that counts employees in the "${dept}" department with Status = "Active" AND Score >= ${minScore}.`,
-    rows, refFormula: `=COUNTIFS(B2:B${last},"${dept}",C2:C${last},"Active",D2:D${last},">=${minScore}")`,
+    title: 'Count with Multiple Conditions',
+    scenario: `A list tracks each ${th.entity}, their ${th.g1}, Status, and ${th.metric}.`,
+    question: `Write a formula that counts ${th.plural} with ${th.g1} = "${g1val}" AND Status = "${activeStatus}" AND ${th.metric} >= ${minVal}.`,
+    rows, refFormula: `=COUNTIFS(B2:B${last},"${g1val}",C2:C${last},"${activeStatus}",D2:D${last},">=${minVal}")`,
     hint: `Use COUNTIFS with three criteria pairs.`,
     functions: ['COUNTIFS']
   };
 }
 
 function cat_averageif(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Product','Category','Units','Rating']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), pick(rng,['Electronics','Accessories']), randInt(rng,5,80), (randInt(rng,30,50)/10)]);
+  const th = pickTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [['Item', th.g1, 'Volume', th.metric]];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), pick(rng,th.g1Pool), randInt(rng,5,80), randInt(rng,th.min,th.max)]);
   const last = n+1;
+  const g1val = pick(rng, th.g1Pool);
   if (!hard) {
     return {
-      title: 'Average Rating by Category',
-      scenario: `A product list shows category, units sold, and customer rating.`,
-      question: `Write a formula for the AVERAGE Rating of products in the "Electronics" category.`,
-      rows, refFormula: `=AVERAGEIF(B2:B${last},"Electronics",D2:D${last})`,
+      title: `Average ${th.metric} by ${th.g1}`,
+      scenario: `A tracking sheet shows ${th.g1}, Volume, and ${th.metric} for each row.`,
+      question: `Write a formula for the AVERAGE ${th.metric} where ${th.g1} is "${g1val}".`,
+      rows, refFormula: `=AVERAGEIF(B2:B${last},"${g1val}",D2:D${last})`,
       hint: `Use AVERAGEIF(range, criteria, average_range).`,
       functions: ['AVERAGEIF']
     };
   }
-  const elecRows = rows.slice(1).filter(r => r[1] === 'Electronics');
-  const minUnits = elecRows.length ? Math.min(...elecRows.map(r => r[2])) : 20;
+  const matchRows = rows.slice(1).filter(r => r[1] === g1val);
+  const minVolume = matchRows.length ? Math.min(...matchRows.map(r => r[2])) : 20;
   return {
-    title: 'Average Rating for Strong Sellers',
-    scenario: `A product list shows category, units sold, and rating.`,
-    question: `Write a formula for the AVERAGE Rating of "Electronics" products that sold ${minUnits} units or more.`,
-    rows, refFormula: `=AVERAGEIFS(D2:D${last},B2:B${last},"Electronics",C2:C${last},">=${minUnits}")`,
+    title: `Average ${th.metric} Above a Threshold`,
+    scenario: `A tracking sheet shows ${th.g1}, Volume, and ${th.metric} for each row.`,
+    question: `Write a formula for the AVERAGE ${th.metric} where ${th.g1} is "${g1val}" AND Volume is ${minVolume} or more.`,
+    rows, refFormula: `=AVERAGEIFS(D2:D${last},B2:B${last},"${g1val}",C2:C${last},">=${minVolume}")`,
     hint: `Use AVERAGEIFS(average_range, criteria_range1, criteria1, criteria_range2, criteria2).`,
     functions: ['AVERAGEIFS']
   };
 }
 
 function cat_vlookup(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['ProductID','Product','Price','Stock']];
   const ids = [];
   for (let i=0;i<n;i++) { const id = 'P' + (100+i); ids.push(id); rows.push([id, pick(rng,PRODUCTS), randInt(rng,10,500), randInt(rng,0,200)]); }
@@ -906,7 +1040,7 @@ function cat_vlookup(rng, hard) {
 }
 
 function cat_indexmatch(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['EmployeeID','Name','Department','Salary']];
   const names = pickN(rng, NAMES, n);
   for (let i=0;i<n;i++) rows.push(['E'+(300+i), names[i], pick(rng,DEPTS), randInt(rng,30000,90000)]);
@@ -934,7 +1068,7 @@ function cat_indexmatch(rng, hard) {
 }
 
 function cat_xlookup(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['OrderID','Customer','Status','Amount']];
   const ids = [];
   for (let i=0;i<n;i++) { const id='ORD'+(500+i); ids.push(id); rows.push([id, pick(rng,NAMES), pick(rng,['Shipped','Pending','Cancelled']), randInt(rng,50,900)]); }
@@ -962,15 +1096,16 @@ function cat_xlookup(rng, hard) {
 }
 
 function cat_nestedif(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Student','Score']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,35,100)]);
+  const th = pickPersonTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [[th.entity,'Score']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), randInt(rng,35,100)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Pass or Fail',
-      scenario: `A gradebook lists each student's Score.`,
+      scenario: `A tracking sheet lists each ${th.entity}'s Score.`,
       question: `In row ${target}, write a formula that shows "Pass" if the Score in B${target} is 40 or above, otherwise "Fail".`,
       rows, refFormula: `=IF(B${target}>=40,"Pass","Fail")`,
       hint: `Use IF(condition, value_if_true, value_if_false).`,
@@ -979,7 +1114,7 @@ function cat_nestedif(rng, hard) {
   }
   return {
     title: 'Letter Grade Assignment',
-    scenario: `A gradebook lists each student's Score.`,
+    scenario: `A tracking sheet lists each ${th.entity}'s Score.`,
     question: `In row ${target}, write a nested IF formula for cell B${target} that returns "A" for 90+, "B" for 80-89, "C" for 70-79, and "D" for anything below 70.`,
     rows, refFormula: `=IF(B${target}>=90,"A",IF(B${target}>=80,"B",IF(B${target}>=70,"C","D")))`,
     hint: `Chain multiple IFs: IF(c1,r1,IF(c2,r2,IF(c3,r3,r4))).`,
@@ -988,15 +1123,16 @@ function cat_nestedif(rng, hard) {
 }
 
 function cat_ifs(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Rep','Sales']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,1000,50000)]);
+  const th = pickPersonTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [[th.entity,'Sales']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), randInt(rng,1000,50000)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
-      title: 'Commission Tier (Two Tiers)',
-      scenario: `A sales rep list shows total Sales.`,
+      title: 'Tier (Two Levels)',
+      scenario: `A ${th.entity.toLowerCase()} list shows total Sales.`,
       question: `In row ${target}, write an IFS formula for cell B${target} that returns "High" if Sales >= 20000, else "Low".`,
       rows, refFormula: `=IFS(B${target}>=20000,"High",TRUE,"Low")`,
       hint: `IFS(cond1,result1,cond2,result2,...). Use TRUE as a catch-all final condition.`,
@@ -1004,8 +1140,8 @@ function cat_ifs(rng, hard) {
     };
   }
   return {
-    title: 'Commission Tier (Four Tiers)',
-    scenario: `A sales rep list shows total Sales.`,
+    title: 'Tier (Four Levels)',
+    scenario: `A ${th.entity.toLowerCase()} list shows total Sales.`,
     question: `In row ${target}, write an IFS formula for cell B${target} that returns "Platinum" for Sales >= 40000, "Gold" for >= 25000, "Silver" for >= 10000, and "Bronze" otherwise.`,
     rows, refFormula: `=IFS(B${target}>=40000,"Platinum",B${target}>=25000,"Gold",B${target}>=10000,"Silver",TRUE,"Bronze")`,
     hint: `List conditions from highest to lowest threshold, ending with TRUE as the catch-all.`,
@@ -1014,12 +1150,12 @@ function cat_ifs(rng, hard) {
 }
 
 function cat_textextract(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['Code']];
   const codes = [];
   for (let i=0;i<n;i++) { const c = pick(rng,['NA','EU','AS']) + '-' + pick(rng,PRODUCTS).slice(0,3).toUpperCase() + '-' + randInt(rng,100,999); codes.push(c); rows.push([c]); }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Extract Region Code',
@@ -1041,11 +1177,11 @@ function cat_textextract(rng, hard) {
 }
 
 function cat_textconcat(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['First','Last','Dept']];
   for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,NAMES), pick(rng,DEPTS)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Build Full Name',
@@ -1067,14 +1203,14 @@ function cat_textconcat(rng, hard) {
 }
 
 function cat_dates(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['Employee','JoinDate']];
   for (let i=0;i<n;i++) {
     const y = randInt(rng, 2015, 2024), m = randInt(rng,1,12), d = randInt(rng,1,28);
     rows.push([pick(rng,NAMES), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
   }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Extract Join Year',
@@ -1096,12 +1232,12 @@ function cat_dates(rng, hard) {
 }
 
 function cat_rank(rng, hard) {
-  const n = hard ? 10 : 8;
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
   const rows = [['Player','Score']];
   const used = new Set();
   for (let i=0;i<n;i++) { let s; do { s = randInt(rng,50,99); } while(used.has(s)); used.add(s); rows.push([pick(rng,NAMES), s]); }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Rank Player Score',
@@ -1123,7 +1259,7 @@ function cat_rank(rng, hard) {
 }
 
 function cat_largesmall(rng, hard) {
-  const n = hard ? 10 : 8;
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
   const rows = [['City','Rainfall']];
   for (let i=0;i<n;i++) rows.push([pick(rng,CITIES), randInt(rng,100,3000)]);
   const last = n+1;
@@ -1132,7 +1268,7 @@ function cat_largesmall(rng, hard) {
     return {
       title: 'Find the Nth Highest Value',
       scenario: `A table shows annual Rainfall by city.`,
-      question: `Write a formula that returns the ${k===1?'highest':k+'nd/rd highest'.replace('nd/rd', k===2?'2nd':'3rd')} Rainfall value in B2:B${last}.`,
+      question: `Write a formula that returns the ${k===1?'highest':(k===2?'2nd highest':'3rd highest')} Rainfall value in B2:B${last}.`,
       rows, refFormula: `=LARGE(B2:B${last},${k})`,
       hint: `LARGE(range, k) returns the k-th largest value.`,
       functions: ['LARGE']
@@ -1150,11 +1286,11 @@ function cat_largesmall(rng, hard) {
 }
 
 function cat_round(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['Item','Price','DiscountPct']];
   for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,500,9999)/10, randInt(rng,5,40)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Round the Price',
@@ -1176,7 +1312,7 @@ function cat_round(rng, hard) {
 }
 
 function cat_iferror(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['SKU','Item','Stock']];
   const skus = [];
   for (let i=0;i<n;i++) { const s='SK'+(700+i); skus.push(s); rows.push([s, pick(rng,PRODUCTS), randInt(rng,0,100)]); }
@@ -1204,15 +1340,16 @@ function cat_iferror(rng, hard) {
 }
 
 function cat_logical(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Applicant','Age','Income']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,18,65), randInt(rng,10000,80000)]);
+  const th = pickPersonTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [[th.entity,'Age','Income']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), randInt(rng,18,65), randInt(rng,10000,80000)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
-      title: 'Loan Eligibility (AND)',
-      scenario: `An applicant list shows Age and Income.`,
+      title: 'Eligibility (AND)',
+      scenario: `A ${th.entity.toLowerCase()} list shows Age and Income.`,
       question: `In row ${target}, write a formula for cell D${target} that returns "Eligible" if Age is 21 or above AND Income is at least 25000, otherwise "Not Eligible".`,
       rows, refFormula: `=IF(AND(B${target}>=21,C${target}>=25000),"Eligible","Not Eligible")`,
       hint: `Combine AND() inside IF().`,
@@ -1220,8 +1357,8 @@ function cat_logical(rng, hard) {
     };
   }
   return {
-    title: 'Loan Eligibility (AND + OR)',
-    scenario: `An applicant list shows Age and Income.`,
+    title: 'Eligibility (AND + OR)',
+    scenario: `A ${th.entity.toLowerCase()} list shows Age and Income.`,
     question: `In row ${target}, write a formula for cell D${target} that returns "Eligible" if (Age >= 21 AND Income >= 25000) OR Income >= 60000 (high earners bypass the age rule), otherwise "Not Eligible".`,
     rows, refFormula: `=IF(OR(AND(B${target}>=21,C${target}>=25000),C${target}>=60000),"Eligible","Not Eligible")`,
     hint: `Nest AND() inside OR(), then wrap the whole thing in IF().`,
@@ -1230,7 +1367,7 @@ function cat_logical(rng, hard) {
 }
 
 function cat_sumproduct(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Item','Qty','UnitPrice']];
   for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,1,20), randInt(rng,50,500)]);
   const last = n+1;
@@ -1256,16 +1393,17 @@ function cat_sumproduct(rng, hard) {
 }
 
 function cat_wildcard(rng, hard) {
-  const n = hard ? 9 : 7;
-  const rows = [['Customer','Channel','OrderValue']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), pick(rng,CHANNELS), randInt(rng,100,2000)]);
+  const th = pickPersonTheme(rng);
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
+  const rows = [[th.entity,'Channel','OrderValue']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), pick(rng,CHANNELS), randInt(rng,100,2000)]);
   rows[1 + randInt(rng,0,n-1)][1] = 'Online';
   rows[1 + randInt(rng,0,n-1)][1] = 'In-store';
   const last = n+1;
   if (!hard) {
     return {
       title: 'Count by Partial Text Match',
-      scenario: `An orders table shows Customer, Channel, and OrderValue.`,
+      scenario: `An orders table shows ${th.entity}, Channel, and OrderValue.`,
       question: `Write a formula that counts orders where the Channel starts with "On" (use a wildcard so it matches "Online").`,
       rows, refFormula: `=COUNTIF(B2:B${last},"On*")`,
       hint: `The * wildcard in COUNTIF matches any text after "On".`,
@@ -1276,7 +1414,7 @@ function cat_wildcard(rng, hard) {
   const minVal = inRows.length ? Math.max(0, Math.min(...inRows.map(r => r[2])) - 1) : 500;
   return {
     title: 'Wildcard + Value Threshold',
-    scenario: `An orders table shows Customer, Channel, and OrderValue.`,
+    scenario: `An orders table shows ${th.entity}, Channel, and OrderValue.`,
     question: `Write a formula that sums OrderValue where Channel starts with "In" (wildcard) AND OrderValue is above ${minVal}.`,
     rows, refFormula: `=SUMIFS(C2:C${last},B2:B${last},"In*",C2:C${last},">${minVal}")`,
     hint: `SUMIFS supports wildcards in text criteria just like SUMIF.`,
@@ -1286,7 +1424,7 @@ function cat_wildcard(rng, hard) {
 
 function cat_twoway(rng, hard) {
   const rows = [['Product', 'Q1', 'Q2', 'Q3', 'Q4']];
-  const prods = pickN(rng, PRODUCTS, hard?6:5);
+  const prods = pickN(rng, PRODUCTS, hard?randInt(rng,6,7):randInt(rng,4,5));
   for (const p of prods) rows.push([p, randInt(rng,100,999), randInt(rng,100,999), randInt(rng,100,999), randInt(rng,100,999)]);
   const last = prods.length + 1;
   const targetProd = pick(rng, prods);
@@ -1314,14 +1452,15 @@ function cat_twoway(rng, hard) {
 
 function cat_mixed(rng) {
   // hard-only case study
-  const n = 8;
-  const rows = [['Employee','BaseSalary','PerformanceScore']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,25000,60000), randInt(rng,1,100)]);
+  const th = pickPersonTheme(rng);
+  const n = randInt(rng,7,10);
+  const rows = [[th.entity,'BaseSalary','PerformanceScore']];
+  for (let i=0;i<n;i++) rows.push([pick(rng,th.pool), randInt(rng,25000,60000), randInt(rng,1,100)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   return {
     title: 'Bonus Calculation Case Study',
-    scenario: `A payroll sheet shows each Employee's BaseSalary and PerformanceScore (0-100).`,
+    scenario: `A payroll sheet shows each ${th.entity}'s BaseSalary and PerformanceScore (0-100).`,
     question: `In row ${target}, write one formula for cell D${target} that calculates a bonus: 10% of BaseSalary if PerformanceScore >= 80, 5% if PerformanceScore >= 50, otherwise 0 — and rounds the result to the nearest whole number.`,
     rows, refFormula: `=ROUND(IF(C${target}>=80,B${target}*0.1,IF(C${target}>=50,B${target}*0.05,0)),0)`,
     hint: `Build the nested IF for the bonus percentage first, then wrap the whole thing in ROUND(...,0).`,
@@ -1332,7 +1471,7 @@ function cat_mixed(rng) {
 // ===================== 20 ADDITIONAL DATA/BUSINESS ANALYSIS CATEGORIES =====================
 
 function cat_medianmode(rng, hard) {
-  const n = hard ? 10 : 8;
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
   const rows = [['Rep','DealsClosed']];
   const pool = [];
   for (let i=0;i<n-2;i++) pool.push(randInt(rng,2,15));
@@ -1363,7 +1502,7 @@ function cat_medianmode(rng, hard) {
 }
 
 function cat_stdevvar(rng, hard) {
-  const n = hard ? 10 : 8;
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
   const rows = [['Month','Revenue']];
   for (let i=0;i<n;i++) rows.push([pick(rng,MONTHS), randInt(rng,5000,50000)]);
   const last = n+1;
@@ -1390,7 +1529,7 @@ function cat_stdevvar(rng, hard) {
 }
 
 function cat_dataquality(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['CustomerID','Email','Region']];
   const ids = [];
   for (let i=0;i<n;i++) {
@@ -1423,11 +1562,11 @@ function cat_dataquality(rng, hard) {
 }
 
 function cat_substitute(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['RawPhone']];
   for (let i=0;i<n;i++) rows.push([`(${randInt(rng,100,999)})-${randInt(rng,100,999)}-${randInt(rng,1000,9999)}`]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Clean Phone Numbers',
@@ -1451,11 +1590,11 @@ function cat_substitute(rng, hard) {
 }
 
 function cat_findsearch(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Email']];
-  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES).toLowerCase()+'.'+pick(rng,NAMES).toLowerCase()+'@'+pick(rng,['acme','globex','initech','umbrella'])+'.com']);
+  for (let i=0;i<n;i++) rows.push([pick(rng,NAMES).toLowerCase()+'.'+pick(rng,NAMES).toLowerCase()+'@'+pick(rng,['acme','globex','initech','umbrella','stark','wonka','wayne'])+'.com']);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Locate the @ Symbol',
@@ -1508,7 +1647,7 @@ function cat_pmt(rng, hard) {
 
 function cat_npv(rng, hard) {
   const rate = randInt(rng,5,15)/100;
-  const n = hard ? 6 : 5;
+  const n = hard ? randInt(rng,6,8) : randInt(rng,4,6);
   const rows = [['Year','CashFlow']];
   for (let i=1;i<=n;i++) rows.push([i, randInt(rng,-2000,8000)]);
   const last = n+1;
@@ -1565,7 +1704,7 @@ function cat_fvpv(rng, hard) {
 }
 
 function cat_percentile(rng, hard) {
-  const n = hard ? 10 : 8;
+  const n = hard ? randInt(rng,9,12) : randInt(rng,7,10);
   const rows = [['Candidate','TestScore']];
   for (let i=0;i<n;i++) rows.push([pick(rng,NAMES), randInt(rng,40,100)]);
   const last = n+1;
@@ -1594,11 +1733,11 @@ function cat_percentile(rng, hard) {
 }
 
 function cat_truncmod(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['Item','UnitsOrdered']];
   for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,15,250)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Truncate Decimal Values',
@@ -1654,11 +1793,11 @@ function cat_powersqrt(rng, hard) {
 }
 
 function cat_ceilfloor(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Item','RawPrice']];
   for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,100,999)/10]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   const nearest = pick(rng,[0.5,1,5]);
   if (!hard) {
     return {
@@ -1683,14 +1822,14 @@ function cat_ceilfloor(rng, hard) {
 }
 
 function cat_edate(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Contract','StartDate']];
   for (let i=0;i<n;i++) {
     const y = randInt(rng,2023,2026), m = randInt(rng,1,12), d = randInt(rng,1,28);
     rows.push(['CT-'+(100+i), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
   }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     const months = pick(rng,[6,12,24]);
     return {
@@ -1715,14 +1854,14 @@ function cat_edate(rng, hard) {
 }
 
 function cat_weekday(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Task','DueDate']];
   for (let i=0;i<n;i++) {
     const y = 2026, m = randInt(rng,1,12), d = randInt(rng,1,28);
     rows.push(['Task '+(i+1), `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`]);
   }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Find the Day of the Week',
@@ -1746,11 +1885,11 @@ function cat_weekday(rng, hard) {
 }
 
 function cat_choose(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Order','QuarterNum']];
   for (let i=0;i<n;i++) rows.push(['ORD-'+(200+i), randInt(rng,1,4)]);
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Convert a Number to a Label',
@@ -1804,11 +1943,11 @@ function cat_growthrate(rng, hard) {
 }
 
 function cat_margin(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Product','Revenue','Cost']];
   for (let i=0;i<n;i++) { const cost = randInt(rng,50,400); rows.push([pick(rng,PRODUCTS), cost + randInt(rng,20,300), cost]); }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Calculate Gross Margin %',
@@ -1832,7 +1971,7 @@ function cat_margin(rng, hard) {
 }
 
 function cat_weightedavg(rng, hard) {
-  const n = hard ? 8 : 6;
+  const n = hard ? randInt(rng,7,10) : randInt(rng,5,8);
   const rows = [['Course','Grade','Credits']];
   for (let i=0;i<n;i++) rows.push([pick(rng,PRODUCTS), randInt(rng,60,100), pick(rng,[1,2,3,4])]);
   rows[1 + randInt(rng,0,n-1)][2] = pick(rng,[3,4]);
@@ -1861,7 +2000,7 @@ function cat_weightedavg(rng, hard) {
 }
 
 function cat_runningtotal(rng, hard) {
-  const n = hard ? 9 : 7;
+  const n = hard ? randInt(rng,8,11) : randInt(rng,6,9);
   const rows = [['Day','UnitsSold']];
   for (let i=1;i<=n;i++) rows.push([i, randInt(rng,10,150)]);
   const last = n+1;
@@ -1889,12 +2028,12 @@ function cat_runningtotal(rng, hard) {
 }
 
 function cat_mixed2(rng, hard) {
-  const n = 8;
+  const n = randInt(rng,7,10);
   const rows = [['SKU','ListPrice','UnitsSold','Category']];
   const skus = [];
   for (let i=0;i<n;i++) { const s='SKU'+(600+i); skus.push(s); rows.push([s, randInt(rng,200,2000)/10, randInt(rng,5,120), pick(rng,['Electronics','Accessories'])]); }
   const last = n+1;
-  const target = randInt(rng,2,n+1);
+  const target = randInt(rng,2,last);
   if (!hard) {
     return {
       title: 'Discounted Revenue by Category (Case Study)',
@@ -1945,7 +2084,6 @@ const CATEGORIES = [
   { key: 'sumif', label: 'SUMIF / SUMIFS', fn: cat_sumif },
   { key: 'countif', label: 'COUNTIF / COUNTIFS', fn: cat_countif },
   { key: 'averageif', label: 'AVERAGEIF / AVERAGEIFS', fn: cat_averageif },
-
   { key: 'vlookup', label: 'VLOOKUP', fn: cat_vlookup },
   { key: 'indexmatch', label: 'INDEX / MATCH', fn: cat_indexmatch },
   { key: 'xlookup', label: 'XLOOKUP', fn: cat_xlookup },
@@ -1989,12 +2127,16 @@ const GENERAL_SHORTCUTS = [
   'F4 (outside formula editing) repeats your last action — handy after formatting a cell.',
 ];
 
+// 40 categories × 250 variants each = 10,000 problems
+const VARIANTS_PER_CATEGORY = 250;
+const HARD_FROM = 125;
+
 function buildAllProblems() {
   const problems = [];
   let id = 1;
   for (const cat of CATEGORIES) {
-    for (let v = 0; v < 25; v++) {
-      const hard = v >= 12;
+    for (let v = 0; v < VARIANTS_PER_CATEGORY; v++) {
+      const hard = v >= HARD_FROM;
       const rng = mulberry32(id * 7919 + 13);
       let p;
       if (cat.key === 'mixed') p = cat.fn(rng);
@@ -2023,18 +2165,32 @@ function buildAllProblems() {
 </script>
 <script>
 (function () {
-  const ALL_PROBLEMS = buildAllProblems(); // from generators_browser.js
+  const ALL_PROBLEMS = buildAllProblems();
   const TOTAL = ALL_PROBLEMS.length;
+
+  // ---------- category color hashing (for colorful sidebar accents) ----------
+  const CAT_HUES = {};
+  (function assignHues() {
+    const seen = [];
+    for (const p of ALL_PROBLEMS) if (!seen.includes(p.category)) seen.push(p.category);
+    seen.forEach((c, i) => { CAT_HUES[c] = Math.round((i * 360) / seen.length); });
+  })();
+  function hueFor(cat) { return CAT_HUES[cat] || 160; }
 
   // ---------- state ----------
   let solvedIds = new Set();
-  let attempts = 0, correctAttempts = 0, streak = 0;
+  let attempts = 0, correctAttempts = 0, streak = 0, bestStreak = 0;
   let diffFilter = 'all';
   let catFilter = null; // null = all categories
   let currentIndex = 0; // index into filteredList()
   let hintShown = false, solutionShown = false;
+  let soundOn = true;
 
   const STORAGE_KEY = 'formuladrill-progress';
+  const RATING_KEY = 'formuladrill-rating';
+  const VISITS_KEY = 'formuladrill-visits';
+  const LEADERBOARD_KEY = 'formuladrill-leaderboard';
+  const LBNAME_KEY = 'formuladrill-lbname';
 
   async function loadProgress() {
     try {
@@ -2045,6 +2201,7 @@ function buildAllProblems() {
         attempts = parsed.attempts || 0;
         correctAttempts = parsed.correctAttempts || 0;
         streak = parsed.streak || 0;
+        bestStreak = parsed.bestStreak || streak;
       }
     } catch (e) { /* no saved progress yet */ }
     renderProgress();
@@ -2053,7 +2210,7 @@ function buildAllProblems() {
   async function saveProgress() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        solvedIds: [...solvedIds], attempts, correctAttempts, streak
+        solvedIds: [...solvedIds], attempts, correctAttempts, streak, bestStreak
       }));
     } catch (e) { console.warn('save failed', e); }
   }
@@ -2093,6 +2250,7 @@ function buildAllProblems() {
       const solvedCount = ALL_PROBLEMS.filter(p => p.category === c && solvedIds.has(p.id)).length;
       const li = document.createElement('li');
       li.className = 'cat-item' + (catFilter === c ? ' active' : '');
+      li.style.borderLeftColor = `hsl(${hueFor(c)},60%,55%)`;
       li.innerHTML = `<span>${c}</span><span class="cat-count">${solvedCount}/${count}</span>`;
       li.onclick = () => { catFilter = c; currentIndex = 0; renderCatList(); showProblem(); };
       ul.appendChild(li);
@@ -2114,11 +2272,15 @@ function buildAllProblems() {
     let s = ''; while (n > 0) { const r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); } return s;
   }
 
+  // ---------- sheet rendering + click/drag cell-reference picker ----------
+  let pickAnchor = null, pickCurrent = null, isPicking = false;
+  let lastCaretPos = 0;
+
   function renderSheet(rows) {
     const table = el('sheetTable');
     table.innerHTML = '';
     const numCols = Math.max(...rows.map(r => r.length));
-    const numRows = rows.length; // includes header row as data row 1
+    const numRows = rows.length;
 
     const thead = document.createElement('thead');
     const colHeadRow = document.createElement('tr');
@@ -2143,6 +2305,9 @@ function buildAllProblems() {
         const td = document.createElement('td');
         const v = rows[r][c];
         td.textContent = v === undefined ? '' : v;
+        td.classList.add('data-cell');
+        td.dataset.row = r + 1;
+        td.dataset.col = c + 1;
         if (r === 0) td.classList.add('header-row');
         if (typeof v === 'number') td.classList.add('numeric');
         tr.appendChild(td);
@@ -2150,6 +2315,74 @@ function buildAllProblems() {
       tbody.appendChild(tr);
     }
     table.appendChild(tbody);
+    attachCellPicker(table);
+  }
+
+  function cellsInBox(a, b) {
+    const r1 = Math.min(a.row, b.row), r2 = Math.max(a.row, b.row);
+    const c1 = Math.min(a.col, b.col), c2 = Math.max(a.col, b.col);
+    return { r1, r2, c1, c2 };
+  }
+
+  function refFromSelection(a, b) {
+    const { r1, r2, c1, c2 } = cellsInBox(a, b);
+    const start = colLetterUI(c1) + r1;
+    if (r1 === r2 && c1 === c2) return start;
+    const end = colLetterUI(c2) + r2;
+    return start + ':' + end;
+  }
+
+  function paintSelection(table, a, b) {
+    const { r1, r2, c1, c2 } = cellsInBox(a, b);
+    table.querySelectorAll('td.data-cell').forEach(td => {
+      const r = +td.dataset.row, c = +td.dataset.col;
+      td.classList.toggle('range-select', r >= r1 && r <= r2 && c >= c1 && c <= c2);
+    });
+  }
+
+  function clearSelectionPaint(table) {
+    table.querySelectorAll('td.range-select').forEach(td => td.classList.remove('range-select'));
+  }
+
+  function insertAtCaret(text) {
+    const input = el('formulaInput');
+    const val = input.value;
+    const pos = Math.min(lastCaretPos, val.length);
+    const newVal = val.slice(0, pos) + text + val.slice(pos);
+    input.value = newVal;
+    const newPos = pos + text.length;
+    lastCaretPos = newPos;
+    input.focus();
+    input.setSelectionRange(newPos, newPos);
+  }
+
+  function attachCellPicker(table) {
+    table.addEventListener('mousedown', (e) => {
+      const td = e.target.closest('td.data-cell');
+      if (!td) return;
+      e.preventDefault();
+      isPicking = true;
+      pickAnchor = { row: +td.dataset.row, col: +td.dataset.col };
+      pickCurrent = pickAnchor;
+      paintSelection(table, pickAnchor, pickCurrent);
+    });
+    table.addEventListener('mousemove', (e) => {
+      if (!isPicking) return;
+      const td = e.target.closest('td.data-cell');
+      if (!td) return;
+      pickCurrent = { row: +td.dataset.row, col: +td.dataset.col };
+      paintSelection(table, pickAnchor, pickCurrent);
+    });
+    document.addEventListener('mouseup', () => {
+      if (!isPicking) return;
+      isPicking = false;
+      if (pickAnchor && pickCurrent) {
+        const ref = refFromSelection(pickAnchor, pickCurrent);
+        insertAtCaret(ref);
+      }
+      clearSelectionPaint(table);
+      pickAnchor = null; pickCurrent = null;
+    });
   }
 
   function currentList() { return filteredList(); }
@@ -2161,12 +2394,15 @@ function buildAllProblems() {
     if (currentIndex < 0) currentIndex = list.length - 1;
     const p = list[currentIndex];
 
-    el('ribbonId').textContent = '#' + String(p.id).padStart(3, '0');
+    el('ribbonId').textContent = '#' + String(p.id).padStart(4, '0');
     el('ribbonTitle').textContent = p.title + ' — ' + p.category;
 
     el('badgeDiff').textContent = p.difficulty;
     el('badgeDiff').className = 'badge ' + p.difficulty.toLowerCase();
     el('badgeCat').textContent = p.category;
+    el('badgeCat').style.background = `hsl(${hueFor(p.category)},70%,94%)`;
+    el('badgeCat').style.color = `hsl(${hueFor(p.category)},55%,32%)`;
+    el('badgeCat').style.borderColor = `hsl(${hueFor(p.category)},50%,75%)`;
     el('badgeId').textContent = `Problem #${p.id} of ${TOTAL}` + (solvedIds.has(p.id) ? '  •  ✓ solved' : '');
     el('probTitle').textContent = p.title;
     el('probScenario').textContent = p.scenario;
@@ -2180,6 +2416,7 @@ function buildAllProblems() {
     const input = el('formulaInput');
     input.value = '';
     input.className = 'formula-input';
+    lastCaretPos = 0;
     input.focus();
 
     el('feedback').className = 'feedback';
@@ -2193,7 +2430,8 @@ function buildAllProblems() {
     el('hintBtn').textContent = '💡 Show hint';
     el('solutionBtn').textContent = '✅ Show solution';
 
-    el('fnTags').innerHTML = p.functions.map(f => `<span class="fn-tag">${f}</span>`).join('');
+    const hue = hueFor(p.category);
+    el('fnTags').innerHTML = p.functions.map((f,i) => `<span class="fn-tag" style="background:hsl(${(hue+i*35)%360},55%,88%);color:hsl(${(hue+i*35)%360},55%,28%)">${f}</span>`).join('');
     el('proTipText').textContent = p.shortcut || '';
 
     el('prevBtn').disabled = false;
@@ -2227,7 +2465,7 @@ function buildAllProblems() {
     try {
       result = evaluateFormula(formula, grid);
     } catch (e) {
-      correctAttempts_fail();
+      streak = 0;
       fb.className = 'feedback incorrect show';
       fb.textContent = `⚠️ Formula error: ${e.message}. Check your syntax and cell references.`;
       input.className = 'formula-input incorrect';
@@ -2238,12 +2476,15 @@ function buildAllProblems() {
     if (valuesMatch(result, p.expected)) {
       correctAttempts++;
       streak++;
+      if (streak > bestStreak) bestStreak = streak;
+      const firstTime = !solvedIds.has(p.id);
       solvedIds.add(p.id);
       fb.className = 'feedback correct show';
       fb.textContent = `✅ Correct! Your formula returned ${formatDisplay(result)}.`;
       input.className = 'formula-input correct';
+      celebrate(firstTime);
     } else {
-      correctAttempts_fail();
+      streak = 0;
       fb.className = 'feedback incorrect show';
       fb.textContent = `❌ Not quite. Your formula returned ${formatDisplay(result)}, but the expected answer is ${formatDisplay(p.expected)}. Try again or check the hint.`;
       input.className = 'formula-input incorrect';
@@ -2252,7 +2493,6 @@ function buildAllProblems() {
     saveProgress();
     renderProgress();
   }
-  function correctAttempts_fail() { streak = 0; }
 
   function formatDisplay(v) {
     if (typeof v === 'number') {
@@ -2262,9 +2502,172 @@ function buildAllProblems() {
     return `"${v}"`;
   }
 
+  // ---------- celebration: confetti + toast + sound ----------
+  const canvas = el('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const CONFETTI_COLORS = ['#E2A63B','#D6467D','#2E8FC7','#7B4FC9','#127849','#B5402D'];
+  let confettiParticles = [];
+  let confettiRAF = null;
+
+  function burstConfetti(count) {
+    for (let i = 0; i < count; i++) {
+      confettiParticles.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * 80,
+        vx: (Math.random() - 0.5) * 4,
+        vy: 2 + Math.random() * 3,
+        size: 5 + Math.random() * 6,
+        rot: Math.random() * Math.PI * 2,
+        vrot: (Math.random() - 0.5) * 0.3,
+        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+        life: 0
+      });
+    }
+    if (!confettiRAF) confettiRAF = requestAnimationFrame(tickConfetti);
+  }
+
+  function tickConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiParticles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.04; p.rot += p.vrot; p.life++;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+      ctx.restore();
+    });
+    confettiParticles = confettiParticles.filter(p => p.y < canvas.height + 40 && p.life < 240);
+    if (confettiParticles.length > 0) {
+      confettiRAF = requestAnimationFrame(tickConfetti);
+    } else {
+      confettiRAF = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  let audioCtx = null;
+  function playClap() {
+    if (!soundOn) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      for (let i = 0; i < 3; i++) {
+        const t = now + i * 0.09;
+        const bufferSize = audioCtx.sampleRate * 0.05;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let j = 0; j < bufferSize; j++) data[j] = (Math.random()*2-1) * (1 - j/bufferSize);
+        const src = audioCtx.createBufferSource();
+        src.buffer = buffer;
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+        src.connect(gain); gain.connect(audioCtx.destination);
+        src.start(t);
+      }
+    } catch (e) { /* audio not available */ }
+  }
+
+  const CELEBRATIONS = ['🎉 Nailed it!', '👏 Great formula!', '🥳 Correct!', '✨ Nice work!', '🙌 You got it!', '🔥 On a roll!'];
+  function celebrate(firstTime) {
+    burstConfetti(streak >= 5 ? 90 : 50);
+    playClap();
+    const toast = el('celebrateToast');
+    const msg = pick2(CELEBRATIONS) + (streak > 1 ? ` Streak: ${streak} 🔥` : '');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 1600);
+    if (firstTime && solvedIds.size > 0 && solvedIds.size % 25 === 0) {
+      setTimeout(() => burstConfetti(60), 250);
+    }
+  }
+  function pick2(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+  // ---------- rating widget ----------
+  function initRating() {
+    let saved = 0;
+    try { saved = parseInt(localStorage.getItem(RATING_KEY) || '0', 10); } catch(e) {}
+    const stars = el('starRow').querySelectorAll('span');
+    function paint(n) { stars.forEach(s => s.classList.toggle('filled', +s.dataset.v <= n)); }
+    paint(saved);
+    if (saved > 0) { el('rwThanks').textContent = `You rated it ${saved}★ — thanks!`; el('rwThanks').classList.add('show'); }
+    stars.forEach(s => {
+      s.addEventListener('mouseenter', () => paint(+s.dataset.v));
+      s.addEventListener('mouseleave', () => paint(saved));
+      s.addEventListener('click', () => {
+        saved = +s.dataset.v;
+        try { localStorage.setItem(RATING_KEY, String(saved)); } catch(e) {}
+        paint(saved);
+        el('rwThanks').textContent = `You rated it ${saved}★ — thanks!`;
+        el('rwThanks').classList.add('show');
+        burstConfetti(24);
+      });
+    });
+  }
+
+  // ---------- visitor counter (per-browser, local only) ----------
+  function initVisits() {
+    let n = 0;
+    try {
+      n = parseInt(localStorage.getItem(VISITS_KEY) || '0', 10) + 1;
+      localStorage.setItem(VISITS_KEY, String(n));
+    } catch (e) { n = 1; }
+    el('visitCount').textContent = n;
+  }
+
+  // ---------- leaderboard (per-browser, local only) ----------
+  function loadLeaderboard() {
+    try { return JSON.parse(localStorage.getItem(LEADERBOARD_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function saveLeaderboardEntries(list) {
+    try { localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+  function renderLeaderboard() {
+    const list = loadLeaderboard().sort((a,b) => b.bestStreak - a.bestStreak || b.solved - a.solved);
+    const box = el('lbList');
+    if (list.length === 0) {
+      box.innerHTML = '<div class="lb-empty">No scores saved yet on this device — solve a few problems, then hit "Save my score" below!</div>';
+      return;
+    }
+    box.innerHTML = list.slice(0,20).map((e,i) => {
+      const rankClass = i===0?'r1':i===1?'r2':i===2?'r3':'';
+      return `<div class="lb-row"><div class="lb-rank ${rankClass}">${i+1}</div><div class="lb-name">${escapeHtml(e.name)}</div><div class="lb-meta">🔥${e.bestStreak} · ${e.solved} solved · ${e.accuracy}%</div></div>`;
+    }).join('');
+  }
+  function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  el('openLbBtn').onclick = () => { renderLeaderboard(); try { el('lbName').value = localStorage.getItem(LBNAME_KEY) || ''; } catch(e){} el('lbOverlay').classList.add('show'); };
+  el('lbClose').onclick = () => el('lbOverlay').classList.remove('show');
+  el('lbOverlay').addEventListener('click', (e) => { if (e.target === el('lbOverlay')) el('lbOverlay').classList.remove('show'); });
+  el('lbSaveBtn').onclick = () => {
+    const name = (el('lbName').value || 'You').trim().slice(0,18) || 'You';
+    try { localStorage.setItem(LBNAME_KEY, name); } catch(e) {}
+    const list = loadLeaderboard();
+    const accuracy = attempts ? Math.round((correctAttempts/attempts)*100) : 0;
+    const existingIdx = list.findIndex(e => e.name.toLowerCase() === name.toLowerCase());
+    const entry = { name, bestStreak, solved: solvedIds.size, accuracy, date: new Date().toISOString().slice(0,10) };
+    if (existingIdx >= 0) {
+      if (entry.bestStreak >= list[existingIdx].bestStreak) list[existingIdx] = entry;
+    } else {
+      list.push(entry);
+    }
+    saveLeaderboardEntries(list);
+    renderLeaderboard();
+    burstConfetti(40);
+  };
+
   // ---------- events ----------
   el('submitBtn').onclick = checkAnswer;
   el('formulaInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') checkAnswer(); });
+  ['keyup','click','focus'].forEach(evt => {
+    el('formulaInput').addEventListener(evt, (e) => { lastCaretPos = e.target.selectionStart; });
+  });
 
   el('prevBtn').onclick = () => { currentIndex--; showProblem(); };
   el('nextBtn').onclick = () => { currentIndex++; showProblem(); };
@@ -2305,14 +2708,21 @@ function buildAllProblems() {
 
   el('resetBtn').onclick = async () => {
     if (!confirm('Reset all saved progress? This cannot be undone.')) return;
-    solvedIds = new Set(); attempts = 0; correctAttempts = 0; streak = 0;
+    solvedIds = new Set(); attempts = 0; correctAttempts = 0; streak = 0; bestStreak = 0;
     await saveProgress();
     renderProgress();
     showProblem();
   };
 
+  el('soundBtn').onclick = () => {
+    soundOn = !soundOn;
+    el('soundBtn').textContent = soundOn ? '🔊' : '🔇';
+  };
+
   // ---------- init ----------
   (async function init() {
+    initRating();
+    initVisits();
     await loadProgress();
     renderCatList();
     showProblem();
