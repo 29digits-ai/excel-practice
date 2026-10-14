@@ -3,56 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FormulaDrill — 10,000 Excel Formula Practice Sets</title>
+<title>FormulaDrill — 10,270 Excel Formula Practice Sets</title>
 <style>
-  
   :root{
-    --paper:#ffffff;
-    --paper-line:#e2e8f0;
-    --ink:#0f172a;
-    --ink-soft:#475569;
-    --green-900:#064e3b;
-    --green-700:#047857;
-    --green-600:#059669;
-    --green-100:#d1fae5;
-    --amber:#d97706;
-    --amber-100:#fef3c7;
-    --blue:#2563eb;
-    --blue-100:#dbeafe;
-    --red:#dc2626;
-    --red-100:#fee2e2;
-    --gold:#d97706;
-    --gold-100:#fef3c7;
-    --pink:#db2777;
-    --pink-100:#fce7f3;
-    --sky:#0284c7;
-    --sky-100:#e0f2fe;
-    --violet:#7c3aed;
-    --violet-100:#ede9fe;
-    --cell-border:#cbd5e1;
-    --header-bg:#f8fafc;
-    --mono: ui-monospace, 'Fira Code', 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
-    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    --radius: 12px;
+    --paper:#F7F8F6;
+    --paper-line:#E1E5E0;
+    --ink:#16261F;
+    --ink-soft:#4E5D56;
+    --green-900:#0B3B26;
+    --green-700:#0F5C39;
+    --green-600:#127849;
+    --green-100:#DCEEE2;
+    --amber:#C97A2B;
+    --amber-100:#F6E4CD;
+    --blue:#2A5FA8;
+    --blue-100:#DCE7F6;
+    --red:#B5402D;
+    --red-100:#F6DFDA;
+    --gold:#E2A63B;
+    --gold-100:#FBEECB;
+    --pink:#D6467D;
+    --pink-100:#FCE1EC;
+    --sky:#2E8FC7;
+    --sky-100:#DCF0F8;
+    --violet:#7B4FC9;
+    --violet-100:#EBE1FA;
+    --cell-border:#C7D0CA;
+    --header-bg:#E9EEE9;
+    --mono: ui-monospace, 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --radius: 6px;
   }
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
-  body {
-    background: #f1f5f9;
-    background-image: radial-gradient(#cbd5e1 1px, transparent 0);
-    background-size: 30px 30px;
-  }
-  .app {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-    background: transparent;
-  }
-  .panel {
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
-  }
-
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  
+  body{
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 34px,
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+  }
   .app{ max-width:1180px; margin:0 auto; padding:20px 18px 60px; }
 
   /* ---------- Header / toolbar ---------- */
@@ -300,6 +291,72 @@
     .answer-row{ flex-wrap:wrap; }
   }
 </style>
+<style>
+/* ===== FormulaDrill v2 redesign ===== */
+:root{--radius:12px;--shadow:0 14px 34px -16px rgba(11,59,38,.35)}
+body{font-family:'Inter',var(--sans);background:radial-gradient(900px 520px at 0% -8%,#cdeedb 0,transparent 60%),radial-gradient(800px 480px at 100% 0,#e6d9fb 0,transparent 55%),#f4f7f5;background-attachment:fixed}
+.app{max-width:1300px;padding-top:24px}
+.titlebar{background:linear-gradient(115deg,#0b3b26,#127849 55%,#2e8fc7);padding:20px 24px;border-radius:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.titlebar:after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%)}
+.brand-mark{width:46px;height:46px;border-radius:14px;font-size:19px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.brand-text h1{background:none;-webkit-text-fill-color:#fff;color:#fff;font-size:26px;letter-spacing:-.02em}
+.brand-text p{color:#d3efdf;font-size:12.5px;max-width:560px}
+.stat-pill{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);color:#e6f6ed;backdrop-filter:blur(6px)}
+.stat-pill b{color:#fff}.stat-pill.streak{background:rgba(226,166,59,.3);border-color:rgba(255,220,150,.6)}
+.board-btn,.lib-btn,.theme-btn,.sound-btn{border-radius:999px;transition:transform .15s,filter .15s;position:relative;z-index:1}
+.lib-btn{background:#fff;color:var(--green-900);border:none;padding:7px 14px;font-size:12.5px;font-weight:800;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.theme-btn{background:rgba(255,255,255,.9);border:none;padding:6px 10px;cursor:pointer}
+.board-btn:hover,.lib-btn:hover{transform:translateY(-2px)}
+.ribbon{border-radius:14px;box-shadow:0 6px 18px -12px rgba(0,0,0,.4)}
+.sidebar,.panel{background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.95);border-radius:20px;box-shadow:var(--shadow)}
+.sidebar{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+.cat-list li{border-radius:10px;transition:background .15s,transform .15s}.cat-list li:hover{transform:translateX(3px)}
+.chip{border-radius:999px}
+.panel-head{background:linear-gradient(180deg,#f3faf6,rgba(255,255,255,0))}
+.panel-body{animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nav-btn,.submit-btn,.helper-btn,.reset-btn{border-radius:11px;transition:transform .15s,box-shadow .15s,filter .15s}
+.nav-btn:hover,.submit-btn:hover,.helper-btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px -8px rgba(0,0,0,.35)}
+.submit-btn{background:linear-gradient(120deg,var(--green-700),var(--green-600));color:#fff}
+.formula-input{border-radius:11px;font-size:14px}.formula-input:focus{box-shadow:0 0 0 4px rgba(18,120,73,.18);outline:none}
+.sheet-wrap{border-radius:14px;box-shadow:inset 0 0 0 1px var(--cell-border);overflow:auto}
+.progress-fill{background:linear-gradient(90deg,var(--green-600),var(--sky),var(--violet));transition:width .6s}
+.fn-tag{cursor:pointer;transition:transform .15s}.fn-tag:hover{transform:translateY(-2px) scale(1.05)}
+.kbd-hint{text-align:center;font-size:11.5px;color:var(--ink-soft);margin:14px 0 0}
+.kbd-hint kbd{background:#fff;border:1px solid var(--cell-border);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-family:var(--mono);font-size:10.5px}
+/* Library overlay */
+.lib-overlay{position:fixed;inset:0;background:rgba(7,22,15,.6);backdrop-filter:blur(5px);display:none;z-index:70;padding:3vh 3vw}
+.lib-overlay.show{display:block;animation:rise .25s}
+.lib-box{background:#f7faf8;border-radius:24px;height:94vh;max-width:1240px;margin:auto;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.lib-head{padding:20px 24px 14px;background:linear-gradient(115deg,#0b3b26,#127849 60%,#2e8fc7);color:#fff;position:relative}
+.lib-head h3{margin:0 0 4px;font-size:21px}.lib-head p{margin:0;font-size:12.5px;color:#d3efdf}
+.lib-close{position:absolute;right:16px;top:14px;background:rgba(255,255,255,.18);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px}
+.lib-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:14px 24px 6px}
+.lib-tools input{flex:1;min-width:220px;border:1px solid var(--cell-border);border-radius:999px;padding:10px 16px;font-size:14px;font-family:inherit}
+.lib-tools input:focus{outline:none;box-shadow:0 0 0 4px rgba(18,120,73,.18)}
+.lib-chips{display:flex;gap:6px;flex-wrap:wrap;padding:4px 24px}
+.lib-chip{border:1px solid var(--cell-border);background:#fff;border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer;font-weight:600;color:var(--ink-soft)}
+.lib-chip.on{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+.lib-count{font-size:12px;color:var(--ink-soft);padding:2px 24px 8px}
+.lib-grid{flex:1;overflow:auto;padding:6px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-content:start}
+.lib-card{background:#fff;border:1px solid var(--paper-line);border-radius:16px;padding:12px 14px;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
+.lib-card:hover{transform:translateY(-4px);box-shadow:0 14px 24px -14px rgba(11,59,38,.5);border-color:var(--green-600)}
+.lib-card.done{background:linear-gradient(160deg,#f2fbf5,#fff);border-color:#9fd3b2}
+.lib-top{display:flex;gap:8px;font-size:11px;color:var(--ink-soft);align-items:center}.lib-top b{margin-left:auto;color:var(--green-600)}
+.lib-card h4{margin:6px 0;font-size:14px}.lib-card code{background:var(--green-100);color:var(--green-900);padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+.lib-fns{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.lib-fns i{font-style:normal;font-size:10.5px;background:var(--violet-100);color:#4a2c8a;padding:1px 7px;border-radius:999px}
+/* rating widget pinned to bottom */
+.rating-widget{top:auto!important;left:auto!important;bottom:14px;right:14px;max-width:none!important;display:flex;align-items:center;gap:10px;border-radius:999px!important;padding:7px 16px!important;background:rgba(255,255,255,.92)!important;backdrop-filter:blur(8px);box-shadow:0 8px 24px -10px rgba(0,0,0,.35)!important}
+.rating-widget .rw-label{margin:0!important;white-space:nowrap;font-size:12px!important}
+.rating-widget .rw-thanks{margin:0!important;white-space:nowrap}
+.visitor-widget{backdrop-filter:blur(8px);background:rgba(255,255,255,.92)!important}
+.app{padding-bottom:90px}
+@media(max-width:640px){.rating-widget{right:8px;bottom:8px;padding:5px 10px!important}.visitor-widget{display:none}}
+/* Dark mode */
+html[data-theme=dark]{filter:invert(.92) hue-rotate(180deg);background:#fff}
+html[data-theme=dark] canvas,html[data-theme=dark] .titlebar,html[data-theme=dark] .lib-head,html[data-theme=dark] .brand-mark,html[data-theme=dark] .board-btn{filter:invert(1) hue-rotate(180deg)}
+@media(max-width:820px){.sidebar{position:static;max-height:none}.titlebar{padding:16px}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -314,6 +371,7 @@
 
   <div class="visitor-widget" id="visitorWidget">👀 Visit #<b id="visitCount">1</b> on this device</div>
 
+  <div class="lib-overlay" id="libOverlay"><div class="lib-box"><div class="lib-head"><button class="lib-close" id="libClose">✕</button><h3>📚 Formula Library &mdash; 270 formulas</h3><p>Every formula from the list, each with a graded practice question. Search by function, pick a category, click a card to practise.</p></div><div class="lib-tools"><input id="libSearch" type="search" placeholder="Search a function, e.g. FILTER, SUMPRODUCT, LAMBDA…"></div><div class="lib-chips" id="libChips"></div><div class="lib-count" id="libCount"></div><div class="lib-grid" id="libGrid"></div></div></div>
   <canvas id="confettiCanvas"></canvas>
   <div class="celebrate-toast" id="celebrateToast"></div>
 
@@ -335,15 +393,15 @@
       <div class="brand-mark">fx</div>
       <div class="brand-text">
         <h1>FormulaDrill</h1>
-        <p>10,000 medium & hard Excel formula problems across every core Data & Business Analysis skill, graded live in your browser</p>
+        <p>10,270 Excel formula problems &mdash; including 270 formula-library patterns &mdash; graded live in your browser</p>
       </div>
     </div>
     <div class="stats-strip">
-      <div class="stat-pill">Solved <b id="statSolved">0</b>/10000</div>
+      <div class="stat-pill">Solved <b id="statSolved">0</b>/10270</div>
       <div class="stat-pill streak">🔥 Streak <b id="statStreak">0</b></div>
       <div class="stat-pill">Accuracy <b id="statAccuracy">—</b></div>
       <button class="board-btn" id="openLbBtn">🏆 Leaderboard</button>
-      <button class="sound-btn" id="soundBtn" title="Toggle celebration sound">🔊</button>
+      <button class="lib-btn" id="libBtn" title="Ctrl+K">📚 Formula Library</button><button class="sound-btn" id="soundBtn" title="Toggle celebration sound">🔊</button><button class="theme-btn" id="themeBtn" title="Toggle dark mode">🌗</button>
     </div>
   </div>
 
@@ -367,7 +425,7 @@
       <ul class="cat-list" id="catList"></ul>
       <div class="progress-wrap">
         <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-        <div class="progress-label"><span id="progressText">0 of 10000 solved</span><span id="progressPct">0%</span></div>
+        <div class="progress-label"><span id="progressText">0 of 10270 solved</span><span id="progressPct">0%</span></div>
       </div>
       <button class="reset-btn" id="resetBtn">Reset all progress</button>
     </aside>
@@ -378,7 +436,7 @@
           <div class="badges">
             <span class="badge" id="badgeDiff">Medium</span>
             <span class="badge cat" id="badgeCat">Category</span>
-            <span class="problem-id" id="badgeId">Problem #1 of 10000</span>
+            <span class="problem-id" id="badgeId">Problem #1 of 10270</span>
           </div>
           <h2 id="probTitle">Title</h2>
         </div>
@@ -420,6 +478,7 @@
     </main>
   </div>
 
+  <p class="kbd-hint"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> check &middot; <kbd>Alt</kbd>+<kbd>&larr;/&rarr;</kbd> prev/next &middot; <kbd>Alt</kbd>+<kbd>H</kbd> hint &middot; <kbd>Ctrl</kbd>+<kbd>K</kbd> library</p>
   <p class="footnote">Covers SUMIFS/COUNTIFS/AVERAGEIFS, VLOOKUP/INDEX-MATCH/XLOOKUP, nested IF/IFS logic, text cleaning, date &amp; business-date math, RANK/LARGE/SMALL/PERCENTILE statistics, SUMPRODUCT, PMT/NPV/FV/PV finance, growth-rate &amp; margin analysis, and more — all evaluated by an in-browser Excel-formula engine. Progress, ratings, visits, and the leaderboard are all saved locally in this browser (they won't follow you to another device or browser).</p>
 </div>
 
@@ -739,33 +798,7 @@ function evalCall(node, grid) {
     case 'COUNTA': return flattenArgs(A, grid).filter(v => v !== null && v !== '').length;
     case 'MAX': return Math.max(...flattenArgs(A, grid).map(toNumber));
     case 'MIN': return Math.min(...flattenArgs(A, grid).map(toNumber));
-    case 'ABS': return Math.abs(toNumber(ev(A[0]))); 
-    case 'INT': return Math.floor(toNumber(ev(A[0])));
-    case 'EXACT': return toStr(ev(A[0])) === toStr(ev(A[1]));
-    case 'MAXIFS': { const maxRng = grid.getRange(A[0].value); let idxs = null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let maxVal=-Infinity; idxs.forEach(ix=>{ const val = toNumber(maxRng[ix]); if(val>maxVal) maxVal=val; }); return maxVal===-Infinity?0:maxVal; }
-    case 'MINIFS': { const minRng = grid.getRange(A[0].value); let idxs = null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let minVal=Infinity; idxs.forEach(ix=>{ const val = toNumber(minRng[ix]); if(val<minVal) minVal=val; }); return minVal===Infinity?0:minVal; }
-    case 'TEXTSPLIT': return toStr(ev(A[0])).split(toStr(ev(A[1])));
-    case 'UNIQUE': { const rng = flattenArgs(A, grid); return [...new Set(rng)]; }
-    case 'SORT': { const rng = flattenArgs(A, grid); return rng.sort(); }
-    case 'COUNTA': return flattenArgs(A, grid).filter(v => v !== null && v !== '').length;
-    case 'SUBTOTAL': { const fnum = toNumber(ev(A[0])); const vs = flattenArgs(A.slice(1), grid); if(fnum===9) return vs.reduce((s,v)=>s+toNumber(v),0); if(fnum===1) return vs.reduce((s,v)=>s+toNumber(v),0)/(vs.length||1); return vs.length; }
-    case 'OFFSET': return "OFFSET results";
-    case 'VSTACK': return "VSTACK results";
-    case 'SORTBY': return "SORTBY results";
-    case 'BYCOL': return "BYCOL results";
-    case 'BYROW': return "BYROW results";
-    case 'GROUPBY': return "GROUPBY results";
-    case 'LAMBDA': return "LAMBDA results";
-    case 'SEQUENCE': return "SEQUENCE results";
-    case 'MAP': return "MAP results";
-    case 'REDUCE': return "REDUCE results";
-    case 'TAKE': return "TAKE results";
-    case 'FILTER': return "FILTER results";
-    case 'AGGREGATE': return "AGGREGATE results";
-    case 'MMULT': return "MMULT results";
-    case 'LET': return "LET results";
-    case 'FREQUENCY': return "FREQUENCY results";
-
+    case 'ABS': return Math.abs(toNumber(ev(A[0])));
     case 'ROUND': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return Math.round(v*f)/f; }
     case 'ROUNDUP': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return (v>=0?Math.ceil(v*f):Math.floor(v*f))/f; }
     case 'ROUNDDOWN': { const v = toNumber(ev(A[0])), d = toNumber(ev(A[1])); const f = Math.pow(10,d); return (v>=0?Math.floor(v*f):Math.ceil(v*f))/f; }
@@ -814,33 +847,7 @@ function evalCall(node, grid) {
     case 'SUMPRODUCT': { const arrs = A.map(a => { const v = a.type==='range'? grid.getRange(a.value) : ev(a); return Array.isArray(v) ? v : [v]; }); const len = Math.max(...arrs.map(a=>a.length)); let s=0; for (let i=0;i<len;i++){ let p=1; for (const arr of arrs) p*=toNumber(arr[i % arr.length]); s+=p; } return s; }
     case 'ROW': return A[0] && A[0].type==='ref' ? parseRef(A[0].value).row : 1;
     case 'COLUMN': return A[0] && A[0].type==='ref' ? parseRef(A[0].value).col : 1;
-    case 'ABS': return Math.abs(toNumber(ev(A[0]))); 
-    case 'INT': return Math.floor(toNumber(ev(A[0])));
-    case 'EXACT': return toStr(ev(A[0])) === toStr(ev(A[1]));
-    case 'MAXIFS': { const maxRng = grid.getRange(A[0].value); let idxs = null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let maxVal=-Infinity; idxs.forEach(ix=>{ const val = toNumber(maxRng[ix]); if(val>maxVal) maxVal=val; }); return maxVal===-Infinity?0:maxVal; }
-    case 'MINIFS': { const minRng = grid.getRange(A[0].value); let idxs = null; for (let i=1;i<A.length;i+=2) { const rng = grid.getRange(A[i].value); const crit = ev(A[i+1]); const pass = new Set(); rng.forEach((v,ix)=>{ if(matchCriteria(v,crit)) pass.add(ix); }); idxs = idxs===null?pass:new Set([...idxs].filter(x=>pass.has(x))); } let minVal=Infinity; idxs.forEach(ix=>{ const val = toNumber(minRng[ix]); if(val<minVal) minVal=val; }); return minVal===Infinity?0:minVal; }
-    case 'TEXTSPLIT': return toStr(ev(A[0])).split(toStr(ev(A[1])));
-    case 'UNIQUE': { const rng = flattenArgs(A, grid); return [...new Set(rng)]; }
-    case 'SORT': { const rng = flattenArgs(A, grid); return rng.sort(); }
-    case 'COUNTA': return flattenArgs(A, grid).filter(v => v !== null && v !== '').length;
-    case 'SUBTOTAL': { const fnum = toNumber(ev(A[0])); const vs = flattenArgs(A.slice(1), grid); if(fnum===9) return vs.reduce((s,v)=>s+toNumber(v),0); if(fnum===1) return vs.reduce((s,v)=>s+toNumber(v),0)/(vs.length||1); return vs.length; }
-    case 'OFFSET': return "OFFSET results";
-    case 'VSTACK': return "VSTACK results";
-    case 'SORTBY': return "SORTBY results";
-    case 'BYCOL': return "BYCOL results";
-    case 'BYROW': return "BYROW results";
-    case 'GROUPBY': return "GROUPBY results";
-    case 'LAMBDA': return "LAMBDA results";
-    case 'SEQUENCE': return "SEQUENCE results";
-    case 'MAP': return "MAP results";
-    case 'REDUCE': return "REDUCE results";
-    case 'TAKE': return "TAKE results";
-    case 'FILTER': return "FILTER results";
-    case 'AGGREGATE': return "AGGREGATE results";
-    case 'MMULT': return "MMULT results";
-    case 'LET': return "LET results";
-    case 'FREQUENCY': return "FREQUENCY results";
-
+    case 'ABS': return Math.abs(toNumber(ev(A[0])));
     case 'DATEDIF': { const d1 = parseDate(ev(A[0])), d2 = parseDate(ev(A[1])); const unit = toStr(ev(A[2])).toUpperCase(); return dateDiff(d1,d2,unit); }
     case 'TODAY': return grid.today || '2026-07-23';
     case 'YEAR': return parseDate(ev(A[0])).getFullYear();
@@ -2119,1399 +2126,6 @@ function cat_mixed2(rng, hard) {
 }
 
 const NEW_CATEGORIES = [
-
-    { key: 'countifs_ej', label: 'EJ: COUNTIFS', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=COUNTIFS(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('COUNTIFS')) {
-             refF = `=COUNTIFS(1)`;
-        } else if ('COUNTIFS' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('COUNTIFS' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice COUNTIFS',
-            scenario: `Test your knowledge of the COUNTIFS formula from the Exceljet dataset.`,
-            question: `Write a formula using COUNTIFS. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the COUNTIFS() function.`,
-            functions: ['COUNTIFS']
-        };
-    } }
-    ,
-
-    { key: 'sumproduct_ej', label: 'EJ: SUMPRODUCT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SUMPRODUCT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SUMPRODUCT')) {
-             refF = `=SUMPRODUCT(1)`;
-        } else if ('SUMPRODUCT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SUMPRODUCT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SUMPRODUCT',
-            scenario: `Test your knowledge of the SUMPRODUCT formula from the Exceljet dataset.`,
-            question: `Write a formula using SUMPRODUCT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SUMPRODUCT() function.`,
-            functions: ['SUMPRODUCT']
-        };
-    } }
-    ,
-
-    { key: 'countif_ej', label: 'EJ: COUNTIF', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=COUNTIF(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('COUNTIF')) {
-             refF = `=COUNTIF(1)`;
-        } else if ('COUNTIF' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('COUNTIF' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice COUNTIF',
-            scenario: `Test your knowledge of the COUNTIF formula from the Exceljet dataset.`,
-            question: `Write a formula using COUNTIF. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the COUNTIF() function.`,
-            functions: ['COUNTIF']
-        };
-    } }
-    ,
-
-    { key: 'match_ej', label: 'EJ: MATCH', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MATCH(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MATCH')) {
-             refF = `=MATCH(1)`;
-        } else if ('MATCH' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MATCH' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MATCH',
-            scenario: `Test your knowledge of the MATCH formula from the Exceljet dataset.`,
-            question: `Write a formula using MATCH. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MATCH() function.`,
-            functions: ['MATCH']
-        };
-    } }
-    ,
-
-    { key: 'countblank_ej', label: 'EJ: COUNTBLANK', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=COUNTBLANK(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('COUNTBLANK')) {
-             refF = `=COUNTBLANK(1)`;
-        } else if ('COUNTBLANK' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('COUNTBLANK' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice COUNTBLANK',
-            scenario: `Test your knowledge of the COUNTBLANK formula from the Exceljet dataset.`,
-            question: `Write a formula using COUNTBLANK. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the COUNTBLANK() function.`,
-            functions: ['COUNTBLANK']
-        };
-    } }
-    ,
-
-    { key: 'counta_ej', label: 'EJ: COUNTA', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=COUNTA(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('COUNTA')) {
-             refF = `=COUNTA(1)`;
-        } else if ('COUNTA' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('COUNTA' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice COUNTA',
-            scenario: `Test your knowledge of the COUNTA formula from the Exceljet dataset.`,
-            question: `Write a formula using COUNTA. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the COUNTA() function.`,
-            functions: ['COUNTA']
-        };
-    } }
-    ,
-
-    { key: 'count_ej', label: 'EJ: COUNT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=COUNT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('COUNT')) {
-             refF = `=COUNT(1)`;
-        } else if ('COUNT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('COUNT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice COUNT',
-            scenario: `Test your knowledge of the COUNT formula from the Exceljet dataset.`,
-            question: `Write a formula using COUNT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the COUNT() function.`,
-            functions: ['COUNT']
-        };
-    } }
-    ,
-
-    { key: 'iserror_ej', label: 'EJ: ISERROR', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=ISERROR(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('ISERROR')) {
-             refF = `=ISERROR(1)`;
-        } else if ('ISERROR' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('ISERROR' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice ISERROR',
-            scenario: `Test your knowledge of the ISERROR formula from the Exceljet dataset.`,
-            question: `Write a formula using ISERROR. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the ISERROR() function.`,
-            functions: ['ISERROR']
-        };
-    } }
-    ,
-
-    { key: 'isnumber_ej', label: 'EJ: ISNUMBER', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=ISNUMBER(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('ISNUMBER')) {
-             refF = `=ISNUMBER(1)`;
-        } else if ('ISNUMBER' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('ISNUMBER' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice ISNUMBER',
-            scenario: `Test your knowledge of the ISNUMBER formula from the Exceljet dataset.`,
-            question: `Write a formula using ISNUMBER. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the ISNUMBER() function.`,
-            functions: ['ISNUMBER']
-        };
-    } }
-    ,
-
-    { key: 'mmult_ej', label: 'EJ: MMULT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MMULT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MMULT')) {
-             refF = `=MMULT(1)`;
-        } else if ('MMULT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MMULT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MMULT',
-            scenario: `Test your knowledge of the MMULT formula from the Exceljet dataset.`,
-            question: `Write a formula using MMULT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MMULT() function.`,
-            functions: ['MMULT']
-        };
-    } }
-    ,
-
-    { key: 'year_ej', label: 'EJ: YEAR', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=YEAR(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('YEAR')) {
-             refF = `=YEAR(1)`;
-        } else if ('YEAR' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('YEAR' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice YEAR',
-            scenario: `Test your knowledge of the YEAR formula from the Exceljet dataset.`,
-            question: `Write a formula using YEAR. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the YEAR() function.`,
-            functions: ['YEAR']
-        };
-    } }
-    ,
-
-    { key: 'mod_ej', label: 'EJ: MOD', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MOD(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MOD')) {
-             refF = `=MOD(1)`;
-        } else if ('MOD' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MOD' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MOD',
-            scenario: `Test your knowledge of the MOD formula from the Exceljet dataset.`,
-            question: `Write a formula using MOD. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MOD() function.`,
-            functions: ['MOD']
-        };
-    } }
-    ,
-
-    { key: 'unique_ej', label: 'EJ: UNIQUE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=UNIQUE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('UNIQUE')) {
-             refF = `=UNIQUE(1)`;
-        } else if ('UNIQUE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('UNIQUE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice UNIQUE',
-            scenario: `Test your knowledge of the UNIQUE formula from the Exceljet dataset.`,
-            question: `Write a formula using UNIQUE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the UNIQUE() function.`,
-            functions: ['UNIQUE']
-        };
-    } }
-    ,
-
-    { key: 'frequency_ej', label: 'EJ: FREQUENCY', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=FREQUENCY(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('FREQUENCY')) {
-             refF = `=FREQUENCY(1)`;
-        } else if ('FREQUENCY' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('FREQUENCY' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice FREQUENCY',
-            scenario: `Test your knowledge of the FREQUENCY formula from the Exceljet dataset.`,
-            question: `Write a formula using FREQUENCY. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the FREQUENCY() function.`,
-            functions: ['FREQUENCY']
-        };
-    } }
-    ,
-
-    { key: 'subtotal_ej', label: 'EJ: SUBTOTAL', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SUBTOTAL(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SUBTOTAL')) {
-             refF = `=SUBTOTAL(1)`;
-        } else if ('SUBTOTAL' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SUBTOTAL' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SUBTOTAL',
-            scenario: `Test your knowledge of the SUBTOTAL formula from the Exceljet dataset.`,
-            question: `Write a formula using SUBTOTAL. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SUBTOTAL() function.`,
-            functions: ['SUBTOTAL']
-        };
-    } }
-    ,
-
-    { key: 'sum_ej', label: 'EJ: SUM', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SUM(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SUM')) {
-             refF = `=SUM(1)`;
-        } else if ('SUM' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SUM' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SUM',
-            scenario: `Test your knowledge of the SUM formula from the Exceljet dataset.`,
-            question: `Write a formula using SUM. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SUM() function.`,
-            functions: ['SUM']
-        };
-    } }
-    ,
-
-    { key: 'sumif_ej', label: 'EJ: SUMIF', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SUMIF(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SUMIF')) {
-             refF = `=SUMIF(1)`;
-        } else if ('SUMIF' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SUMIF' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SUMIF',
-            scenario: `Test your knowledge of the SUMIF formula from the Exceljet dataset.`,
-            question: `Write a formula using SUMIF. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SUMIF() function.`,
-            functions: ['SUMIF']
-        };
-    } }
-    ,
-
-    { key: 'sumifs_ej', label: 'EJ: SUMIFS', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SUMIFS(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SUMIFS')) {
-             refF = `=SUMIFS(1)`;
-        } else if ('SUMIFS' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SUMIFS' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SUMIFS',
-            scenario: `Test your knowledge of the SUMIFS formula from the Exceljet dataset.`,
-            question: `Write a formula using SUMIFS. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SUMIFS() function.`,
-            functions: ['SUMIFS']
-        };
-    } }
-    ,
-
-    { key: 'small_ej', label: 'EJ: SMALL', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SMALL(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SMALL')) {
-             refF = `=SMALL(1)`;
-        } else if ('SMALL' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SMALL' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SMALL',
-            scenario: `Test your knowledge of the SMALL formula from the Exceljet dataset.`,
-            question: `Write a formula using SMALL. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SMALL() function.`,
-            functions: ['SMALL']
-        };
-    } }
-    ,
-
-    { key: 'filter_ej', label: 'EJ: FILTER', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=FILTER(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('FILTER')) {
-             refF = `=FILTER(1)`;
-        } else if ('FILTER' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('FILTER' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice FILTER',
-            scenario: `Test your knowledge of the FILTER formula from the Exceljet dataset.`,
-            question: `Write a formula using FILTER. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the FILTER() function.`,
-            functions: ['FILTER']
-        };
-    } }
-    ,
-
-    { key: 'take_ej', label: 'EJ: TAKE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=TAKE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('TAKE')) {
-             refF = `=TAKE(1)`;
-        } else if ('TAKE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('TAKE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice TAKE',
-            scenario: `Test your knowledge of the TAKE formula from the Exceljet dataset.`,
-            question: `Write a formula using TAKE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the TAKE() function.`,
-            functions: ['TAKE']
-        };
-    } }
-    ,
-
-    { key: 'textsplit_ej', label: 'EJ: TEXTSPLIT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=TEXTSPLIT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('TEXTSPLIT')) {
-             refF = `=TEXTSPLIT(1)`;
-        } else if ('TEXTSPLIT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('TEXTSPLIT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice TEXTSPLIT',
-            scenario: `Test your knowledge of the TEXTSPLIT formula from the Exceljet dataset.`,
-            question: `Write a formula using TEXTSPLIT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the TEXTSPLIT() function.`,
-            functions: ['TEXTSPLIT']
-        };
-    } }
-    ,
-
-    { key: 'averageif_ej', label: 'EJ: AVERAGEIF', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=AVERAGEIF(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('AVERAGEIF')) {
-             refF = `=AVERAGEIF(1)`;
-        } else if ('AVERAGEIF' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('AVERAGEIF' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice AVERAGEIF',
-            scenario: `Test your knowledge of the AVERAGEIF formula from the Exceljet dataset.`,
-            question: `Write a formula using AVERAGEIF. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the AVERAGEIF() function.`,
-            functions: ['AVERAGEIF']
-        };
-    } }
-    ,
-
-    { key: 'averageifs_ej', label: 'EJ: AVERAGEIFS', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=AVERAGEIFS(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('AVERAGEIFS')) {
-             refF = `=AVERAGEIFS(1)`;
-        } else if ('AVERAGEIFS' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('AVERAGEIFS' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice AVERAGEIFS',
-            scenario: `Test your knowledge of the AVERAGEIFS formula from the Exceljet dataset.`,
-            question: `Write a formula using AVERAGEIFS. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the AVERAGEIFS() function.`,
-            functions: ['AVERAGEIFS']
-        };
-    } }
-    ,
-
-    { key: 'average_ej', label: 'EJ: AVERAGE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=AVERAGE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('AVERAGE')) {
-             refF = `=AVERAGE(1)`;
-        } else if ('AVERAGE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('AVERAGE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice AVERAGE',
-            scenario: `Test your knowledge of the AVERAGE formula from the Exceljet dataset.`,
-            question: `Write a formula using AVERAGE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the AVERAGE() function.`,
-            functions: ['AVERAGE']
-        };
-    } }
-    ,
-
-    { key: 'large_ej', label: 'EJ: LARGE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=LARGE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('LARGE')) {
-             refF = `=LARGE(1)`;
-        } else if ('LARGE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('LARGE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice LARGE',
-            scenario: `Test your knowledge of the LARGE formula from the Exceljet dataset.`,
-            question: `Write a formula using LARGE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the LARGE() function.`,
-            functions: ['LARGE']
-        };
-    } }
-    ,
-
-    { key: 'offset_ej', label: 'EJ: OFFSET', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=OFFSET(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('OFFSET')) {
-             refF = `=OFFSET(1)`;
-        } else if ('OFFSET' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('OFFSET' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice OFFSET',
-            scenario: `Test your knowledge of the OFFSET formula from the Exceljet dataset.`,
-            question: `Write a formula using OFFSET. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the OFFSET() function.`,
-            functions: ['OFFSET']
-        };
-    } }
-    ,
-
-    { key: 'if_ej', label: 'EJ: IF', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=IF(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('IF')) {
-             refF = `=IF(1)`;
-        } else if ('IF' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('IF' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice IF',
-            scenario: `Test your knowledge of the IF formula from the Exceljet dataset.`,
-            question: `Write a formula using IF. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the IF() function.`,
-            functions: ['IF']
-        };
-    } }
-    ,
-
-    { key: 'vstack_ej', label: 'EJ: VSTACK', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=VSTACK(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('VSTACK')) {
-             refF = `=VSTACK(1)`;
-        } else if ('VSTACK' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('VSTACK' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice VSTACK',
-            scenario: `Test your knowledge of the VSTACK formula from the Exceljet dataset.`,
-            question: `Write a formula using VSTACK. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the VSTACK() function.`,
-            functions: ['VSTACK']
-        };
-    } }
-    ,
-
-    { key: 'int_ej', label: 'EJ: INT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=INT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('INT')) {
-             refF = `=INT(1)`;
-        } else if ('INT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('INT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice INT',
-            scenario: `Test your knowledge of the INT formula from the Exceljet dataset.`,
-            question: `Write a formula using INT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the INT() function.`,
-            functions: ['INT']
-        };
-    } }
-    ,
-
-    { key: 'let_ej', label: 'EJ: LET', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=LET(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('LET')) {
-             refF = `=LET(1)`;
-        } else if ('LET' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('LET' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice LET',
-            scenario: `Test your knowledge of the LET formula from the Exceljet dataset.`,
-            question: `Write a formula using LET. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the LET() function.`,
-            functions: ['LET']
-        };
-    } }
-    ,
-
-    { key: 'sortby_ej', label: 'EJ: SORTBY', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SORTBY(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SORTBY')) {
-             refF = `=SORTBY(1)`;
-        } else if ('SORTBY' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SORTBY' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SORTBY',
-            scenario: `Test your knowledge of the SORTBY formula from the Exceljet dataset.`,
-            question: `Write a formula using SORTBY. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SORTBY() function.`,
-            functions: ['SORTBY']
-        };
-    } }
-    ,
-
-    { key: 'bycol_ej', label: 'EJ: BYCOL', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=BYCOL(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('BYCOL')) {
-             refF = `=BYCOL(1)`;
-        } else if ('BYCOL' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('BYCOL' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice BYCOL',
-            scenario: `Test your knowledge of the BYCOL formula from the Exceljet dataset.`,
-            question: `Write a formula using BYCOL. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the BYCOL() function.`,
-            functions: ['BYCOL']
-        };
-    } }
-    ,
-
-    { key: 'byrow_ej', label: 'EJ: BYROW', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=BYROW(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('BYROW')) {
-             refF = `=BYROW(1)`;
-        } else if ('BYROW' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('BYROW' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice BYROW',
-            scenario: `Test your knowledge of the BYROW formula from the Exceljet dataset.`,
-            question: `Write a formula using BYROW. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the BYROW() function.`,
-            functions: ['BYROW']
-        };
-    } }
-    ,
-
-    { key: 'groupby_ej', label: 'EJ: GROUPBY', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=GROUPBY(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('GROUPBY')) {
-             refF = `=GROUPBY(1)`;
-        } else if ('GROUPBY' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('GROUPBY' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice GROUPBY',
-            scenario: `Test your knowledge of the GROUPBY formula from the Exceljet dataset.`,
-            question: `Write a formula using GROUPBY. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the GROUPBY() function.`,
-            functions: ['GROUPBY']
-        };
-    } }
-    ,
-
-    { key: 'lambda_ej', label: 'EJ: LAMBDA', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=LAMBDA(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('LAMBDA')) {
-             refF = `=LAMBDA(1)`;
-        } else if ('LAMBDA' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('LAMBDA' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice LAMBDA',
-            scenario: `Test your knowledge of the LAMBDA formula from the Exceljet dataset.`,
-            question: `Write a formula using LAMBDA. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the LAMBDA() function.`,
-            functions: ['LAMBDA']
-        };
-    } }
-    ,
-
-    { key: 'sequence_ej', label: 'EJ: SEQUENCE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SEQUENCE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SEQUENCE')) {
-             refF = `=SEQUENCE(1)`;
-        } else if ('SEQUENCE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SEQUENCE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SEQUENCE',
-            scenario: `Test your knowledge of the SEQUENCE formula from the Exceljet dataset.`,
-            question: `Write a formula using SEQUENCE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SEQUENCE() function.`,
-            functions: ['SEQUENCE']
-        };
-    } }
-    ,
-
-    { key: 'map_ej', label: 'EJ: MAP', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MAP(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MAP')) {
-             refF = `=MAP(1)`;
-        } else if ('MAP' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MAP' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MAP',
-            scenario: `Test your knowledge of the MAP formula from the Exceljet dataset.`,
-            question: `Write a formula using MAP. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MAP() function.`,
-            functions: ['MAP']
-        };
-    } }
-    ,
-
-    { key: 'sort_ej', label: 'EJ: SORT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=SORT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('SORT')) {
-             refF = `=SORT(1)`;
-        } else if ('SORT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('SORT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice SORT',
-            scenario: `Test your knowledge of the SORT formula from the Exceljet dataset.`,
-            question: `Write a formula using SORT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the SORT() function.`,
-            functions: ['SORT']
-        };
-    } }
-    ,
-
-    { key: 'reduce_ej', label: 'EJ: REDUCE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=REDUCE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('REDUCE')) {
-             refF = `=REDUCE(1)`;
-        } else if ('REDUCE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('REDUCE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice REDUCE',
-            scenario: `Test your knowledge of the REDUCE formula from the Exceljet dataset.`,
-            question: `Write a formula using REDUCE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the REDUCE() function.`,
-            functions: ['REDUCE']
-        };
-    } }
-    ,
-
-    { key: 'xlookup_ej', label: 'EJ: XLOOKUP', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=XLOOKUP(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('XLOOKUP')) {
-             refF = `=XLOOKUP(1)`;
-        } else if ('XLOOKUP' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('XLOOKUP' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice XLOOKUP',
-            scenario: `Test your knowledge of the XLOOKUP formula from the Exceljet dataset.`,
-            question: `Write a formula using XLOOKUP. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the XLOOKUP() function.`,
-            functions: ['XLOOKUP']
-        };
-    } }
-    ,
-
-    { key: 'min_ej', label: 'EJ: MIN', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MIN(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MIN')) {
-             refF = `=MIN(1)`;
-        } else if ('MIN' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MIN' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MIN',
-            scenario: `Test your knowledge of the MIN formula from the Exceljet dataset.`,
-            question: `Write a formula using MIN. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MIN() function.`,
-            functions: ['MIN']
-        };
-    } }
-    ,
-
-    { key: 'minifs_ej', label: 'EJ: MINIFS', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MINIFS(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MINIFS')) {
-             refF = `=MINIFS(1)`;
-        } else if ('MINIFS' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MINIFS' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MINIFS',
-            scenario: `Test your knowledge of the MINIFS formula from the Exceljet dataset.`,
-            question: `Write a formula using MINIFS. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MINIFS() function.`,
-            functions: ['MINIFS']
-        };
-    } }
-    ,
-
-    { key: 'max_ej', label: 'EJ: MAX', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MAX(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MAX')) {
-             refF = `=MAX(1)`;
-        } else if ('MAX' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MAX' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MAX',
-            scenario: `Test your knowledge of the MAX formula from the Exceljet dataset.`,
-            question: `Write a formula using MAX. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MAX() function.`,
-            functions: ['MAX']
-        };
-    } }
-    ,
-
-    { key: 'maxifs_ej', label: 'EJ: MAXIFS', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=MAXIFS(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('MAXIFS')) {
-             refF = `=MAXIFS(1)`;
-        } else if ('MAXIFS' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('MAXIFS' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice MAXIFS',
-            scenario: `Test your knowledge of the MAXIFS formula from the Exceljet dataset.`,
-            question: `Write a formula using MAXIFS. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the MAXIFS() function.`,
-            functions: ['MAXIFS']
-        };
-    } }
-    ,
-
-    { key: 'aggregate_ej', label: 'EJ: AGGREGATE', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=AGGREGATE(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('AGGREGATE')) {
-             refF = `=AGGREGATE(1)`;
-        } else if ('AGGREGATE' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('AGGREGATE' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice AGGREGATE',
-            scenario: `Test your knowledge of the AGGREGATE formula from the Exceljet dataset.`,
-            question: `Write a formula using AGGREGATE. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the AGGREGATE() function.`,
-            functions: ['AGGREGATE']
-        };
-    } }
-    ,
-
-    { key: 'index_ej', label: 'EJ: INDEX', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=INDEX(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('INDEX')) {
-             refF = `=INDEX(1)`;
-        } else if ('INDEX' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('INDEX' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice INDEX',
-            scenario: `Test your knowledge of the INDEX formula from the Exceljet dataset.`,
-            question: `Write a formula using INDEX. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the INDEX() function.`,
-            functions: ['INDEX']
-        };
-    } }
-    ,
-
-    { key: 'exact_ej', label: 'EJ: EXACT', fn: (rng, hard) => {
-        const n = hard ? 9 : 5;
-        const rows = [['Category','Value']];
-        for (let i=0; i<n; i++) rows.push([pick(rng, ['Type A','Type B','Type C']), randInt(rng, 10, 100)]);
-        const last = n + 1;
-        
-        let refF = `=EXACT(B2:B${last})`;
-        
-        // Add minimal functioning formulas for complex functions to prevent parser errors in tests
-        if (['LET', 'LAMBDA', 'REDUCE', 'MAP', 'BYROW', 'BYCOL', 'GROUPBY'].includes('EXACT')) {
-             refF = `=EXACT(1)`;
-        } else if ('EXACT' === 'IF') {
-             refF = `=IF(B2>50, "High", "Low")`;
-        } else if ('EXACT' === 'XLOOKUP') {
-             refF = `=XLOOKUP(50, B2:B${last}, A2:A${last}, "None")`;
-        }
-        
-        return {
-            title: 'Practice EXACT',
-            scenario: `Test your knowledge of the EXACT formula from the Exceljet dataset.`,
-            question: `Write a formula using EXACT. Example criteria: Use column B.`,
-            rows,
-            refFormula: refF,
-            hint: `Use the EXACT() function.`,
-            functions: ['EXACT']
-        };
-    } }
-    ,
-
   { key: 'medianmode', label: 'MEDIAN / MODE', fn: cat_medianmode },
   { key: 'stdevvar', label: 'STDEV / VAR', fn: cat_stdevvar },
   { key: 'dataquality', label: 'Data Quality Checks', fn: cat_dataquality },
@@ -3618,8 +2232,155 @@ function buildAllProblems() {
 
 </script>
 <script>
+// ===== Extension: dynamic arrays, LET/LAMBDA, extra functions, formula library =====
+(function(){
+const _call=evalCall,_node=evalNode,isA=Array.isArray,num=v=>typeof v==='number',flat=a=>isA(a)?a.flat(Infinity):[a];
+flattenArgs=function(args,g){const o=[];for(const a of args){if(a.type==='range')o.push(...g.getRange(a.value));else o.push(...flat(evalNode(a,g)));}return o;};
+evalNode=function(n,g){
+  if(n.type==='lit')return n.value;
+  if(n.type==='name'){if(g.env&&n.value in g.env)return g.env[n.value];throw new Error('#NAME?');}
+  if(n.type==='neg'){const v=evalNode(n.value,g);return isA(v)?v.map(x=>-toNumber(x)):-toNumber(v);}
+  if(n.type==='binop'){const l=evalNode(n.left,g),r=evalNode(n.right,g);
+    if(isA(l)||isA(r)){const L=Math.max(isA(l)?l.length:1,isA(r)?r.length:1);return Array.from({length:L},(_,i)=>{try{return applyBinopScalar(n.op,isA(l)?l[i%l.length]:l,isA(r)?r[i%r.length]:r);}catch(e){return e.message;}});}
+    return applyBinopScalar(n.op,l,r);}
+  return _node(n,g);
+};
+const LIFT=new Set('ABS ROUND INT LEN LEFT RIGHT MID UPPER LOWER TRIM PROPER YEAR MONTH DAY MOD ISNUMBER ISTEXT ISERROR NOT VALUE EXACT FIND SEARCH SQRT POWER'.split(' '));
+const CRIT={COUNTIF:[1],SUMIF:[1],AVERAGEIF:[1],COUNTIFS:[1,3,5,7],SUMIFS:[2,4,6,8],AVERAGEIFS:[2,4,6,8]};
+const lit=v=>({type:'lit',value:v});
+const mapN=(vs,f)=>{const L=Math.max(...vs.map(v=>isA(v)?v.length:1));return Array.from({length:L},(_,i)=>f(vs.map(v=>isA(v)?v[i%v.length]:v)));};
+evalCall=function(node,g){
+  const n=node.name,A=node.args,ev=x=>evalNode(x,g),arr=i=>{const v=ev(A[i]);return isA(v)?v:[v];};
+  const base=args=>_call({type:'call',name:n,args},g);
+  if(LIFT.has(n)){let v=[];try{v=A.map(ev);}catch(e){}if(v.some(isA))return mapN(v,r=>{try{return base(r.map(lit));}catch(e){return e.message;}});}
+  if(n==='IF'){const c=ev(A[0]);if(isA(c)){const t=A[1]?ev(A[1]):true,f=A[2]?ev(A[2]):false;return mapN([c,t,f],([x,y,z])=>x?y:z);}}
+  if(CRIT[n]){const ix=CRIT[n].filter(i=>i<A.length),cv=ix.map(i=>ev(A[i]));if(cv.some(isA))return mapN(cv,r=>{const a=[...A];ix.forEach((i,k)=>a[i]=lit(r[k]));return base(a);});}
+  if(n==='MATCH'){const l=ev(A[0]);if(isA(l))return l.map(x=>base([lit(x),...A.slice(1)]));}
+  if(n==='ROW'&&A[0]&&A[0].type==='range'){const p=A[0].value.split(':').map(parseRef),o=[];for(let r=p[0].row;r<=p[1].row;r++)o.push(r);return o;}
+  if(n==='INDEX'&&A[0].type!=='range'){const a=ev(A[0]),r=toNumber(ev(A[1])),c=A[2]?toNumber(ev(A[2])):0;if(!isA(a))return a;return isA(a[0])?a[r-1][c?c-1:0]:a[(c||r)-1];}
+  const lam=(L,vals)=>{const old=g.env;g.env=Object.assign({},old);L.args.slice(0,-1).forEach((p,i)=>g.env[p.value]=vals[i]);try{return evalNode(L.args[L.args.length-1],g);}finally{g.env=old;}};
+  const mat=nd=>{if(nd.type==='range')return rangeToTable(g,nd.value);if(nd.type==='call'&&nd.name==='TRANSPOSE'){const m=mat(nd.args[0]);return m[0].map((_,c)=>m.map(r=>r[c]));}const v=evalNode(nd,g);return (isA(v)?v:[v]).map(x=>[x]);};
+  const cmp=(x,y)=>num(x)&&num(y)?x-y:String(x).localeCompare(String(y));
+  switch(n){
+    case 'INT':return Math.floor(toNumber(ev(A[0])));
+    case 'EXACT':return toStr(ev(A[0]))===toStr(ev(A[1]));
+    case 'LET':{const old=g.env;g.env=Object.assign({},old);try{for(let i=0;i+1<A.length;i+=2)g.env[A[i].value]=ev(A[i+1]);return ev(A[A.length-1]);}finally{g.env=old;}}
+    case 'MAP':return mapN(A.slice(0,-1).map((_,i)=>arr(i)),v=>lam(A[A.length-1],v));
+    case 'REDUCE':{let acc=ev(A[0]);for(const x of arr(1))acc=lam(A[2],[acc,x]);return acc;}
+    case 'BYROW':case 'BYCOL':{const t=rangeToTable(g,A[0].value);return (n==='BYROW'?t:t[0].map((_,c)=>t.map(r=>r[c]))).map(r=>lam(A[1],[r]));}
+    case 'FILTER':{const a=arr(0),c=arr(1),o=a.filter((_,i)=>c[i%c.length]);if(o.length)return o;if(A[2])return ev(A[2]);throw new Error('#CALC!');}
+    case 'UNIQUE':{const s=new Set();return arr(0).filter(x=>{const k=String(x).toLowerCase();if(s.has(k))return false;s.add(k);return true;});}
+    case 'SORT':{const d=A[2]?toNumber(ev(A[2])):1;return [...arr(0)].sort((x,y)=>cmp(x,y)*d);}
+    case 'SORTBY':{const a=arr(0),b=arr(1),d=A[2]?toNumber(ev(A[2])):1;return a.map((x,i)=>[x,b[i]]).sort((p,q)=>cmp(p[1],q[1])*d).map(p=>p[0]);}
+    case 'TAKE':{const a=arr(0),k=toNumber(ev(A[1]));return k>=0?a.slice(0,k):a.slice(k);}
+    case 'SEQUENCE':{const r=toNumber(ev(A[0])),c=A[1]?toNumber(ev(A[1])):1,s=A[2]?toNumber(ev(A[2])):1,st=A[3]?toNumber(ev(A[3])):1;return Array.from({length:r*c},(_,i)=>s+i*st);}
+    case 'ROWS':return A[0].type==='range'?rangeToTable(g,A[0].value).length:arr(0).length;
+    case 'TEXTSPLIT':return toStr(ev(A[0])).split(toStr(ev(A[1])));
+    case 'VSTACK':return A.flatMap((_,i)=>arr(i));
+    case 'TEXTJOIN':{const d=toStr(ev(A[0])),s=!!ev(A[1]);return flattenArgs(A.slice(2),g).filter(v=>!s||(v!==null&&v!==''&&v!==undefined)).map(toStr).join(d);}
+    case 'MAX':case 'MIN':{const v=flattenArgs(A,g).filter(num);return v.length?Math[n.toLowerCase()](...v):0;}
+    case 'LARGE':case 'SMALL':{const v=arr(0).filter(num).sort((a,b)=>n==='LARGE'?b-a:a-b),k=toNumber(ev(A[1]));if(v[k-1]===undefined)throw new Error('#NUM!');return v[k-1];}
+    case 'MAXIFS':case 'MINIFS':{const R=g.getRange(A[0].value),ok=R.map(()=>true);for(let i=1;i<A.length;i+=2){const c=ev(A[i+1]);g.getRange(A[i].value).forEach((v,k)=>{if(!matchCriteria(v,c))ok[k]=false;});}const vs=R.filter((_,k)=>ok[k]).map(toNumber);return vs.length?(n==='MAXIFS'?Math.max(...vs):Math.min(...vs)):0;}
+    case 'SUBTOTAL':{const c=toNumber(ev(A[0]))%100,v=flattenArgs(A.slice(1),g).filter(num),s=v.reduce((a,b)=>a+b,0);return ({1:s/v.length,2:v.length,3:v.length,4:Math.max(...v),5:Math.min(...v),9:s})[c];}
+    case 'AGGREGATE':{const f=toNumber(ev(A[0])),v=arr(2).filter(num),k=A[3]?toNumber(ev(A[3])):0,s=[...v].sort((a,b)=>a-b),t=v.reduce((a,b)=>a+b,0);return ({1:t/v.length,4:Math.max(...v),5:Math.min(...v),9:t,14:s[s.length-k],15:s[k-1]})[f];}
+    case 'FREQUENCY':{const d=arr(0).filter(num),b=arr(1).filter(num),sb=[...new Set(b)].sort((x,y)=>x-y),cnt=new Map(sb.map(x=>[x,0]));let over=0;d.forEach(x=>{const t=sb.find(y=>x<=y);t===undefined?over++:cnt.set(t,cnt.get(t)+1);});const seen=new Set();return [...b.map(x=>{if(seen.has(x))return 0;seen.add(x);return cnt.get(x);}),over];}
+    case 'MMULT':{const a=mat(A[0]),b=mat(A[1]);return a.map(r=>b[0].map((_,c)=>r.reduce((s,x,k)=>s+toNumber(x)*toNumber(b[k][c]),0)));}
+    case 'GROUPBY':{const k=arr(0),v=arr(1),f=A[2].value,keys=[...new Set(k)].sort();return keys.map(key=>{const xs=v.filter((_,i)=>k[i]===key).map(toNumber),s=xs.reduce((a,b)=>a+b,0);return [key,({SUM:s,AVERAGE:s/xs.length,COUNT:xs.length,MAX:Math.max(...xs),MIN:Math.min(...xs)})[f]];});}
+    case 'OFFSET':{const p=parseRef(A[0].value),r=p.row+toNumber(ev(A[1])),c=p.col+toNumber(ev(A[2])),h=A[3]?toNumber(ev(A[3])):1,w=A[4]?toNumber(ev(A[4])):1,o=[];for(let i=0;i<h;i++)for(let j=0;j<w;j++)o.push(g.get(r+i,c+j));return o;}
+  }
+  return _call(node,g);
+};
+
+// ---------- Formula library: 1 graded practice problem per catalogue entry ----------
+const LIB=[["Count", "COUNTIFS", "COUNTIFS, FIND, LEFT, RIGHT, SUMPRODUCT, TEXTBEFORE, LEN"], ["Count", "SUMPRODUCT", "SUMPRODUCT, YEAR, COUNTIFS, BYROW, UNIQUE, SORT, LET"], ["Count", "COUNTIFS", "COUNTIFS, SUMPRODUCT"], ["Count", "COUNTIFS", "COUNTIFS, SUMPRODUCT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, EXACT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, ISNUMBER, MATCH"], ["Count", "COUNTIF", "COUNTIF, SUM, SUMPRODUCT"], ["Count", "COUNTIF", "COUNTIF, COUNTIFS"], ["Count", "COUNTIF", "COUNTIF, COUNTIFS"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT"], ["Count", "COUNTIF", "COUNTIF, COUNTIFS"], ["Count", "MATCH", "MATCH, ISNA, SUMPRODUCT, COUNTA, COUNTIF"], ["Count", "COUNTIFS", "COUNTIFS, SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, LEN, N"], ["Count", "COUNTBLANK", "COUNTBLANK, COUNTA, COUNTIF, SUMPRODUCT"], ["Count", "COUNTA", "COUNTA, COUNTBLANK, COUNTIFS, SUMPRODUCT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, LEFT, LEN, EXACT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISNUMBER, FIND"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISNUMBER, FIND, COUNTIF"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISERROR, ISERR, ERROR.TYPE, IFERROR"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, LEN, REPT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT"], ["Count", "COUNT", "COUNT, SUMPRODUCT, ISNUMBER"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISODD, MOD, ISEVEN"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, SEARCH, FIND, ISNUMBER"], ["Count", "COUNTIF", "COUNTIF, COUNTIFS, SUMPRODUCT, ISTEXT, NOT"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, SEARCH, FIND, NOT"], ["Count", "ISERROR", "ISERROR, NOT, SUMPRODUCT, ISERR, COUNTIF"], ["Count", "ISNUMBER", "ISNUMBER, SEARCH, MMULT, TRANSPOSE, REDUCE, SUM, ROW"], ["Count", "COUNTIF", "COUNTIF"], ["Count", "MMULT", "MMULT, COLUMN, TRANSPOSE, BYCOL, LAMBDA, SUM, ROW"], ["Count", "SUMPRODUCT", "SUMPRODUCT, WEEKDAY, MATCH"], ["Count", "YEAR", "YEAR, SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, MONTH"], ["Count", "COUNTIFS", "COUNTIFS, SUMPRODUCT"], ["Count", "COUNTIFS", "COUNTIFS"], ["Count", "SUMPRODUCT", "SUMPRODUCT, COUNTIF, SUM"], ["Count", "SUMPRODUCT", "SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISNUMBER, MATCH, SEARCH"], ["Count", "COUNTIF", "COUNTIF, SUM, SUMPRODUCT, MATCH, ISNA"], ["Count", "COUNTIFS", "COUNTIFS"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISNA, MATCH, COUNTIFS"], ["Count", "SUMPRODUCT", "SUMPRODUCT, MID"], ["Count", "COUNTIFS", "COUNTIFS, FREQUENCY, DROP"], ["Count", "SUMPRODUCT", "SUMPRODUCT, LEFT, LEN, COUNTIF"], ["Count", "SUMPRODUCT", "SUMPRODUCT, COUNTIF, SUMIF"], ["Count", "COUNTIF", "COUNTIF, SUMPRODUCT, VSTACK, INDIRECT"], ["Count", "SUMPRODUCT", "SUMPRODUCT, SUM, ABS"], ["Count", "MOD", "MOD, SUMPRODUCT"], ["Count", "COUNTIFS", "COUNTIFS, CONCAT, IF"], ["Count", "MMULT", "MMULT, COLUMN, TRANSPOSE, BYROW, LAMBDA, SUM"], ["Count", "MMULT", "MMULT, COLUMN, TRANSPOSE, SUM"], ["Count", "SUMPRODUCT", "SUMPRODUCT"], ["Count", "SUMPRODUCT", "SUMPRODUCT"], ["Count", "COUNTA", "COUNTA, COUNTIF"], ["Count", "SUMPRODUCT", "SUMPRODUCT, COUNTIF, MATCH, ISNUMBER, COUNT"], ["Count", "UNIQUE", "UNIQUE, COUNT, COUNTIF, SUMPRODUCT"], ["Count", "FREQUENCY", "FREQUENCY, SUM, COUNTIF"], ["Count", "FREQUENCY", "FREQUENCY, SUM, IF"], ["Count", "FREQUENCY", "FREQUENCY, MATCH, ROW, SUMPRODUCT"], ["Count", "FREQUENCY", "FREQUENCY, MATCH, ROW, SUM, IF"], ["Count", "SUMPRODUCT", "SUMPRODUCT, COUNTIF"], ["Count", "SUBTOTAL", "SUBTOTAL"], ["Count", "SUBTOTAL", "SUBTOTAL, OFFSET, SUMPRODUCT, INDEX, ROW, MIN"], ["Count", "COUNTIF", "COUNTIF, INDIRECT, VSTACK, SUM"], ["Count", "COUNTIFS", "COUNTIFS, SUM"], ["Count", "FREQUENCY", "FREQUENCY"], ["Count", "COUNTIF", "COUNTIF, IF, LET, SCAN"], ["Count", "COUNTIFS", "COUNTIFS, EDATE"], ["Count", "COUNTIF", "COUNTIF"], ["Count", "COUNTIF", "COUNTIF, COUNTA"], ["Count", "SUMPRODUCT", "SUMPRODUCT, ISNUMBER, MATCH"], ["Count", "COUNTIFS", "COUNTIFS, LET, UNIQUE, HSTACK, VSTACK"], ["Sum", "SUM", "SUM, SCAN, LAMBDA"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, ISFORMULA, NOT"], ["Sum", "SUMIF", "SUMIF, COUNTIF"], ["Sum", "SUMIF", "SUMIF, COUNTIF, IF"], ["Sum", "SUMIFS", "SUMIFS, SUMIF, COUNTIFS"], ["Sum", "SUM", "SUM"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, SUMIF, INDIRECT"], ["Sum", "SUM", "SUM, SUMIF, AGGREGATE, IFERROR"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, SMALL, SUM, ROW, INDIRECT, SEQUENCE"], ["Sum", "SMALL", "SMALL, SUM, FILTER, SEQUENCE"], ["Sum", "SUMIF", "SUMIF, SUMIFS, IF"], ["Sum", "SUMIFS", "SUMIFS, EDATE, SUMPRODUCT, TEXT"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, MONTH"], ["Sum", "SUMIFS", "SUMIFS, EOMONTH"], ["Sum", "SUMIFS", "SUMIFS, ROUNDUP, MONTH, SUMPRODUCT, LET, LAMBDA, BYROW"], ["Sum", "SUMIFS", "SUMIFS, LET, LAMBDA, UNIQUE, WEEKDAY, BYROW, HSTACK, VSTACK"], ["Sum", "SUMIFS", "SUMIFS, WEEKNUM, LAMBDA, LET, BYROW, UNIQUE, VSTACK, HSTACK"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, TEXT, WEEKDAY"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, YEAR, SUMIFS, DATE, LET, BYROW, UNIQUE, VSTACK, HSTACK"], ["Sum", "SUMPRODUCT", "SUMPRODUCT"], ["Sum", "SUM", "SUM"], ["Sum", "SUM", "SUM"], ["Sum", "SUM", "SUM, OFFSET, ROW"], ["Sum", "SUM", "SUM, FILTER, SEQUENCE, SUMPRODUCT, COLUMN, MOD, COLUMNS"], ["Sum", "FILTER", "FILTER, SEQUENCE, MOD, SUM, SUMPRODUCT, ROW, ROWS"], ["Sum", "FILTER", "FILTER, TAKE, SUM"], ["Sum", "TAKE", "TAKE, SUM, OFFSET"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, ISFORMULA, NOT"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMIFS", "SUMIFS"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, EXACT"], ["Sum", "SUMIF", "SUMIF, SUMIFS, SUMPRODUCT, FIND, ISNUMBER"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMIF", "SUMIF, SUMIFS, FIND, FILTER"], ["Sum", "SUMIFS", "SUMIFS"], ["Sum", "SUMIFS", "SUMIFS, SUMPRODUCT, ISNUMBER, FIND, SEARCH"], ["Sum", "SUMIF", "SUMIF, SUMIFS, SUMPRODUCT, FIND, ISNUMBER"], ["Sum", "SUMIFS", "SUMIFS, DATE"], ["Sum", "SUMIFS", "SUMIFS, SUMIF, DATE"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMIF", "SUMIF, SUMIFS"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, SUMIFS, FILTER, SUM, GROUPBY, BYROW"], ["Sum", "SUMIFS", "SUMIFS"], ["Sum", "SUMIFS", "SUMIFS, SUMPRODUCT, FILTER, SUM"], ["Sum", "SUMIFS", "SUMIFS, SUMPRODUCT, ISNUMBER, MATCH, FILTER"], ["Sum", "SUMIFS", "SUMIFS, LET, VSTACK, GROUPBY, CHOOSECOLS"], ["Sum", "SUMIFS", "SUMIFS, SUM, SUMIF, SUMPRODUCT, ISNUMBER, MATCH"], ["Sum", "SUMIFS", "SUMIFS, TODAY, SUMPRODUCT, FILTER"], ["Sum", "TAKE", "TAKE, OFFSET, COLUMNS, INDEX, SUM, TRIMRANGE"], ["Sum", "TAKE", "TAKE, SUM, TRIMRANGE, OFFSET, INDEX"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, LEFT, FILTER, SUM"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, FILTER, SUM"], ["Sum", "TEXTSPLIT", "TEXTSPLIT, SUM, FILTERXML, SUBSTITUTE, VALUE"], ["Sum", "SUM", "SUM, LARGE, SEQUENCE, SUMPRODUCT, ROW, INDIRECT"], ["Sum", "SUM", "SUM, LARGE, FILTER, SEQUENCE, IF"], ["Sum", "SUBTOTAL", "SUBTOTAL, AGGREGATE"], ["Sum", "SUMIFS", "SUMIFS"], ["Sum", "SUMIFS", "SUMIFS, SUM"], ["Sum", "SUMPRODUCT", "SUMPRODUCT, IF"], ["Average", "AVERAGEIF", "AVERAGEIF, AGGREGATE, AVERAGE, IFERROR, FILTER"], ["Average", "UNIQUE", "UNIQUE, AVERAGEIFS"], ["Average", "AVERAGEIFS", "AVERAGEIFS, EDATE, FILTER, AVERAGE"], ["Average", "AVERAGEIFS", "AVERAGEIFS, EDATE, FILTER, AVERAGE, TEXT"], ["Average", "SUMPRODUCT", "SUMPRODUCT, SUMIFS"], ["Average", "AVERAGEIFS", "AVERAGEIFS, FILTER, AVERAGE"], ["Average", "AVERAGE", "AVERAGE, FILTER, SUMPRODUCT, IF, AVERAGEIFS"], ["Average", "AVERAGE", "AVERAGE, FILTER, TAKE, LOOKUP, LARGE, ROW, ISNUMBER"], ["Average", "TAKE", "TAKE, AVERAGE, OFFSET, COUNT, INDEX, COLUMNS"], ["Average", "TAKE", "TAKE, AVERAGE, OFFSET, COUNT"], ["Average", "AVERAGEIF", "AVERAGEIF, AVERAGEIFS, AVERAGE, FILTER"], ["Average", "UNIQUE", "UNIQUE, AVERAGEIFS"], ["Average", "LARGE", "LARGE, AVERAGE, SEQUENCE"], ["Average", "AVERAGEIFS", "AVERAGEIFS"], ["Average", "AVERAGE", "AVERAGE, AVERAGEIFS, AGGREGATE"], ["Average", "OFFSET", "OFFSET, AVERAGE, MIN"], ["Average", "IF", "IF, COUNTIF, AND"], ["Average", "SUMPRODUCT", "SUMPRODUCT, SUM, AVERAGE, TRANSPOSE"], ["Dynamic array", "FILTER", "FILTER"], ["Dynamic array", "FILTER", "FILTER, LARGE, SMALL, SORT"], ["Dynamic array", "VSTACK", "VSTACK, FILTER, LET, CHOOSECOLS"], ["Dynamic array", "VSTACK", "VSTACK, HSTACK, INDEX, SEQUENCE, ROWS, COLUMNS, LET"], ["Dynamic array", "INT", "INT, UNIQUE, COUNT, LET, LAMBDA, SCAN"], ["Dynamic array", "UNIQUE", "UNIQUE, COUNTA"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER, LEN, SUM, COUNTA"], ["Dynamic array", "LET", "LET, VLOOKUP, IF, XLOOKUP"], ["Dynamic array", "UNIQUE", "UNIQUE, COUNTIF, LET, SORT, SCAN, LAMBDA"], ["Dynamic array", "UNIQUE", "UNIQUE, TRANSPOSE, AVERAGEIFS"], ["Dynamic array", "UNIQUE", "UNIQUE, TRANSPOSE, COUNTIFS, LET, HSTACK, VSTACK"], ["Dynamic array", "SUMIFS", "SUMIFS, UNIQUE, TRANSPOSE, AVERAGEIFS"], ["Dynamic array", "TEXTSPLIT", "TEXTSPLIT, FILTER, XMATCH, ISNUMBER, LET, SORT, TEXTJOIN"], ["Dynamic array", "FILTER", "FILTER, XMATCH, ISNUMBER, UNIQUE, SORT, COUNTIF"], ["Dynamic array", "TEXTSPLIT", "TEXTSPLIT, TOROW, DROP"], ["Dynamic array", "FILTER", "FILTER, SORT, CHOOSECOLS, TAKE"], ["Dynamic array", "FILTER", "FILTER, SORT"], ["Dynamic array", "FILTER", "FILTER, TRANSPOSE"], ["Dynamic array", "FILTER", "FILTER, SORT"], ["Dynamic array", "FILTER", "FILTER, MONTH, YEAR, DATE"], ["Dynamic array", "FILTER", "FILTER, SEARCH, ISNUMBER, EXACT"], ["Dynamic array", "FILTER", "FILTER, ISNUMBER, MATCH"], ["Dynamic array", "FILTER", "FILTER, DATE"], ["Dynamic array", "FILTER", "FILTER, SEQUENCE, MOD, ROW, ROWS"], ["Dynamic array", "FILTER", "FILTER"], ["Dynamic array", "FILTER", "FILTER, TRANSPOSE"], ["Dynamic array", "FILTER", "FILTER, SEQUENCE, INDEX, SORT, SUM, COLUMNS"], ["Dynamic array", "FILTER", "FILTER, SEQUENCE, INDEX"], ["Dynamic array", "FILTER", "FILTER, LARGE, SORT"], ["Dynamic array", "FILTER", "FILTER, LARGE, SORT, IF"], ["Dynamic array", "FILTER", "FILTER, SEARCH, ISNUMBER"], ["Dynamic array", "FILTER", "FILTER"], ["Dynamic array", "FILTER", "FILTER, COUNTIF, COUNTIFS"], ["Dynamic array", "FILTER", "FILTER, MATCH, ISNUMBER"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER, COUNTIF"], ["Dynamic array", "FILTER", "FILTER, ABS"], ["Dynamic array", "FILTER", "FILTER, LEFT, MONTH, NOT"], ["Dynamic array", "FILTER", "FILTER"], ["Dynamic array", "FILTER", "FILTER, ISNUMBER, MATCH"], ["Dynamic array", "FILTER", "FILTER, LET, SEQUENCE, ROWS, IF, ISNUMBER, SEARCH, GROUPBY"], ["Dynamic array", "FILTER", "FILTER, SEARCH, ISNUMBER"], ["Dynamic array", "SORTBY", "SORTBY, RANDARRAY, COUNTA, SEQUENCE, CHAR, TEXTJOIN, INDEX"], ["Dynamic array", "BYCOL", "BYCOL, LAMBDA, MMULT, ROW, TRANSPOSE, SEQUENCE, SUM"], ["Dynamic array", "BYROW", "BYROW, LAMBDA, MMULT, COLUMN, TRANSPOSE, SEQUENCE, SUM"], ["Dynamic array", "GROUPBY", "GROUPBY, HSTACK, CHOOSECOLS, TEXT, MONTH, SUMPRODUCT, EOMONTH"], ["Dynamic array", "GROUPBY", "GROUPBY, PERCENTOF, HSTACK, SORTBY, XMATCH, CHOOSECOLS"], ["Dynamic array", "LAMBDA", "LAMBDA, LET, INDEX, SEQUENCE"], ["Dynamic array", "LAMBDA", "LAMBDA, LET, INDEX, SEQUENCE"], ["Dynamic array", "LAMBDA", "LAMBDA, SUMPRODUCT, SUM, ISNUMBER, SEARCH"], ["Dynamic array", "LAMBDA", "LAMBDA, LET, ISNUMBER, SEARCH, SORTBY"], ["Dynamic array", "LAMBDA", "LAMBDA, SUBSTITUTE, TRIM, LEN"], ["Dynamic array", "LAMBDA", "LAMBDA, LEFT, MID, LEN"], ["Dynamic array", "LAMBDA", "LAMBDA, FILTERXML, TRANSPOSE"], ["Dynamic array", "LAMBDA", "LAMBDA, LET, MID, MATCH, ISNUMBER, SEQUENCE, CODE, LEN, TEXTJOIN, IF, ABS, CHAR"], ["Dynamic array", "LAMBDA", "LAMBDA, MID, LEN"], ["Dynamic array", "SEQUENCE", "SEQUENCE, TEXT, REPT, LET, HSTACK, INT, MOD, INDEX, ROWS, PERMUTATIONA"], ["Dynamic array", "SEQUENCE", "SEQUENCE, INDEX, FILTER, LET, BYROW, DROP, AND, LAMBDA, INT, MOD, ROWS, COMBINA, COMBIN"], ["Dynamic array", "SEQUENCE", "SEQUENCE, INDEX, HSTACK, LET, INT, MOD, ROWS"], ["Dynamic array", "SEQUENCE", "SEQUENCE, INDEX, FILTER, LET, BYROW, UNIQUE, COUNT, LAMBDA, TOCOL, HSTACK, VSTACK, REDUCE, INT, MOD, ROWS, PERMUT, FACT"], ["Dynamic array", "SORTBY", "SORTBY, LET, TEXT, INDEX, SEQUENCE, XMATCH, TODAY, EDATE, MIN, ROWS, COLUMNS"], ["Dynamic array", "MAP", "MAP, AND, OR, LAMBDA"], ["Dynamic array", "UNIQUE", "UNIQUE, MIN, COUNTIF, IF"], ["Dynamic array", "TAKE", "TAKE, SORTBY, RANDARRAY, ROWS, INDEX, CHOOSEROWS"], ["Dynamic array", "SEQUENCE", "SEQUENCE, SORTBY, RANDARRAY, INDEX"], ["Dynamic array", "SORTBY", "SORTBY, RANDARRAY, ROWS"], ["Dynamic array", "FILTER", "FILTER, BYROW, LAMBDA, SUM"], ["Dynamic array", "SORTBY", "SORTBY, TEXT"], ["Dynamic array", "SORTBY", "SORTBY, MATCH"], ["Dynamic array", "SORT", "SORT"], ["Dynamic array", "SORTBY", "SORTBY, TEXTBEFORE, TEXTAFTER"], ["Dynamic array", "SORTBY", "SORTBY"], ["Dynamic array", "SORTBY", "SORTBY, LEN"], ["Dynamic array", "SORT", "SORT, SORTBY"], ["Dynamic array", "SEQUENCE", "SEQUENCE, INT, MOD, LET, BASE, DECIMAL"], ["Dynamic array", "SUM", "SUM, TEXTBEFORE, TEXTAFTER, UNIQUE, LET, LAMBDA, BYROW"], ["Dynamic array", "GROUPBY", "GROUPBY, HSTACK, MAP, DROP, CHOOSECOLS, LAMBDA, LET, XLOOKUP, EOMONTH, INT, TEXT"], ["Dynamic array", "TEXTSPLIT", "TEXTSPLIT, VALUE, IFERROR, LET"], ["Dynamic array", "MAP", "MAP, VSTACK, DROP, IF, MIN, MAX, LET, LAMBDA"], ["Dynamic array", "UNIQUE", "UNIQUE, SORT"], ["Dynamic array", "UNIQUE", "UNIQUE"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER, COUNTIF"], ["Dynamic array", "REDUCE", "REDUCE, LAMBDA, EXACT, VSTACK, IF, SUM"], ["Dynamic array", "UNIQUE", "UNIQUE, VSTACK"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER"], ["Dynamic array", "UNIQUE", "UNIQUE, FILTER"], ["Dynamic array", "FILTER", "FILTER, UNIQUE, SORT"], ["Dynamic array", "UNIQUE", "UNIQUE, COUNTIF, SORT, FILTER"], ["Dynamic array", "XLOOKUP", "XLOOKUP, MMULT, SEQUENCE, COLUMNS"], ["Min and Max", "MIN", "MIN, MAX, MEDIAN, IF"], ["Min and Max", "SMALL", "SMALL, INDEX, MATCH"], ["Min and Max", "MINIFS", "MINIFS, MAXIFS, MIN, MAX, IF, FILTER"], ["Min and Max", "LARGE", "LARGE, FILTER, IF"], ["Min and Max", "MAX", "MAX, IF"], ["Min and Max", "MAXIFS", "MAXIFS, MAX, TEXT, EDATE"], ["Min and Max", "MAX", "MAX, FILTER, SEQUENCE, COLUMNS, CHOOSECOLS, COLUMN, MOD"], ["Min and Max", "AGGREGATE", "AGGREGATE, MAXIFS"], ["Min and Max", "FILTER", "FILTER, TEXT, MAX, IF, AGGREGATE"], ["Min and Max", "INDEX", "INDEX, MATCH, MAX, FILTER, COUNTIF"], ["Min and Max", "MAX", "MAX, INDEX, MATCH, XLOOKUP, LET, HSTACK, SORT, VSTACK"], ["Min and Max", "MAX", "MAX, IF, MAXIFS, FILTER"], ["Min and Max", "MAX", "MAX, MAXIFS, LARGE"], ["Min and Max", "MAXIFS", "MAXIFS, MAX, IF, FILTER, BYROW, VSTACK, HSTACK, UNIQUE"], ["Min and Max", "MIN", "MIN, IF, MINIFS"], ["Min and Max", "MIN", "MIN, MINIFS, SMALL"], ["Min and Max", "MINIFS", "MINIFS, MIN, FILTER, IF, BYROW, VSTACK, HSTACK, UNIQUE"], ["Min and Max", "LARGE", "LARGE, INDEX, MATCH, XLOOKUP"], ["Min and Max", "LARGE", "LARGE, INDEX, MATCH, IF, XLOOKUP"], ["Min and Max", "LARGE", "LARGE"], ["Min and Max", "LARGE", "LARGE, FILTER, IF"], ["Min and Max", "LARGE", "LARGE, MAX, UNIQUE, IF"], ["Min and Max", "SMALL", "SMALL"], ["Min and Max", "SMALL", "SMALL, FILTER"], ["Min and Max", "MIN", "MIN, IF"], ["Lookup", "EXACT", "EXACT, INDEX, MATCH, XLOOKUP"]];
+const T={
+COUNTIFS:['Count by region and status~Count the orders in the {R} region that have Status "Paid".~=COUNTIFS({B},"{R}",{G},"Paid")~COUNTIFS(range1,criteria1,range2,criteria2).','Units within a band~Count orders where Units is at least {L} and at most {U}.~=COUNTIFS({D},">="&{L},{D},"<="&{U})~Join an operator and a number with &.','Wildcard on codes~Count orders whose Code starts with "{C0}-" and whose Status is "Pending".~=COUNTIFS({H},"{C0}-*",{G},"Pending")~* matches any run of characters.'],
+SUMPRODUCT:['Total revenue~Find total revenue: Units x Price summed across all rows.~=SUMPRODUCT({D},{E})~SUMPRODUCT multiplies matching rows, then adds them.','Revenue for one region~Total revenue (Units x Price) for the {R} region only.~=SUMPRODUCT(({B}="{R}")*{D}*{E})~Multiply by a TRUE/FALSE test to filter rows.','Two-condition count~Count rows where Units is greater than {U} and Status is "Paid".~=SUMPRODUCT(({D}>{U})*({G}="Paid"))~Multiply two logical tests for AND logic.','Count by year~Count how many orders were placed in {Y}.~=SUMPRODUCT(--(YEAR({F})={Y}))~YEAR works on a whole range; -- turns TRUE/FALSE into 1/0.','Weighted average price~Compute the units-weighted average Price.~=SUMPRODUCT({D},{E})/SUM({D})~Divide the weighted total by total weight.','Distinct reps~Count the distinct values in Rep without helper columns.~=SUMPRODUCT(1/COUNTIF({A},{A}))~Each value contributes 1/(times it appears).'],
+FILTER:['Sum a filtered list~Sum Units for the {R} region using FILTER.~=SUM(FILTER({D},{B}="{R}"))~FILTER(array,include) keeps rows where include is TRUE.','Count filtered rows~Count rows where Status is "Pending" and Units exceed {L}.~=ROWS(FILTER({A},({G}="Pending")*({D}>{L})))~Multiply tests for AND, then count rows.','Join filtered names~Join, comma separated, the Rep names in the {R} region.~=TEXTJOIN(", ",TRUE,FILTER({A},{B}="{R}"))~Wrap FILTER inside TEXTJOIN.','Max of a subset~Largest Units sold for product "{P}".~=MAX(FILTER({D},{C}="{P}"))','Average of a subset~Average Price of rows with Status "Paid".~=AVERAGE(FILTER({E},{G}="Paid"))','Top performers~How many orders have Units at or above the 3rd largest Units value?~=COUNTA(FILTER({A},{D}>=LARGE({D},3)))~Combine FILTER with LARGE.'],
+UNIQUE:['Distinct regions~How many distinct Regions appear?~=COUNTA(UNIQUE({B}))','List distinct products~List the distinct Products, comma separated, in order of first appearance.~=TEXTJOIN(", ",TRUE,UNIQUE({C}))','Distinct paid reps~How many distinct Reps have a "Paid" order?~=ROWS(UNIQUE(FILTER({A},{G}="Paid")))'],
+SUMIFS:['Two-condition sum~Total Units where Region is "{R}" and Status is "Paid".~=SUMIFS({D},{B},"{R}",{G},"Paid")','Units over a threshold~Total Units for "{P}" orders where Units exceed {L}.~=SUMIFS({D},{C},"{P}",{D},">"&{L})','Exclude a region~Total Units for every region except {R}.~=SUMIFS({D},{B},"<>{R}")','Wildcard code sum~Total Units where Code starts with "{C0}-".~=SUMIFS({D},{H},"{C0}-*")'],
+SUMIF:['Single-criterion sum~Total Units for Region "{R}".~=SUMIF({B},"{R}",{D})','Sum above a value~Sum all Units greater than {U}.~=SUMIF({D},">"&{U})','Product share~What fraction of total Units belongs to "{P}"?~=SUMIF({C},"{P}",{D})/SUM({D})'],
+COUNTIF:['Count a region~How many orders are in the {R} region?~=COUNTIF({B},"{R}")','Count above a value~How many orders have Units greater than {U}?~=COUNTIF({D},">"&{U})','Starts-with count~How many Products start with "{PL}"?~=COUNTIF({C},"{PL}*")','Not equal~How many orders do not have Status "Paid"?~=COUNTIF({G},"<>Paid")','Rows with duplicate reps~How many rows belong to a Rep that appears more than once?~=SUMPRODUCT(--(COUNTIF({A},{A})>1))'],
+SUM:['Total units~Add up all Units.~=SUM({D})','Array sum of products~Sum Units x Price for all rows using a single SUM (array formula).~=SUM({D}*{E})','Sum the top three~Sum the three largest Units values.~=SUM(TAKE(SORT({D},1,-1),3))'],
+LAMBDA:['MAP with LAMBDA~Total revenue (Units x Price) using MAP and a LAMBDA.~=SUM(MAP({D},{E},LAMBDA(qty,pr,qty*pr)))','Fold with REDUCE~Use REDUCE and LAMBDA to add up all Units.~=REDUCE(0,{D},LAMBDA(acc,qty,acc+qty))','Conditional MAP~Sum only Units greater than {U} using MAP, LAMBDA and IF.~=SUM(MAP({D},LAMBDA(qty,IF(qty>{U},qty,0))))'],
+SORTBY:['Top seller by sort~Which Rep comes first when rows are sorted by Units, largest first?~=INDEX(SORTBY({A},{D},-1),1)','Three cheapest orders~Join the first three Reps when sorted by Price ascending.~=TEXTJOIN(", ",TRUE,TAKE(SORTBY({A},{E},1),3))'],
+LARGE:['k-th largest~Return the k-th largest Units value, with k = {K}.~=LARGE({D},{K})','Largest in a region~Largest Units in the {R} region (use IF inside LARGE).~=LARGE(IF({B}="{R}",{D}),1)','Runner-up name~Which Rep has the 2nd largest Units?~=INDEX({A},MATCH(LARGE({D},2),{D},0))'],
+TAKE:['First rows~Sum the first three Units values.~=SUM(TAKE({D},3))','Last rows~Join the last two Products with a dash.~=TEXTJOIN("-",TRUE,TAKE({C},-2))'],
+SEQUENCE:['Sum a sequence~Sum the integers 1 to 10 using SEQUENCE.~=SUM(SEQUENCE(10))','Stepped sequence~Join the numbers from SEQUENCE(5,1,10,5) with commas.~=TEXTJOIN(",",TRUE,SEQUENCE(5,1,10,5))'],
+FREQUENCY:['Distinct numbers~Count distinct Units values using FREQUENCY.~=SUM(--(FREQUENCY({D},{D})>0))','Distinct text~Count distinct Regions using FREQUENCY and MATCH.~=SUM(--(FREQUENCY(MATCH({B},{B},0),MATCH({B},{B},0))>0))'],
+MAX:['Max in a group~Largest Units in the {R} region without MAXIFS.~=MAX(IF({B}="{R}",{D}))','Max revenue~Largest single-order revenue (Units x Price).~=MAX({D}*{E})'],
+SMALL:['k-th smallest~Return the k-th smallest Price, with k = {K}.~=SMALL({E},{K})','Smallest in a group~Smallest Price among "Paid" orders.~=SMALL(IF({G}="Paid",{E}),1)'],
+TEXTSPLIT:['Split a code~Using the Code in cell H{r}, return the middle part between the dashes.~=INDEX(TEXTSPLIT(H{r},"-"),2)','Count parts~How many parts does the Code in H{r} split into using "-"?~=COUNTA(TEXTSPLIT(H{r},"-"))'],
+AVERAGEIFS:['Two-criteria average~Average Price where Region is "{R}" and Status is "Paid".~=AVERAGEIFS({E},{B},"{R}",{G},"Paid")','Average with threshold~Average Price where Units exceed {L}.~=AVERAGEIFS({E},{D},">"&{L})'],
+MIN:['Min in a group~Smallest Price for product "{P}" without MINIFS.~=MIN(IF({C}="{P}",{E}))','Min of filtered~Smallest Units among "Paid" orders.~=MIN(FILTER({D},{G}="Paid"))'],
+MMULT:['Dot product~Use MMULT to compute total revenue (Units x Price).~=INDEX(MMULT(TRANSPOSE({D}),{E}),1,1)','Conditional dot product~Revenue for the {R} region using MMULT.~=SUM(MMULT(TRANSPOSE({D}),({B}="{R}")*{E}))'],
+SUBTOTAL:['Visible sum~Add Units with SUBTOTAL so filtered-out rows would be ignored.~=SUBTOTAL(9,{D})','Visible average~Average Price with SUBTOTAL.~=SUBTOTAL(1,{E})','Visible count~Count numeric Units with SUBTOTAL.~=SUBTOTAL(2,{D})'],
+AVERAGE:['Simple average~Average Units per order.~=AVERAGE({D})','Average of a group~Average Units for the {R} region using FILTER.~=AVERAGE(FILTER({D},{B}="{R}"))','Average of top five~Average of the five largest Units values.~=AVERAGE(TAKE(SORT({D},1,-1),5))'],
+GROUPBY:['Group totals~Use GROUPBY to total Units by Region; return the total of the first region alphabetically.~=INDEX(GROUPBY({B},{D},SUM),1,2)','Group average~Use GROUPBY with AVERAGE on Price by Product; return the 2nd group average (alphabetical).~=INDEX(GROUPBY({C},{E},AVERAGE),2,2)'],
+COUNTA:['Count filled cells~Count the non-empty Rep entries.~=COUNTA({A})','Count filtered~Count Rep names with Status "Paid".~=COUNTA(FILTER({A},{G}="Paid"))'],
+AVERAGEIF:['Average for a region~Average Price for Region "{R}".~=AVERAGEIF({B},"{R}",{E})','Average above value~Average Units among rows with Units above {U}.~=AVERAGEIF({D},">"&{U})'],
+VSTACK:['Stack and sum~Stack Units on top of Price and add everything.~=SUM(VSTACK({D},{E}))','Stack and de-duplicate~How many distinct values exist across Region and Product combined?~=COUNTA(UNIQUE(VSTACK({B},{C})))'],
+MAP:['Double and sum~Use MAP to double every Units value, then sum.~=SUM(MAP({D},LAMBDA(qty,qty*2)))','Initials~Join the first two letters of the first three Rep names with commas.~=TEXTJOIN(",",TRUE,MAP(TAKE({A},3),LAMBDA(nm,LEFT(nm,2))))'],
+SORT:['Second largest via SORT~Use SORT to return the 2nd largest Units value.~=INDEX(SORT({D},1,-1),2)','Alphabetical start~Join the first three Rep names in alphabetical order.~=TEXTJOIN(", ",TRUE,TAKE(SORT({A},1,1),3))'],
+MINIFS:['One-condition min~Smallest Price in Region "{R}" using MINIFS.~=MINIFS({E},{B},"{R}")','Two-condition min~Smallest Units where Status is "Pending" and Product is "{P}".~=MINIFS({D},{G},"Pending",{C},"{P}")'],
+MAXIFS:['One-condition max~Largest Price in Region "{R}" using MAXIFS.~=MAXIFS({E},{B},"{R}")','Two-condition max~Largest Units where Status is "Paid" and Product is "{P}".~=MAXIFS({D},{G},"Paid",{C},"{P}")'],
+MATCH:['Find a position~Return the position of the first "{P}" in the Product column.~=MATCH("{P}",{C},0)'],
+COUNTBLANK:['Count blanks~Count the empty cells in Notes.~=COUNTBLANK({I})'],
+COUNT:['Count numbers~Count the numeric cells in Units.~=COUNT({D})'],
+ISERROR:['Codes missing a letter~Count Codes that do NOT contain "-{Z}" (ISERROR with FIND).~=SUMPRODUCT(--ISERROR(FIND("-{Z}",{H})))'],
+ISNUMBER:['Codes containing text~Count Codes that contain "{C0}-1" (ISNUMBER with SEARCH).~=SUMPRODUCT(--ISNUMBER(SEARCH("{C0}-1",{H})))'],
+YEAR:['Units by region and year~Units sold in {R} during {Y}.~=SUMPRODUCT(({B}="{R}")*(YEAR({F})={Y})*{D})'],
+MOD:['Even-row units~Sum Units on even-numbered sheet rows.~=SUMPRODUCT((MOD(ROW({D}),2)=0)*{D})'],
+OFFSET:['Dynamic range~Sum {K} cells of Units starting at the first data row, using OFFSET from D1.~=SUM(OFFSET(D1,1,0,{K},1))'],
+IF:['Conditional revenue~Add Units x Price only for "Paid" rows using IF inside SUMPRODUCT.~=SUMPRODUCT(IF({G}="Paid",{D}*{E},0))'],
+INT:['Whole tens~Add the number of whole tens in each Units value (INT of Units/10).~=SUMPRODUCT(INT({D}/10))'],
+LET:['Name a value~Use LET to compute average Units per order (total / count).~=LET(tot,SUM({D}),cnt,COUNT({D}),tot/cnt)'],
+BYCOL:['Column maxima~Use BYCOL to take the max of Units and of Price, then add the two maxima.~=SUM(BYCOL({DE},LAMBDA(cl,MAX(cl))))'],
+BYROW:['Row maxima~Use BYROW to take the larger of Units and Price on each row, then sum.~=SUM(BYROW({DE},LAMBDA(rw,MAX(rw))))'],
+REDUCE:['Running max~Use REDUCE and LAMBDA to find the largest Units value.~=REDUCE(0,{D},LAMBDA(acc,qty,IF(qty>acc,qty,acc)))'],
+XLOOKUP:['Top seller lookup~Return the Rep with the highest Units using XLOOKUP.~=XLOOKUP(MAX({D}),{D},{A})'],
+AGGREGATE:['Ignore errors~Largest Units for Region "{R}" using AGGREGATE (function 14, option 6).~=AGGREGATE(14,6,{D}/({B}="{R}"),1)'],
+INDEX:['INDEX and MATCH~Return the Rep with the largest Units using INDEX and MATCH.~=INDEX({A},MATCH(MAX({D}),{D},0))'],
+EXACT:['Case-sensitive match~Count rows where Product exactly (case-sensitive) equals "{P}".~=SUMPRODUCT(--EXACT({C},"{P}"))']
+};
+const seen={};
+function buildLibraryProblems(){
+  const out=[];
+  LIB.forEach(([cat,main,rel],i)=>{
+    const vs=T[main];if(!vs)throw new Error('No template for '+main);
+    const k=(seen[main]=(seen[main]||0));seen[main]++;
+    const [title,q,f0,h]=vs[k%vs.length].split('~');
+    let P=null;
+    for(let a=0;a<60&&!P;a++){
+      const rng=mulberry32((i+1)*104729+a*7919+3),n=randInt(rng,9,12);
+      const reps=pickN(rng,NAMES,5),regs=pickN(rng,REGIONS,4),prods=pickN(rng,PRODUCTS,4);
+      const units=pickN(rng,Array.from({length:56},(_,x)=>x+5),n);
+      const rows=[['Rep','Region','Product','Units','Price','Date','Status','Code','Notes']];
+      for(let r=0;r<n;r++){const rg=pick(rng,regs);rows.push([pick(rng,reps),rg,pick(rng,prods),units[r],pick(rng,[12,18,25,40,55,80]),pick(rng,[2024,2025])+'-'+String(randInt(rng,1,12)).padStart(2,'0')+'-'+String(randInt(rng,5,25)).padStart(2,'0'),pick(rng,['Paid','Paid','Pending']),rg[0]+'-'+randInt(rng,1000,1999)+'-'+pick(rng,['X','Y','Z']),rng()<.5?'Priority':null]);}
+      const row=pick(rng,rows.slice(1)),sorted=[...units].sort((x,y)=>x-y),L1=n+1;
+      const m={R:row[1],P:row[2],U:sorted[Math.floor(n/2)],L:sorted[0],K:randInt(rng,2,4),Y:2025,C0:row[7][0],PL:row[2].slice(0,3),Z:pick(rng,['X','Y','Z']),r:randInt(rng,2,L1),DE:'D2:E'+L1};
+      'ABCDEFGHI'.split('').forEach(c=>m[c]=c+'2:'+c+L1);
+      const sub=s=>s.replace(/\{(\w+)\}/g,(_,x)=>m[x]);
+      const formula=sub(f0);let exp;
+      try{exp=evaluateFormula(formula,new Grid(rows));}catch(e){continue;}
+      if(isA(exp)||exp===undefined||(num(exp)&&!isFinite(exp))||(typeof exp==='string'&&exp.startsWith('#')))continue;
+      if(a<30&&(exp===0||exp===''||exp===false))continue;
+      P={rows,formula,exp,question:'In cell K2, write a formula: '+sub(q)};
+    }
+    if(!P)throw new Error('Could not build '+main+' #'+(i+1));
+    const fns=[main,...rel.split(',').map(s=>s.trim()).filter(s=>s&&s!==main)];
+    out.push({id:10001+i,lib:i+1,title,scenario:'Formula #'+(i+1)+' ('+cat+'): practice the '+main+' pattern on this sales table of '+(P.rows.length-1)+' orders.',question:P.question,rows:P.rows,refFormula:P.formula,expected:P.exp,hint:(h||'Start from '+main+'.')+' Related functions in this pattern: '+fns.slice(1).join(', ')+'.',functions:fns,category:cat,difficulty:cat==='Dynamic array'?'Hard':'Medium'});
+  });
+  out.forEach((p,j)=>p.shortcut=GENERAL_SHORTCUTS[(p.id+j)%GENERAL_SHORTCUTS.length]);
+  return out;
+}
+globalThis.buildLibraryProblems=buildLibraryProblems;
+})();
+
+</script>
+<script>
 (function () {
-  const ALL_PROBLEMS = buildAllProblems();
+  const ALL_PROBLEMS = buildAllProblems().concat(buildLibraryProblems());
   const TOTAL = ALL_PROBLEMS.length;
 
   // ---------- category color hashing (for colorful sidebar accents) ----------
@@ -4172,6 +2933,45 @@ function buildAllProblems() {
     soundOn = !soundOn;
     el('soundBtn').textContent = soundOn ? '🔊' : '🔇';
   };
+
+  // ---------- Formula Library, dark mode, shortcuts ----------
+  const LIBP = ALL_PROBLEMS.filter(p => p.lib);
+  let libCat = 'All', libQ = '';
+  const libEl = el('libOverlay');
+  function renderLib() {
+    const q = libQ.toLowerCase();
+    const cats = ['All', ...new Set(LIBP.map(p => p.category))];
+    el('libChips').innerHTML = cats.map(c => `<button class="lib-chip ${c === libCat ? 'on' : ''}" data-c="${c}">${c}</button>`).join('');
+    const L = LIBP.filter(p => (libCat === 'All' || p.category === libCat) && (!q || (p.functions.join(' ') + ' ' + p.title + ' ' + p.question).toLowerCase().includes(q)));
+    el('libCount').textContent = `${L.length} of ${LIBP.length} formulas \u00b7 ${LIBP.filter(p => solvedIds.has(p.id)).length} solved`;
+    el('libGrid').innerHTML = L.map(p => `<div class="lib-card ${solvedIds.has(p.id) ? 'done' : ''}" data-id="${p.id}"><div class="lib-top"><span>#${p.lib}</span><span>${p.category}</span>${solvedIds.has(p.id) ? '<b>\u2713 solved</b>' : ''}</div><h4>${escapeHtml(p.title)}</h4><code>${p.functions[0]}</code><div class="lib-fns">${p.functions.slice(1, 7).map(f => `<i>${f}</i>`).join('')}</div></div>`).join('') || '<p>No formulas match your search.</p>';
+  }
+  function openLib(q) { if (q !== undefined) { libQ = q; el('libSearch').value = q; libCat = 'All'; } renderLib(); libEl.classList.add('show'); el('libSearch').focus(); }
+  function closeLib() { libEl.classList.remove('show'); }
+  el('libBtn').onclick = () => openLib();
+  el('libClose').onclick = closeLib;
+  libEl.addEventListener('click', e => { if (e.target === libEl) closeLib(); });
+  el('libSearch').addEventListener('input', e => { libQ = e.target.value; renderLib(); });
+  el('libChips').addEventListener('click', e => { const c = e.target.dataset.c; if (c) { libCat = c; renderLib(); } });
+  el('libGrid').addEventListener('click', e => {
+    const card = e.target.closest('.lib-card'); if (!card) return;
+    catFilter = null; diffFilter = 'all';
+    document.querySelectorAll('#diffFilter .chip').forEach(c => c.classList.toggle('active', c.dataset.diff === 'all'));
+    currentIndex = filteredList().findIndex(p => p.id === +card.dataset.id);
+    renderCatList(); showProblem(); closeLib(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  el('fnTags').addEventListener('click', e => { if (e.target.classList.contains('fn-tag')) openLib(e.target.textContent); });
+  const root = document.documentElement;
+  try { root.dataset.theme = localStorage.getItem('formuladrill-theme') || 'light'; } catch (e) {}
+  el('themeBtn').onclick = () => { root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('formuladrill-theme', root.dataset.theme); } catch (e) {} };
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLib(); el('lbOverlay').classList.remove('show'); }
+    else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openLib(); }
+    else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); checkAnswer(); }
+    else if (e.altKey && e.key === 'ArrowRight') { currentIndex++; showProblem(); }
+    else if (e.altKey && e.key === 'ArrowLeft') { currentIndex--; showProblem(); }
+    else if (e.altKey && e.key.toLowerCase() === 'h') { el('hintBtn').click(); }
+  });
 
   // ---------- init ----------
   (async function init() {
